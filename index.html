@@ -37,7 +37,16 @@
 
       <div class="slider-track">
 
-        <!-- Asistenta -->
+        <!-- Manager — Coming Soon (stânga) -->
+        <div class="character-card">
+          <div class="character-img-wrap">
+            <div class="coming-soon-ribbon">Coming Soon</div>
+            <img src="Indicatii/Manager.png" alt="Manager AI" class="character-img coming-soon-img manager-img" />
+          </div>
+          <button class="btn-demo" disabled>Vezi Demo</button>
+        </div>
+
+        <!-- Asistenta (centru — default) -->
         <div class="character-card">
           <div class="character-img-wrap">
             <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
@@ -45,20 +54,11 @@
           <button class="btn-demo">Vezi Demo</button>
         </div>
 
-        <!-- Receptionista — Coming Soon -->
+        <!-- Receptionista — Coming Soon (dreapta) -->
         <div class="character-card">
           <div class="character-img-wrap">
             <div class="coming-soon-ribbon">Coming Soon</div>
             <img src="Indicatii/Receptionista.png" alt="Receptionista AI" class="character-img coming-soon-img receptionista-img" />
-          </div>
-          <button class="btn-demo" disabled>Vezi Demo</button>
-        </div>
-
-        <!-- Manager — Coming Soon -->
-        <div class="character-card">
-          <div class="character-img-wrap">
-            <div class="coming-soon-ribbon">Coming Soon</div>
-            <img src="Indicatii/Manager.png" alt="Manager AI" class="character-img coming-soon-img manager-img" />
           </div>
           <button class="btn-demo" disabled>Vezi Demo</button>
         </div>
@@ -76,7 +76,7 @@
     const cards = track.querySelectorAll('.character-card');
     const prevBtn = document.querySelector('.slider-arrow--prev');
     const nextBtn = document.querySelector('.slider-arrow--next');
-    let current = 0;
+    let current = 1; /* pornește pe Asistenta */
 
     function updateSlider() {
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
