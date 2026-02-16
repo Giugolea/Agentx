@@ -30,6 +30,22 @@
   <!-- MAIN CONTENT -->
   <main>
 
+    <!-- SECTIUNE HERO -->
+    <section class="hero">
+      <h1 class="hero__title">Ce-ar fi dacă recepția ta ar funcționa perfect, non-stop?</h1>
+      <p class="hero__subtitle">
+        Fără apeluri pierdute.<br>
+        Fără programări uitate.<br>
+        Fără timp irosit.<br><br>
+        Doar eficiență, automatizare și pacienți mulțumiți.
+      </p>
+      <p class="hero__support">
+        Agentul nostru AI pentru cabinete stomatologice este deja activ și preia munca repetitivă din locul tău sau al receptionistei tale NON-STOP.<br>
+        Următorii agenți sunt pe drum.
+      </p>
+      <button class="btn-cta" id="cta-btn">Descoperă cum funcționează</button>
+    </section>
+
     <!-- SECTIUNE PERSONAJE -->
     <section class="characters">
 
@@ -42,7 +58,7 @@
           <div class="character-img-wrap">
             <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
           </div>
-          <button class="btn-demo">Vezi Demo</button>
+          <button class="btn-demo" id="demo-asistenta">Vezi Demo</button>
         </div>
 
         <!-- Receptionista — Coming Soon -->
@@ -93,6 +109,13 @@
     });
 
     updateSlider();
+
+    document.getElementById('cta-btn').addEventListener('click', function() {
+      const demoBtn = document.getElementById('demo-asistenta');
+      demoBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      demoBtn.classList.add('btn-demo--highlight');
+      setTimeout(function() { demoBtn.classList.remove('btn-demo--highlight'); }, 4000);
+    });
   </script>
 </body>
 </html>

@@ -25,16 +25,16 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;              /* înălțime fixă — nu se schimbă indiferent de logo */
+  height: 80px;
   z-index: 1000;
   display: flex;
-  align-items: center;       /* centrare verticală pentru linkuri */
+  align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  overflow: visible;         /* permite logo-ului să depășească bordura */
+  overflow: visible;
 }
 
 /* Logo — stânga */
@@ -50,7 +50,7 @@ body {
 }
 
 .navbar__logo-img {
-  max-height: 200px;         /* controlat doar prin max-height */
+  max-height: 200px;
   width: auto;
   display: block;
 }
@@ -99,7 +99,69 @@ body {
    MAIN
 ===================== */
 main {
-  padding-top: 220px;
+  min-height: 100vh;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 32px;
+  box-sizing: border-box;
+}
+
+/* =====================
+   HERO SECTION
+===================== */
+.hero {
+  text-align: center;
+  max-width: 720px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero__title {
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: #444;
+  line-height: 1.85;
+}
+
+.hero__support {
+  font-size: clamp(12px, 1.2vw, 14px);
+  color: #888;
+  line-height: 1.7;
+}
+
+/* =====================
+   BUTON CTA
+===================== */
+.btn-cta {
+  padding: 13px 36px;
+  background: transparent;
+  color: #2ecc71;
+  font-size: 15px;
+  font-weight: 700;
+  border: 2px solid #2ecc71;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cta:hover {
+  background-color: #2ecc71;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 /* =====================
@@ -110,7 +172,7 @@ main {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 60px 0 80px;
+  padding: 20px 0 0;
   width: 100%;
   position: relative;
 }
@@ -139,7 +201,7 @@ main {
 .character-img-wrap {
   position: relative;
   width: 220px;
-  height: 280px;
+  height: 260px;
   overflow: hidden;
   border-radius: 16px;
 }
@@ -238,6 +300,19 @@ main {
   box-shadow: none;
 }
 
+/* Animație highlight — CTA scroll target */
+@keyframes pulse-demo {
+  0%   { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7), 0 4px 14px rgba(46, 204, 113, 0.35); }
+  70%  { box-shadow: 0 0 0 14px rgba(46, 204, 113, 0), 0 4px 14px rgba(46, 204, 113, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0), 0 4px 14px rgba(46, 204, 113, 0.35); }
+}
+
+.btn-demo--highlight {
+  animation: pulse-demo 1s ease-out 3;
+  outline: 3px solid #2ecc71;
+  outline-offset: 3px;
+}
+
 /* =====================
    HAMBURGER — ascuns pe desktop
 ===================== */
@@ -281,12 +356,12 @@ main {
 @media (max-width: 1024px) {
   .characters {
     gap: 16px;
-    padding: 40px 20px 60px;
+    padding: 20px 20px 0;
   }
 
   .character-img-wrap {
     width: 180px;
-    height: 240px;
+    height: 230px;
   }
 }
 
@@ -339,13 +414,39 @@ main {
 
   /* Main */
   main {
-    padding-top: 100px;
+    padding-top: 70px;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 16px 20px 0;
+    gap: 14px;
+  }
+
+  .hero__title {
+    font-size: 20px;
+  }
+
+  .hero__subtitle {
+    font-size: 14px;
+  }
+
+  .hero__support {
+    font-size: 12px;
+  }
+
+  .btn-cta {
+    padding: 11px 28px;
+    font-size: 14px;
   }
 
   /* Personaje — slider pe mobil */
   .characters {
     overflow: hidden;
-    padding: 30px 0 60px;
+    padding: 10px 0 0;
   }
 
   .slider-track {
@@ -397,7 +498,7 @@ main {
 
   .character-img-wrap {
     width: 200px;
-    height: 260px;
+    height: 240px;
   }
 
   .btn-demo {
