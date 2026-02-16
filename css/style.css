@@ -29,10 +29,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 40px;
+  padding: 12px 40px;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: visible;
 }
 
 /* Logo */
@@ -48,7 +49,7 @@ body {
 }
 
 .navbar__logo-img {
-  height: 180px;
+  height: 200px;
   width: auto;
   object-fit: contain;
 }
@@ -96,7 +97,7 @@ body {
    MAIN
 ===================== */
 main {
-  padding-top: 200px;
+  padding-top: 220px;
 }
 
 /* =====================
