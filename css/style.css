@@ -13,8 +13,8 @@ html {
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #0a0a0a;
-  color: #f0f0f0;
+  background-color: #ffffff;
+  color: #1a1a1a;
 }
 
 /* =====================
@@ -29,52 +29,163 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 40px;
-  background: rgba(10, 10, 10, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Logo link — zona clicabilă */
+/* Logo */
 .navbar__logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: transform 0.25s ease;
 }
 
 .navbar__logo:hover {
-  opacity: 0.8;
+  transform: scale(1.08);
 }
 
-/* Imaginea logo (simbolul grafic) */
 .navbar__logo-img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* Textul logo */
-.navbar__logo-text {
-  height: 22px;
+  height: 50px;
   width: auto;
   object-fit: contain;
 }
 
 /* =====================
-   NAV LINKS (de completat)
+   NAV LINKS
 ===================== */
 .navbar__nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #2ecc71;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #2ecc71;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 /* =====================
-   MAIN — spațiu sub navbar fix
+   MAIN
 ===================== */
 main {
-  padding-top: 80px;
+  padding-top: 90px;
+}
+
+/* =====================
+   CHARACTERS SECTION
+===================== */
+.characters {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 48px;
+  padding: 60px 40px 80px;
+  flex-wrap: wrap;
+}
+
+.character-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.character-img {
+  height: 320px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover .character-img {
+  transform: translateY(-6px);
+}
+
+/* Imagine estompată pentru Coming Soon */
+.coming-soon-img {
+  filter: brightness(0.65) saturate(0.5);
+}
+
+/* =====================
+   COMING SOON RIBBON
+===================== */
+.coming-soon-ribbon {
+  position: absolute;
+  top: 36px;
+  left: -34px;
+  width: 160px;
+  background: #FFD700;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 7px 0;
+  transform: rotate(-35deg);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  border: 2px dashed rgba(0,0,0,0.2);
+  z-index: 10;
+  text-transform: uppercase;
+}
+
+/* =====================
+   BUTON VEZI DEMO
+===================== */
+.btn-demo {
+  padding: 12px 32px;
+  background-color: #2ecc71;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(46, 204, 113, 0.35);
+}
+
+.btn-demo:hover:not(:disabled) {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(46, 204, 113, 0.45);
+}
+
+.btn-demo:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+  box-shadow: none;
 }
