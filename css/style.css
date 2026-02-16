@@ -163,7 +163,7 @@ main {
 
 /* Asistenta — ajustare verticală */
 .asistenta-img {
-  bottom: 0;
+  bottom: -15px;
 }
 
 /* Receptionista — micșorată */
