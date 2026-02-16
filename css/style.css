@@ -351,6 +351,7 @@ main {
   .slider-track {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     align-items: flex-end;
     gap: 0;
     width: 100%;
