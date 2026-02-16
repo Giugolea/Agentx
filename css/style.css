@@ -224,3 +224,126 @@ main {
   cursor: not-allowed;
   box-shadow: none;
 }
+
+/* =====================
+   HAMBURGER — ascuns pe desktop
+===================== */
+.nav-toggle {
+  display: none;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animație X când e deschis */
+.nav-toggle:checked ~ .nav-hamburger span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.nav-toggle:checked ~ .nav-hamburger span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle:checked ~ .nav-hamburger span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* =====================
+   RESPONSIVE — TABLET
+===================== */
+@media (max-width: 1024px) {
+  .characters {
+    gap: 16px;
+    padding: 40px 20px 60px;
+  }
+
+  .character-img-wrap {
+    width: 180px;
+    height: 240px;
+  }
+}
+
+/* =====================
+   RESPONSIVE — MOBIL
+===================== */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .navbar {
+    height: 70px;
+    padding: 0 20px;
+    overflow: visible;
+  }
+
+  .navbar__logo-img {
+    max-height: 90px;
+  }
+
+  /* Afișează hamburger */
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* Meniu dropdown */
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px 24px;
+    gap: 18px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    z-index: 999;
+  }
+
+  .nav-toggle:checked ~ .navbar__nav {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 17px;
+  }
+
+  /* Main */
+  main {
+    padding-top: 100px;
+  }
+
+  /* Personaje — coloană pe mobil */
+  .characters {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 30px 20px 60px;
+  }
+
+  .character-img-wrap {
+    width: 200px;
+    height: 260px;
+  }
+
+  .btn-demo {
+    padding: 10px 28px;
+    font-size: 14px;
+  }
+}
