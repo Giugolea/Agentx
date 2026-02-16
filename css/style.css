@@ -48,7 +48,7 @@ body {
 }
 
 .navbar__logo-img {
-  height: 72px;
+  height: 120px;
   width: auto;
   object-fit: contain;
 }
@@ -121,26 +121,27 @@ main {
 /* Wrapper fix — ribbon + imagine, aliniate la baza */
 .character-img-wrap {
   position: relative;
-  width: 200px;
-  height: 260px;
+  width: 220px;
+  height: 280px;
   overflow: hidden;
   border-radius: 16px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
 }
 
 .character-img {
-  width: 200px;
-  height: 260px;
-  object-fit: contain;
-  object-position: bottom;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
   display: block;
   transition: transform 0.3s ease;
 }
 
 .character-card:hover .character-img {
-  transform: translateY(-6px);
+  transform: translateX(-50%) translateY(-6px);
 }
 
 /* Imagine estompată pentru Coming Soon */
