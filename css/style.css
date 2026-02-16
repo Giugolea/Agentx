@@ -153,9 +153,19 @@ main {
   bottom: -20px;
 }
 
-/* Manager — coborât cu 5px */
+/* Receptionista — micșorată */
+.receptionista-img {
+  max-height: 82%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) scale(0.85);
+}
+
+/* Manager — micșorat și coborât */
 .manager-img {
   bottom: -5px;
+  max-height: 82%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) scale(0.85);
 }
 
 /* Imagine estompată pentru Coming Soon */
