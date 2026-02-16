@@ -37,7 +37,15 @@
 
       <div class="slider-track">
 
-        <!-- Receptionista — Coming Soon (stânga) -->
+        <!-- Asistenta -->
+        <div class="character-card">
+          <div class="character-img-wrap">
+            <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
+          </div>
+          <button class="btn-demo">Vezi Demo</button>
+        </div>
+
+        <!-- Receptionista — Coming Soon -->
         <div class="character-card">
           <div class="character-img-wrap">
             <div class="coming-soon-ribbon">Coming Soon</div>
@@ -46,15 +54,7 @@
           <button class="btn-demo" disabled>Vezi Demo</button>
         </div>
 
-        <!-- Asistenta (centru — default) -->
-        <div class="character-card">
-          <div class="character-img-wrap">
-            <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
-          </div>
-          <button class="btn-demo">Vezi Demo</button>
-        </div>
-
-        <!-- Manager — Coming Soon (dreapta) -->
+        <!-- Manager — Coming Soon -->
         <div class="character-card">
           <div class="character-img-wrap">
             <div class="coming-soon-ribbon">Coming Soon</div>
@@ -76,7 +76,7 @@
     const cards = track.querySelectorAll('.character-card');
     const prevBtn = document.querySelector('.slider-arrow--prev');
     const nextBtn = document.querySelector('.slider-arrow--next');
-    let current = 1; /* pornește pe Asistenta */
+    let current = 0;
 
     function updateSlider() {
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
