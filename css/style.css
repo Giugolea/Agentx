@@ -123,8 +123,17 @@ main {
   padding: 20px 0 0;
 }
 
-.character-img {
+/* Wrapper cu înălțime fixă — ancorează imaginea la bază */
+.character-img-wrap {
   height: 224px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.character-img {
+  max-height: 224px;
   width: auto;
   object-fit: contain;
   display: block;
