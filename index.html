@@ -33,35 +33,66 @@
     <!-- SECTIUNE PERSONAJE -->
     <section class="characters">
 
-      <!-- Asistenta -->
-      <div class="character-card">
-        <div class="character-img-wrap">
-          <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
+      <button class="slider-arrow slider-arrow--prev" aria-label="Anterior">&#8249;</button>
+
+      <div class="slider-track">
+
+        <!-- Asistenta -->
+        <div class="character-card">
+          <div class="character-img-wrap">
+            <img src="Indicatii/Asistenta.png" alt="Asistenta AI" class="character-img asistenta-img" />
+          </div>
+          <button class="btn-demo">Vezi Demo</button>
         </div>
-        <button class="btn-demo">Vezi Demo</button>
+
+        <!-- Receptionista — Coming Soon -->
+        <div class="character-card">
+          <div class="character-img-wrap">
+            <div class="coming-soon-ribbon">Coming Soon</div>
+            <img src="Indicatii/Receptionista.png" alt="Receptionista AI" class="character-img coming-soon-img receptionista-img" />
+          </div>
+          <button class="btn-demo" disabled>Vezi Demo</button>
+        </div>
+
+        <!-- Manager — Coming Soon -->
+        <div class="character-card">
+          <div class="character-img-wrap">
+            <div class="coming-soon-ribbon">Coming Soon</div>
+            <img src="Indicatii/Manager.png" alt="Manager AI" class="character-img coming-soon-img manager-img" />
+          </div>
+          <button class="btn-demo" disabled>Vezi Demo</button>
+        </div>
+
       </div>
 
-      <!-- Receptionista — Coming Soon -->
-      <div class="character-card">
-        <div class="character-img-wrap">
-          <div class="coming-soon-ribbon">Coming Soon</div>
-          <img src="Indicatii/Receptionista.png" alt="Receptionista AI" class="character-img coming-soon-img receptionista-img" />
-        </div>
-        <button class="btn-demo" disabled>Vezi Demo</button>
-      </div>
-
-      <!-- Manager — Coming Soon -->
-      <div class="character-card">
-        <div class="character-img-wrap">
-          <div class="coming-soon-ribbon">Coming Soon</div>
-          <img src="Indicatii/Manager.png" alt="Manager AI" class="character-img coming-soon-img manager-img" />
-        </div>
-        <button class="btn-demo" disabled>Vezi Demo</button>
-      </div>
+      <button class="slider-arrow slider-arrow--next" aria-label="Următor">&#8250;</button>
 
     </section>
 
   </main>
 
+  <script>
+    const track = document.querySelector('.slider-track');
+    const cards = track.querySelectorAll('.character-card');
+    const prevBtn = document.querySelector('.slider-arrow--prev');
+    const nextBtn = document.querySelector('.slider-arrow--next');
+    let current = 0;
+
+    function updateSlider() {
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      prevBtn.style.opacity = current === 0 ? '0.25' : '0.7';
+      nextBtn.style.opacity = current === cards.length - 1 ? '0.25' : '0.7';
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (current > 0) { current--; updateSlider(); }
+    });
+
+    nextBtn.addEventListener('click', function() {
+      if (current < cards.length - 1) { current++; updateSlider(); }
+    });
+
+    updateSlider();
+  </script>
 </body>
 </html>
