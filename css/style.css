@@ -48,7 +48,7 @@ body {
 }
 
 .navbar__logo-img {
-  height: 120px;
+  height: 180px;
   width: auto;
   object-fit: contain;
 }
@@ -96,18 +96,19 @@ body {
    MAIN
 ===================== */
 main {
-  padding-top: 90px;
+  padding-top: 200px;
 }
 
 /* =====================
    CHARACTERS SECTION
 ===================== */
 .characters {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: end;
-  gap: 0;
-  padding: 60px 80px 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 24px;
+  padding: 60px 40px 80px;
   width: 100%;
 }
 
