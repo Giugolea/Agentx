@@ -25,18 +25,19 @@ body {
   top: 0;
   left: 0;
   width: 100%;
+  height: 80px;              /* înălțime fixă — nu se schimbă indiferent de logo */
   z-index: 1000;
   display: flex;
-  align-items: center;
+  align-items: center;       /* centrare verticală pentru linkuri */
   justify-content: space-between;
-  padding: 12px 40px;
+  padding: 0 40px;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  overflow: visible;
+  overflow: visible;         /* permite logo-ului să depășească bordura */
 }
 
-/* Logo */
+/* Logo — stânga */
 .navbar__logo {
   display: inline-flex;
   align-items: center;
@@ -49,13 +50,13 @@ body {
 }
 
 .navbar__logo-img {
-  height: 200px;
+  max-height: 200px;         /* controlat doar prin max-height */
   width: auto;
-  object-fit: contain;
+  display: block;
 }
 
 /* =====================
-   NAV LINKS
+   NAV LINKS — dreapta
 ===================== */
 .navbar__nav {
   display: flex;
@@ -72,6 +73,7 @@ body {
   position: relative;
   padding-bottom: 4px;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link::after {
