@@ -1,0 +1,80 @@
+/* =====================
+   RESET & BASE
+===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #0a0a0a;
+  color: #f0f0f0;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Logo link — zona clicabilă */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__logo:hover {
+  opacity: 0.8;
+}
+
+/* Imaginea logo (simbolul grafic) */
+.navbar__logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Textul logo */
+.navbar__logo-text {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* =====================
+   NAV LINKS (de completat)
+===================== */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* =====================
+   MAIN — spațiu sub navbar fix
+===================== */
+main {
+  padding-top: 80px;
+}
