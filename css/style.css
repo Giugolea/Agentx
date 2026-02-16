@@ -148,9 +148,14 @@ main {
   transform: translateX(-50%) translateY(-6px);
 }
 
-/* Asistenta — coborâtă cu 30px */
+/* Asistenta — ajustare verticală */
 .asistenta-img {
-  bottom: -30px;
+  bottom: -20px;
+}
+
+/* Manager — coborât cu 5px */
+.manager-img {
+  bottom: -5px;
 }
 
 /* Imagine estompată pentru Coming Soon */
