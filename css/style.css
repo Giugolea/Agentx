@@ -104,11 +104,11 @@ main {
 ===================== */
 .characters {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: flex-end;
   gap: 48px;
   padding: 60px 40px 80px;
-  flex-wrap: wrap;
 }
 
 .character-card {
