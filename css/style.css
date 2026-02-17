@@ -118,32 +118,113 @@ main {
 .hero {
   text-align: center;
   max-width: 720px;
-  padding: 0 24px;
+  padding: 48px 40px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 18px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #e6f0ff 0%, #d0e0ff 40%, #5b7cfa 100%);
+  z-index: 1;
 }
 
+/* Radial glow — pulsing subtil */
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 320px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(91, 124, 250, 0.35) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: glow-pulse 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* Blob shapes — floating organic */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.hero-blob--1 {
+  width: 200px;
+  height: 200px;
+  background: rgba(100, 200, 255, 0.5);
+  top: -40px;
+  left: -60px;
+  animation: blob-float-1 8s ease-in-out infinite;
+}
+
+.hero-blob--2 {
+  width: 160px;
+  height: 160px;
+  background: rgba(91, 124, 250, 0.4);
+  bottom: -30px;
+  right: -40px;
+  animation: blob-float-2 7s ease-in-out infinite;
+}
+
+.hero-blob--3 {
+  width: 120px;
+  height: 120px;
+  background: rgba(0, 210, 200, 0.35);
+  top: 50%;
+  right: 10%;
+  animation: blob-float-3 9s ease-in-out infinite;
+}
+
+@keyframes blob-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(15px, 10px); }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-12px, -8px); }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-8px, 12px); }
+}
+
+/* Text colors — readable pe gradient */
 .hero__title {
   font-size: clamp(22px, 3vw, 40px);
   font-weight: 800;
-  color: #1a1a1a;
+  color: #0d1b3e;
   line-height: 1.2;
+  position: relative;
 }
 
 .hero__subtitle {
   font-size: clamp(14px, 1.5vw, 17px);
   font-weight: 800;
-  color: #444;
+  color: #1a2d5a;
   line-height: 1.85;
+  position: relative;
 }
 
 .hero__support {
   font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 800;
-  color: #888;
+  color: rgba(13, 27, 62, 0.65);
   line-height: 1.7;
+  position: relative;
 }
 
 /* =====================
@@ -151,21 +232,24 @@ main {
 ===================== */
 .btn-cta {
   padding: 13px 36px;
-  background: transparent;
-  color: #2ecc71;
+  background: rgba(255, 255, 255, 0.9);
+  color: #5b7cfa;
   font-size: 15px;
   font-weight: 700;
-  border: 2px solid #2ecc71;
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 50px;
   cursor: pointer;
   letter-spacing: 0.4px;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(91, 124, 250, 0.2);
 }
 
 .btn-cta:hover {
-  background-color: #2ecc71;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #4a68e0;
   transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(91, 124, 250, 0.35);
 }
 
 /* =====================
@@ -430,9 +514,21 @@ main {
 
   /* Hero */
   .hero {
-    padding: 16px 20px 0;
+    padding: 24px 20px 28px;
     gap: 14px;
+    border-radius: 16px;
+    margin: 0 12px;
+    max-width: calc(100% - 24px);
   }
+
+  .hero-glow {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-blob--1 { width: 120px; height: 120px; }
+  .hero-blob--2 { width: 100px; height: 100px; }
+  .hero-blob--3 { width: 80px; height: 80px; }
 
   .hero__title {
     font-size: 20px;
