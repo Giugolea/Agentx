@@ -45,7 +45,7 @@ body {
   align-items: center;
   text-decoration: none;
   transition: transform 0.25s ease;
-  margin-left: -50px;
+  margin-left: -15px;
 }
 
 .navbar__logo:hover {
@@ -53,7 +53,7 @@ body {
 }
 
 .navbar__logo-img {
-  max-height: 179px;
+  max-height: 171px;
   width: auto;
   display: block;
 }
