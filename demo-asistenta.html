@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Asistenta Ariana — AGX</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    main {
+      height: 100vh;
+      overflow: hidden;
+      padding: 80px 0 0;
+      box-sizing: border-box;
+    }
+
+    .demo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .phone-frame {
+      height: calc(100vh - 110px);
+      aspect-ratio: 10 / 19;
+      position: relative;
+      user-select: none;
+    }
+
+    /* Corpul telefonului */
+    .phone-body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
+      border-radius: 48px;
+      padding: 14px;
+      box-sizing: border-box;
+      box-shadow:
+        0 0 0 3px #3a3a3a,
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    /* Ecranul alb */
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Notch / Dynamic Island */
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 20px;
+      z-index: 5;
+    }
+
+    .phone-notch::after {
+      content: '';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: #0d2847;
+      border-radius: 50%;
+      box-shadow: inset 0 0 2px rgba(79, 195, 247, 0.5);
+    }
+
+    /* Bara de jos (home indicator) */
+    .phone-home {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    /* Butoane laterale */
+    .phone-btn-vol1,
+    .phone-btn-vol2,
+    .phone-btn-power {
+      position: absolute;
+      background: #3a3a3a;
+      border-radius: 3px;
+    }
+
+    .phone-btn-vol1 {
+      left: -4px;
+      top: 140px;
+      width: 4px;
+      height: 40px;
+    }
+
+    .phone-btn-vol2 {
+      left: -4px;
+      top: 190px;
+      width: 4px;
+      height: 40px;
+    }
+
+    .phone-btn-power {
+      right: -4px;
+      top: 160px;
+      width: 4px;
+      height: 50px;
+    }
+
+    /* Zona pentru iconițe — container */
+    .phone-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 50px 16px 40px;
+      box-sizing: border-box;
+    }
+
+    .phone-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .phone-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      padding: 10px;
+      box-sizing: border-box;
+      background: #f5f5f5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .phone-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .phone-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* =====================
+       WHATSAPP CHAT POPUP
+    ===================== */
+    .wapp-chat {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      z-index: 10;
+      border-radius: 36px;
+      overflow: hidden;
+    }
+
+    .wapp-chat.active {
+      display: flex;
+    }
+
+    /* Header WhatsApp */
+    .wapp-header {
+      background: #075e54;
+      padding: 14px 16px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 48px;
+    }
+
+    .wapp-back {
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      pointer-events: auto;
+      background: none;
+      border: none;
+      padding: 4px 8px;
+    }
+
+    .wapp-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .wapp-contact {
+      flex: 1;
+    }
+
+    .wapp-contact-name {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .wapp-contact-status {
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+    }
+
+    /* Zona mesaje */
+    .wapp-messages {
+      flex: 1;
+      background: #ece5dd;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4cfc6' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      padding: 16px 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .wapp-msg {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.4;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .wapp-msg--sent {
+      align-self: flex-end;
+      background: #dcf8c6;
+      border-bottom-right-radius: 2px;
+      color: #111;
+    }
+
+    .wapp-msg--received {
+      align-self: flex-start;
+      background: #ffffff;
+      border-bottom-left-radius: 2px;
+      color: #111;
+    }
+
+    .wapp-msg-time {
+      font-size: 10px;
+      color: #999;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Input bar */
+    .wapp-input-bar {
+      background: #f0f0f0;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wapp-input {
+      flex: 1;
+      background: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 14px;
+      font-size: 13px;
+      outline: none;
+      color: #333;
+      pointer-events: auto;
+    }
+
+    .wapp-send {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #25d366;
+      border: none;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .wapp-send:hover {
+      background: #1da851;
+    }
+
+    /* Separator de dată (ex: Tomorrow) */
+    .wapp-date-sep {
+      align-self: center;
+      background: rgba(11, 20, 26, 0.15);
+      color: #555;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 8px;
+      margin: 8px 0;
+    }
+
+    .wapp-send svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    /* =====================
+       ROBOT INFO POPUP
+    ===================== */
+    .robot-info {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      flex-direction: column;
+      z-index: 30;
+      border-radius: 36px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0f172a 0%, #1a2744 60%, #0f172a 100%);
+    }
+
+    .robot-info.active {
+      display: flex;
+    }
+
+    .ri-header {
+      padding: 46px 20px 16px;
+      background: rgba(30, 41, 59, 0.8);
+      border-bottom: 1px solid rgba(79, 195, 247, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ri-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ri-header-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #4fc3f7, #5b7cfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .ri-header-title {
+      color: #fff;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .ri-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 22px;
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 4px 6px;
+    }
+
+    .ri-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 14px 16px 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .ri-subtitle {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      text-align: center;
+      line-height: 1.5;
+      padding: 0 4px;
+    }
+
+    .ri-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .ri-step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    .ri-step-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .ri-step--1 .ri-step-num { background: rgba(79,195,247,0.2); color: #4fc3f7; }
+    .ri-step--2 .ri-step-num { background: rgba(167,139,250,0.2); color: #a78bfa; }
+    .ri-step--3 .ri-step-num { background: rgba(52,211,153,0.2); color: #34d399; }
+
+    .ri-step-content { flex: 1; }
+
+    .ri-step-title {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .ri-step-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .ri-step-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .ri-tag {
+      background: rgba(52,211,153,0.12);
+      border: 1px solid rgba(52,211,153,0.25);
+      color: #34d399;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .ri-footer {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+      padding: 10px 14px 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* =====================
+       ROBOT AI SCREEN
+    ===================== */
+    .robot-screen {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      flex-direction: column;
+      z-index: 20;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    .robot-screen.active {
+      display: flex;
+    }
+
+    .robot-header {
+      background: #1e293b;
+      padding: 48px 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .robot-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4fc3f7, #5b7cfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .robot-title {
+      flex: 1;
+    }
+
+    .robot-title-name {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .robot-title-sub {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+    }
+
+    .robot-close {
+      color: rgba(255,255,255,0.6);
+      font-size: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 4px 8px;
+    }
+
+    .robot-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      gap: 6px;
+    }
+
+    .robot-intro {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .flow-step {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .flow-step.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .flow-step-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .flow-step-icon--wapp  { background: rgba(37,211,102,0.2); }
+    .flow-step-icon--ai    { background: rgba(79,195,247,0.2); }
+    .flow-step-icon--cal   { background: rgba(251,191,36,0.2); }
+    .flow-step-icon--bell  { background: rgba(167,139,250,0.2); }
+
+    .flow-step-text {
+      flex: 1;
+    }
+
+    .flow-step-label {
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .flow-step-desc {
+      color: rgba(255,255,255,0.5);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .flow-check {
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease 0.3s;
+    }
+
+    .flow-step.visible .flow-check {
+      opacity: 1;
+    }
+
+    .flow-arrow {
+      font-size: 16px;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .flow-arrow.visible {
+      opacity: 1;
+    }
+
+    .robot-footer {
+      padding: 12px 16px;
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 70px 0 0;
+      }
+
+      .phone-frame {
+        height: calc(100vh - 80px);
+      }
+
+      .phone-body {
+        border-radius: 36px;
+        padding: 10px;
+      }
+
+      .phone-screen {
+        border-radius: 28px;
+      }
+
+      .phone-notch {
+        width: 80px;
+        height: 22px;
+        top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="navbar__logo" aria-label="Acasă">
+      <img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" />
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Meniu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="navbar__nav">
+      <a href="despre-noi.html" class="nav-link">Despre noi</a>
+      <a href="servicii.html" class="nav-link">Servicii</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="demo-container">
+      <div class="phone-frame">
+        <div class="phone-body">
+          <div class="phone-btn-vol1"></div>
+          <div class="phone-btn-vol2"></div>
+          <div class="phone-btn-power"></div>
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="phone-icons">
+                <div class="phone-icon">
+                  <img src="Iconite/wapp.png" alt="WhatsApp" />
+                </div>
+                <div class="phone-icon">
+                  <img src="Iconite/robot.png" alt="Robot AI" />
+                </div>
+                <div class="phone-icon">
+                  <img src="Iconite/calendar.png" alt="Calendar" />
+                </div>
+              </div>
+            </div>
+            <div class="phone-home"></div>
+
+            <!-- Robot Info Popup -->
+            <div class="robot-info" id="robot-info">
+              <div class="ri-header">
+                <div class="ri-header-left">
+                  <div class="ri-header-icon">🤖</div>
+                  <div class="ri-header-title">Cum funcționează agentul AI</div>
+                </div>
+                <button class="ri-close" id="ri-close">✕</button>
+              </div>
+              <div class="ri-body">
+                <p class="ri-subtitle">Preia automat cererile, le analizează și execută acțiunile necesare în câteva secunde, fără intervenție umană.</p>
+                <div class="ri-steps">
+                  <div class="ri-step ri-step--1">
+                    <div class="ri-step-num">1</div>
+                    <div class="ri-step-content">
+                      <div class="ri-step-title">Primește</div>
+                      <div class="ri-step-desc">Preia solicitările prin apel, mesaj, formular sau WhatsApp — disponibil non-stop, fără să rateze nicio cerere.</div>
+                    </div>
+                  </div>
+                  <div class="ri-step ri-step--2">
+                    <div class="ri-step-num">2</div>
+                    <div class="ri-step-content">
+                      <div class="ri-step-title">Filtrează</div>
+                      <div class="ri-step-desc">Înțelege intenția, extrage informațiile și separă automat programările, întrebările frecvente și urgențele.</div>
+                    </div>
+                  </div>
+                  <div class="ri-step ri-step--3">
+                    <div class="ri-step-num">3</div>
+                    <div class="ri-step-content">
+                      <div class="ri-step-title">Execută</div>
+                      <div class="ri-step-desc">Acționează imediat — rapid, precis, fără erori.</div>
+                      <div class="ri-step-tags">
+                        <span class="ri-tag">Programări</span>
+                        <span class="ri-tag">Răspunsuri instant</span>
+                        <span class="ri-tag">CRM</span>
+                        <span class="ri-tag">Notificări echipă</span>
+                        <span class="ri-tag">Procese automate</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ri-footer">Totul automat. Fără intervenție umană.</div>
+            </div>
+
+            <!-- Robot AI Screen -->
+            <div class="robot-screen" id="robot-screen">
+              <div class="robot-header">
+                <div class="robot-avatar">🤖</div>
+                <div class="robot-title">
+                  <div class="robot-title-name">Agent AI — AGX</div>
+                  <div class="robot-title-sub">Procesare automată completă</div>
+                </div>
+                <button class="robot-close" id="robot-close">✕</button>
+              </div>
+              <div class="robot-body">
+                <p class="robot-intro">Iată cum a funcționat automatizarea<br>în spatele acestei programări:</p>
+
+                <div class="flow-step" id="step-1">
+                  <div class="flow-step-icon flow-step-icon--wapp">💬</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Mesaj WhatsApp primit</div>
+                    <div class="flow-step-desc">Pacientul a trimis cererea de programare</div>
+                  </div>
+                  <div class="flow-check">✅</div>
+                </div>
+
+                <div class="flow-arrow" id="arrow-1">↓</div>
+
+                <div class="flow-step" id="step-2">
+                  <div class="flow-step-icon flow-step-icon--ai">🤖</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Agent AI a procesat cererea</div>
+                    <div class="flow-step-desc">A înțeles intenția și a verificat disponibilitatea</div>
+                  </div>
+                  <div class="flow-check">✅</div>
+                </div>
+
+                <div class="flow-arrow" id="arrow-2">↓</div>
+
+                <div class="flow-step" id="step-3">
+                  <div class="flow-step-icon flow-step-icon--cal">📅</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Programare adăugată în Calendar</div>
+                    <div class="flow-step-desc">Slot rezervat automat la Dr. Cristian, 14:30</div>
+                  </div>
+                  <div class="flow-check">✅</div>
+                </div>
+
+                <div class="flow-arrow" id="arrow-3">↓</div>
+
+                <div class="flow-step" id="step-4">
+                  <div class="flow-step-icon flow-step-icon--bell">🔔</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Reminder trimis automat</div>
+                    <div class="flow-step-desc">Pacientul a confirmat prezența cu "Ok"</div>
+                  </div>
+                  <div class="flow-check">✅</div>
+                </div>
+              </div>
+              <div class="robot-footer">Totul s-a întâmplat automat, fără intervenție umană.</div>
+            </div>
+
+            <!-- WhatsApp Chat Popup -->
+            <div class="wapp-chat" id="wapp-chat">
+              <div class="wapp-header">
+                <button class="wapp-back" id="wapp-back">&#8592;</button>
+                <div class="wapp-avatar">A</div>
+                <div class="wapp-contact">
+                  <div class="wapp-contact-name">Asistenta Ariana</div>
+                  <div class="wapp-contact-status">online</div>
+                </div>
+              </div>
+              <div class="wapp-messages" id="wapp-messages">
+                <!-- Mesajele apar aici -->
+              </div>
+              <div class="wapp-input-bar">
+                <input type="text" class="wapp-input" id="wapp-input" value="Buna ziua, vreau sa-mi fac o programare cat de repede pentru o consultatie" readonly />
+                <button class="wapp-send" id="wapp-send">
+                  <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var icons = document.querySelectorAll('.phone-icon');
+    var wappIcon = icons[0];
+    var robotInfoIcon = icons[1];
+    var robotInfo = document.getElementById('robot-info');
+    var riClose = document.getElementById('ri-close');
+
+    // Deschide robot info popup
+    robotInfoIcon.addEventListener('click', function() {
+      robotInfo.classList.add('active');
+    });
+
+    riClose.addEventListener('click', function() {
+      robotInfo.classList.remove('active');
+    });
+    var wappChat = document.getElementById('wapp-chat');
+    var wappBack = document.getElementById('wapp-back');
+    var wappSend = document.getElementById('wapp-send');
+    var wappMessages = document.getElementById('wapp-messages');
+    var wappInput = document.getElementById('wapp-input');
+    var robotScreen = document.getElementById('robot-screen');
+    var robotClose = document.getElementById('robot-close');
+
+    // Deschide chat-ul WhatsApp
+    wappIcon.addEventListener('click', function() {
+      wappChat.classList.add('active');
+    });
+
+    // Închide chat-ul
+    wappBack.addEventListener('click', function() {
+      wappChat.classList.remove('active');
+      wappMessages.innerHTML = '';
+      wappInput.value = 'Buna ziua, vreau sa-mi fac o programare cat de repede pentru o consultatie';
+    });
+
+    // Închide robot screen
+    robotClose.addEventListener('click', function() {
+      robotScreen.classList.remove('active');
+      resetRobotSteps();
+    });
+
+    // Trimite mesajul
+    wappSend.addEventListener('click', function() {
+      var msg = wappInput.value.trim();
+      if (!msg) return;
+
+      addMessage(msg, 'sent');
+      wappInput.value = '';
+
+      if (msg === 'Ok') {
+        // Fluxul de confirmare — închide wapp, deschide robot
+        setTimeout(function() {
+          wappChat.classList.remove('active');
+          wappMessages.innerHTML = '';
+          wappInput.value = 'Buna ziua, vreau sa-mi fac o programare cat de repede pentru o consultatie';
+          openRobotScreen();
+        }, 2000);
+        return;
+      }
+
+      // Simulare răspuns de la Ariana
+      setTimeout(function() {
+        addMessage('Bună ziua! Sunt Ariana, asistenta virtuală. Vă ajut imediat cu programarea.', 'received');
+      }, 1200);
+
+      setTimeout(function() {
+        addMessage('Am verificat calendarul doctorului. Cel mai apropiat slot disponibil este mâine, ora 14:30. Vă programez?', 'received');
+
+        setTimeout(function() {
+          addMessage('Da, vă rog!', 'sent');
+
+          setTimeout(function() {
+            addMessage('Perfect, am adăugat programarea în calendarul D-lui Dr. Cristian. O să primiți un mesaj cu două ore înainte de programare care să vă reamintească ora și locul programării.\nMulțumim! 😊', 'received');
+
+            setTimeout(function() {
+              addDateSep('Tomorrow');
+              setTimeout(function() {
+                addMessage('Bună ziua, vă reamintim că aveți o programare la ora 14:30 pentru o consultație la Dl. Dr. Cristian.\nVă rugăm să ne confirmați prezența cu un "Ok" aici! 📅', 'received', '12:30');
+                // Pune "Ok" în input pentru pasul următor
+                setTimeout(function() {
+                  wappInput.value = 'Ok';
+                }, 1000);
+              }, 800);
+            }, 2500);
+          }, 1500);
+        }, 2000);
+      }, 3000);
+    });
+
+    function openRobotScreen() {
+      robotScreen.classList.add('active');
+      var steps = ['step-1','arrow-1','step-2','arrow-2','step-3','arrow-3','step-4'];
+      steps.forEach(function(id, i) {
+        setTimeout(function() {
+          document.getElementById(id).classList.add('visible');
+        }, i * 500);
+      });
+    }
+
+    function resetRobotSteps() {
+      ['step-1','arrow-1','step-2','arrow-2','step-3','arrow-3','step-4'].forEach(function(id) {
+        document.getElementById(id).classList.remove('visible');
+      });
+    }
+
+    function addMessage(text, type, fixedTime) {
+      var now = new Date();
+      var time = fixedTime || (now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0'));
+      var div = document.createElement('div');
+      div.className = 'wapp-msg wapp-msg--' + type;
+      div.innerHTML = text.replace(/\n/g, '<br>') + '<div class="wapp-msg-time">' + time + '</div>';
+      wappMessages.appendChild(div);
+      wappMessages.scrollTop = wappMessages.scrollHeight;
+    }
+
+    function addDateSep(label) {
+      var div = document.createElement('div');
+      div.className = 'wapp-date-sep';
+      div.textContent = label;
+      wappMessages.appendChild(div);
+      wappMessages.scrollTop = wappMessages.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
