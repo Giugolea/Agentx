@@ -105,13 +105,13 @@ body {
    MAIN
 ===================== */
 main {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: visible;
   padding-top: 80px;
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 24px;
   box-sizing: border-box;
@@ -404,7 +404,7 @@ main {
   width: 143px;
   height: auto;
   margin-top: -8px;
-  transform: rotate(15deg);
+  transform: rotate(15deg) translateX(20px);
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
   -webkit-user-drag: none;
   user-select: none;
@@ -556,6 +556,85 @@ main {
 }
 
 /* =====================
+   DESPRE NOI
+===================== */
+.about {
+  width: 100%;
+  padding: 80px 40px;
+  background: linear-gradient(180deg, transparent 0%, rgba(79, 195, 247, 0.04) 40%, transparent 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.about__inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.about__title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 36px;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.about__title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4fc3f7, #7c3aed);
+  border-radius: 2px;
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__body p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #ffffff;
+}
+
+.about__mission {
+  background: rgba(79, 195, 247, 0.07);
+  border-left: 3px solid #4fc3f7;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  color: #ffffff !important;
+}
+
+.about__mission strong {
+  color: #4fc3f7;
+}
+
+.about__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 8px 0;
+}
+
+.about__future {
+  color: #ffffff !important;
+  font-style: italic;
+}
+
+.about__belief {
+  font-size: 18px !important;
+  font-weight: 600;
+  color: #ffffff !important;
+  border-top: none;
+  padding-top: 4px;
+}
+
+/* =====================
    RESPONSIVE — MOBIL
 ===================== */
 @media (max-width: 768px) {
@@ -657,9 +736,40 @@ main {
     height: 200px;
   }
 
-  /* Ascunde arrow callout pe mobil */
+  /* Arrow callout pe mobil — deasupra capului Asistentei */
   .arrow-callout {
+    display: flex;
+    position: relative;
+    right: auto;
+    top: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arrow-ribbon {
+    font-size: 13px;
+    white-space: normal;
+    text-align: center;
+    max-width: 200px;
+    margin-bottom: 0;
+    padding: 8px 14px;
+  }
+
+  /* Ascunde sageata .png pe mobil */
+  .arrow-img {
     display: none;
+  }
+
+  /* Sageata CSS generata — pointeaza in jos spre Asistenta */
+  .arrow-callout::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 20px solid #FFD700;
+    margin-top: -2px;
   }
 
   /* Personaje — slider pe mobil */
@@ -724,5 +834,23 @@ main {
   .btn-demo {
     padding: 10px 28px;
     font-size: 14px;
+  }
+
+  /* Despre noi — mobil */
+  .about {
+    padding: 50px 20px;
+  }
+
+  .about__title {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+
+  .about__body p {
+    font-size: 15px;
+  }
+
+  .about__belief {
+    font-size: 16px !important;
   }
 }

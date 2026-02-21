@@ -131,6 +131,8 @@
       align-items: center;
       padding: 50px 16px 40px;
       box-sizing: border-box;
+      position: relative;
+      z-index: 1;
     }
 
     .phone-icons {
@@ -530,13 +532,13 @@
 
     .robot-title-name {
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
     }
 
     .robot-title-sub {
       color: rgba(255,255,255,0.5);
-      font-size: 11px;
+      font-size: 13px;
     }
 
     .robot-close {
@@ -561,7 +563,7 @@
 
     .robot-intro {
       color: rgba(255,255,255,0.7);
-      font-size: 12px;
+      font-size: 15px;
       text-align: center;
       margin-bottom: 10px;
       line-height: 1.5;
@@ -608,13 +610,13 @@
 
     .flow-step-label {
       color: #fff;
-      font-size: 11px;
+      font-size: 15px;
       font-weight: 600;
     }
 
     .flow-step-desc {
       color: rgba(255,255,255,0.5);
-      font-size: 10px;
+      font-size: 13px;
       margin-top: 2px;
     }
 
@@ -645,9 +647,353 @@
       padding: 12px 16px;
       text-align: center;
       color: rgba(255,255,255,0.3);
-      font-size: 10px;
+      font-size: 13px;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
+
+    /* =====================
+       PHONE WALLPAPER — CSS only
+    ===================== */
+    .phone-wallpaper {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(170deg,
+        #B3E5FC 0%,
+        #E1F5D8 45%,
+        #C8ECC0 100%
+      );
+      overflow: hidden;
+    }
+
+    .pw-statusbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 22px 10px;
+    }
+
+    .pw-time {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a3a52;
+      letter-spacing: -0.2px;
+    }
+
+    .pw-icons {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* Signal bars */
+    .pw-signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 2.5px;
+    }
+
+    .pw-bar {
+      width: 4px;
+      background: #1a3a52;
+      border-radius: 2px;
+    }
+
+    .pw-bar--1 { height: 5px; }
+    .pw-bar--2 { height: 8px; }
+    .pw-bar--3 { height: 11px; }
+    .pw-bar--4 { height: 14px; opacity: 0.28; }
+
+    /* WiFi icon — pure CSS arcs */
+    .pw-wifi {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 2px;
+      padding-bottom: 1px;
+    }
+
+    .pw-wifi-arc {
+      border: 2.5px solid #1a3a52;
+      border-bottom: none;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .pw-wifi-arc--lg { width: 14px; height: 7px; }
+    .pw-wifi-arc--sm { width: 8px; height: 4px; }
+
+    .pw-wifi-dot {
+      width: 3px;
+      height: 3px;
+      background: #1a3a52;
+      border-radius: 50%;
+    }
+
+    /* Battery icon */
+    .pw-battery {
+      display: flex;
+      align-items: center;
+    }
+
+    .pw-battery-body {
+      width: 22px;
+      height: 11px;
+      border: 2px solid #1a3a52;
+      border-radius: 3px;
+      padding: 1.5px;
+      box-sizing: border-box;
+    }
+
+    .pw-battery-fill {
+      width: 70%;
+      height: 100%;
+      background: #1a3a52;
+      border-radius: 1px;
+    }
+
+    .pw-battery-nub {
+      width: 3px;
+      height: 6px;
+      background: #1a3a52;
+      border-radius: 0 2px 2px 0;
+      margin-left: 1px;
+    }
+
+    /* =====================
+       CALENDAR SCREEN
+    ===================== */
+    .calendar-screen {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      flex-direction: column;
+      z-index: 15;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #EFF6FF;
+    }
+
+    .calendar-screen.active {
+      display: flex;
+    }
+
+    .cal-header {
+      background: linear-gradient(135deg, #5B7CFA 0%, #4fc3f7 100%);
+      padding: 46px 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cal-header-icon { font-size: 22px; }
+
+    .cal-header-title {
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .cal-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cal-ai-badge {
+      background: rgba(255,255,255,0.22);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+
+    .cal-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 18px;
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 2px 4px;
+    }
+
+    .cal-date-bar {
+      background: rgba(91,124,250,0.07);
+      border-bottom: 1px solid rgba(91,124,250,0.11);
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #5B7CFA;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+    }
+
+    .cal-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 14px 14px 10px;
+      gap: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .cal-card {
+      background: white;
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 4px solid #E5E7EB;
+      box-shadow: 0 2px 8px rgba(30,58,95,0.07);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .cal-card--confirmed  { border-left-color: #34D399; }
+    .cal-card--reminder   { border-left-color: #FBBF24; }
+    .cal-card--reschedule { border-left-color: #60A5FA; }
+    .cal-card--crm        { border-left-color: #A78BFA; }
+
+    .cal-time {
+      font-size: 16px;
+      font-weight: 800;
+      color: #1E3A5F;
+      min-width: 42px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .cal-divider {
+      width: 1px;
+      height: 32px;
+      background: #E5E7EB;
+      flex-shrink: 0;
+    }
+
+    .cal-info { flex: 1; }
+
+    .cal-service {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E3A5F;
+      margin-bottom: 5px;
+    }
+
+    .cal-status {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .cal-status--confirmed  { background: rgba(52,211,153,0.13);  color: #059669; }
+    .cal-status--reminder   { background: rgba(251,191,36,0.13);   color: #D97706; }
+    .cal-status--reschedule { background: rgba(96,165,250,0.13);   color: #2563EB; }
+    .cal-status--crm        { background: rgba(167,139,250,0.13);  color: #7C3AED; }
+
+    /* Auto-fill animation */
+    @keyframes cal-card-fill {
+      0%   { opacity: 0.28; filter: saturate(0); }
+      100% { opacity: 1;    filter: saturate(1); }
+    }
+
+    @keyframes cal-badge-appear {
+      0%   { opacity: 0; transform: translateY(-6px) scale(0.85); }
+      100% { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .cal-card--animate {
+      opacity: 0.28;
+      filter: saturate(0);
+      animation: cal-card-fill 0.7s ease 1.5s forwards;
+    }
+
+    .cal-auto-badge {
+      position: absolute;
+      top: -11px;
+      right: 12px;
+      background: linear-gradient(135deg, #7C3AED, #5B7CFA);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(-6px) scale(0.85);
+      animation: cal-badge-appear 0.4s ease 2.1s forwards;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .cal-footer {
+      text-align: center;
+      color: rgba(30,58,95,0.35);
+      font-size: 11px;
+      padding: 10px 14px 14px;
+      border-top: 1px solid rgba(91,124,250,0.1);
+      flex-shrink: 0;
+    }
+
+    /* Doctor section header */
+    .cal-doctor-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 2px 2px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .cal-doctor-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.3px;
+    }
+
+    .cal-doctor-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1E3A5F;
+      flex: 1;
+    }
+
+    .cal-doctor-count {
+      font-size: 10px;
+      font-weight: 600;
+      color: #5B7CFA;
+      background: rgba(91,124,250,0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* New status: call received */
+    .cal-card--call    { border-left-color: #2DD4BF; }
+    .cal-status--call  { background: rgba(45,212,191,0.13); color: #0D9488; }
 
     @media (max-width: 768px) {
       main {
@@ -702,6 +1048,32 @@
           <div class="phone-btn-vol2"></div>
           <div class="phone-btn-power"></div>
           <div class="phone-screen">
+
+            <!-- WALLPAPER -->
+            <div class="phone-wallpaper">
+              <div class="pw-statusbar">
+                <span class="pw-time">9:41</span>
+                <div class="pw-icons">
+                  <div class="pw-signal">
+                    <div class="pw-bar pw-bar--1"></div>
+                    <div class="pw-bar pw-bar--2"></div>
+                    <div class="pw-bar pw-bar--3"></div>
+                    <div class="pw-bar pw-bar--4"></div>
+                  </div>
+                  <div class="pw-wifi">
+                    <div class="pw-wifi-arc pw-wifi-arc--lg"></div>
+                    <div class="pw-wifi-arc pw-wifi-arc--sm"></div>
+                    <div class="pw-wifi-dot"></div>
+                  </div>
+                  <div class="pw-battery">
+                    <div class="pw-battery-body"><div class="pw-battery-fill"></div></div>
+                    <div class="pw-battery-nub"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END WALLPAPER -->
+
             <div class="phone-notch"></div>
             <div class="phone-content">
               <div class="phone-icons">
@@ -842,6 +1214,121 @@
               </div>
             </div>
 
+            <!-- Calendar Screen -->
+            <div class="calendar-screen" id="calendar-screen">
+              <div class="cal-header">
+                <div class="cal-header-left">
+                  <div class="cal-header-icon">📅</div>
+                  <div class="cal-header-title">Programul de azi</div>
+                </div>
+                <div class="cal-header-right">
+                  <span class="cal-ai-badge">Optimizat de AI ✨</span>
+                  <button class="cal-close" id="cal-close">✕</button>
+                </div>
+              </div>
+              <div class="cal-date-bar">Luni, 21 Februarie · 9 programări · AI activ ✨</div>
+              <div class="cal-body">
+
+                <!-- DR. CRISTIAN -->
+                <div class="cal-doctor-header">
+                  <div class="cal-doctor-avatar" style="background:#5B7CFA;">DC</div>
+                  <div class="cal-doctor-name">Dr. Cristian Ionescu</div>
+                  <span class="cal-doctor-count">4 programări</span>
+                </div>
+
+                <div class="cal-card cal-card--confirmed">
+                  <div class="cal-time">09:00</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Detartraj</div>
+                    <div class="cal-status cal-status--confirmed">✔ Confirmat automat</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--reminder">
+                  <div class="cal-time">10:00</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Consultație</div>
+                    <div class="cal-status cal-status--reminder">🔔 Reminder trimis</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--reminder">
+                  <div class="cal-time">11:00</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Albire dentară</div>
+                    <div class="cal-status cal-status--reminder">🔔 Reminder trimis</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--crm cal-card--animate">
+                  <div class="cal-auto-badge">Slot completat automat</div>
+                  <div class="cal-time">12:00</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Pacient nou</div>
+                    <div class="cal-status cal-status--crm">🧠 Adăugat în CRM</div>
+                  </div>
+                </div>
+
+                <!-- DR. ANDREEA -->
+                <div class="cal-doctor-header">
+                  <div class="cal-doctor-avatar" style="background:#EC4899;">AM</div>
+                  <div class="cal-doctor-name">Dr. Andreea Munteanu</div>
+                  <span class="cal-doctor-count">5 programări</span>
+                </div>
+
+                <div class="cal-card cal-card--reminder">
+                  <div class="cal-time">09:30</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Obturație</div>
+                    <div class="cal-status cal-status--reminder">🔔 Reminder trimis</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--confirmed">
+                  <div class="cal-time">10:30</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Control rutinar</div>
+                    <div class="cal-status cal-status--confirmed">✔ Confirmat automat</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--reminder">
+                  <div class="cal-time">11:30</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Extracție</div>
+                    <div class="cal-status cal-status--reminder">🔔 Reminder trimis</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--call">
+                  <div class="cal-time">13:00</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Consultație urgentă</div>
+                    <div class="cal-status cal-status--call">📞 Apel preluat automat</div>
+                  </div>
+                </div>
+
+                <div class="cal-card cal-card--reschedule">
+                  <div class="cal-time">14:30</div>
+                  <div class="cal-divider"></div>
+                  <div class="cal-info">
+                    <div class="cal-service">Implant dentar</div>
+                    <div class="cal-status cal-status--reschedule">🤖 Reprogramat automat</div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="cal-footer">9 programări gestionate automat · Fără intervenție umană</div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -854,6 +1341,19 @@
     var robotInfoIcon = icons[1];
     var robotInfo = document.getElementById('robot-info');
     var riClose = document.getElementById('ri-close');
+
+    // Deschide calendar screen
+    var calIcon = icons[2];
+    var calScreen = document.getElementById('calendar-screen');
+    var calClose = document.getElementById('cal-close');
+
+    calIcon.addEventListener('click', function() {
+      calScreen.classList.add('active');
+    });
+
+    calClose.addEventListener('click', function() {
+      calScreen.classList.remove('active');
+    });
 
     // Deschide robot info popup
     robotInfoIcon.addEventListener('click', function() {
