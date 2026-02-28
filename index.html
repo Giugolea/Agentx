@@ -22,10 +22,13 @@
     </label>
     <nav class="navbar__nav">
       <a href="#despre-noi" class="nav-link">Despre noi</a>
-      <a href="servicii.html" class="nav-link">Servicii</a>
+      <a href="#servicii" class="nav-link">Servicii</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
   </header>
+
+  <!-- SPATIU STELE -->
+  <div class="starfield" id="starfield"></div>
 
   <!-- MAIN CONTENT -->
   <main>
@@ -36,7 +39,7 @@
       <div class="hero-blob hero-blob--2"></div>
       <div class="hero-blob hero-blob--3"></div>
       <div class="hero-glow"></div>
-      <h1 class="hero__title">Ce-ar fi dacă recepția ta ar funcționa perfect, non-stop?</h1>
+      <h1 class="hero__title">Ce-ar fi dacă recepția ta ar funcționa perfect, <span id="nonstop-anim">24/7</span>?</h1>
       <p class="hero__subtitle">
         Fără apeluri pierdute.<br>
         Fără programări uitate.<br>
@@ -44,10 +47,15 @@
         Doar eficiență, automatizare și pacienți mulțumiți.
       </p>
       <p class="hero__support">
-        Agentul nostru AI pentru cabinete stomatologice este deja activ și preia munca repetitivă din locul tău sau al receptionistei tale NON-STOP.<br>
-        Următorii agenți sunt pe drum.
+        Agentul nostru AI pentru cabinete stomatologice este deja activ și preia munca repetitivă din locul tău sau al receptionistei tale 24/7.<br>
+        Următorii agenți sunt pe drum!
       </p>
       <button class="btn-cta" id="cta-btn">Descoperă cum funcționează</button>
+
+      <!-- Bulina promo -->
+      <div class="promo-badge">
+        Implementare GRATUITA 14 zile
+      </div>
     </section>
 
     <!-- SECTIUNE PERSONAJE -->
@@ -110,7 +118,129 @@
       </div>
     </section>
 
+    <!-- SECTIUNE SERVICII -->
+    <section class="services" id="servicii">
+      <div class="services__inner">
+        <h2 class="services__title">Pachetele noastre</h2>
+        <p class="services__subtitle">Alege nivelul de automatizare potrivit pentru cabinetul tău stomatologic</p>
+
+        <div class="services__grid">
+
+          <!-- PACHET A -->
+          <div class="service-card service-card--a">
+            <span class="service-card__pkg">Pachet A</span>
+            <div class="service-card__icon">💬</div>
+            <h3 class="service-card__title">WhatsApp Assistant</h3>
+            <p class="service-card__desc">Comunicare inteligentă, automatizată</p>
+            <ul class="service-card__features">
+              <li>Bot activ 24/7, non-stop</li>
+              <li>Răspunsuri automate la întrebări frecvente</li>
+              <li>Reminder-e pentru confirmarea programărilor</li>
+            </ul>
+            <div class="service-card__price">
+              <span class="service-card__amount">179 RON</span>
+              <span class="service-card__period">/lunar</span>
+            </div>
+            <a href="#" class="service-card__cta">Alege pachetul</a>
+          </div>
+
+          <!-- PACHET B -->
+          <div class="service-card service-card--b">
+            <span class="service-card__badge">⭐ Cel mai popular</span>
+            <span class="service-card__pkg">Pachet B</span>
+            <div class="service-card__icon">🌟</div>
+            <h3 class="service-card__title">Review Automation</h3>
+            <p class="service-card__desc">Reputație online în creștere continuă</p>
+            <ul class="service-card__features">
+              <li>Tot ce include Pachetul A</li>
+              <li>Cerere automată de review Google după fiecare consultație</li>
+              <li>Mai multe recenzii pozitive, fără niciun efort</li>
+            </ul>
+            <div class="service-card__price">
+              <span class="service-card__amount">219 RON</span>
+              <span class="service-card__period">/lunar</span>
+            </div>
+            <a href="#" class="service-card__cta">Alege pachetul</a>
+          </div>
+
+          <!-- PACHET C -->
+          <div class="service-card service-card--c">
+            <span class="service-card__pkg">Pachet C</span>
+            <div class="service-card__icon">📞</div>
+            <h3 class="service-card__title">Full Communication</h3>
+            <p class="service-card__desc">Comunicare completă pe toate canalele</p>
+            <ul class="service-card__features">
+              <li>Tot ce include Pachetul B</li>
+              <li>Agent vocal AI disponibil 24/7</li>
+              <li>Număr de telefon fix dedicat</li>
+              <li>Zero apeluri pierdute</li>
+            </ul>
+            <p class="service-card__note">Preluare apeluri 24/7 atunci când recepția este ocupată. Toate solicitările pacienților sunt salvate automat și trimise instant către echipă, pentru programări rapide și fără apeluri pierdute.</p>
+            <a href="#" class="service-card__cta">Solicită ofertă</a>
+          </div>
+
+          <!-- PACHET D -->
+          <div class="service-card service-card--d">
+            <span class="service-card__badge service-card__badge--gold">👑 Cel mai complet</span>
+            <span class="service-card__pkg">Pachet D</span>
+            <div class="service-card__icon">🏆</div>
+            <h3 class="service-card__title">Clinic Intelligence</h3>
+            <p class="service-card__desc">Transformare digitală completă a cabinetului</p>
+            <ul class="service-card__features">
+              <li>Tot ce include Pachetul C</li>
+              <li>CRM complet integrat</li>
+              <li>Gestiune stoc &amp; scaune</li>
+              <li>Bot admin intern</li>
+              <li>Statistici live pe WhatsApp sau Email</li>
+              <li>Bază de date clienți completă</li>
+            </ul>
+            <p class="service-card__tagline">"Lucrează 24/7. Fără concediu.<br>Fără zile libere. Fără greșeli."</p>
+            <div class="service-card__price">
+              <span class="service-card__amount service-card__amount--custom">Solicită ofertă</span>
+            </div>
+            <a href="#" class="service-card__cta service-card__cta--gold">Solicită ofertă</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- WHATSAPP WIDGET -->
+  <div class="wa-widget">
+
+    <!-- Popup chat -->
+    <div class="wa-popup" id="wa-popup">
+      <div class="wa-popup__header">
+        <div class="wa-popup__logo-wrap">
+          <img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="wa-popup__logo" />
+          <span class="wa-popup__status"><span class="wa-online-dot"></span>Online acum</span>
+        </div>
+        <button class="wa-popup__close" id="wa-close" aria-label="Închide">&#10005;</button>
+      </div>
+      <div class="wa-popup__body">
+        <div class="wa-bubble">
+          <p>Salutare! 👋</p>
+          <p>Pentru orice întrebare referitoare la implementare, cost și orice curiozitate despre Asistenta Virtuală, scrie-mi un mesaj!</p>
+          <span class="wa-bubble__time">Acum</span>
+        </div>
+      </div>
+      <div class="wa-popup__footer">
+        <a href="#" class="wa-btn-chat" id="wa-open-chat">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+          Hai să discutăm pe WhatsApp!
+        </a>
+      </div>
+    </div>
+
+    <!-- Buton flotant -->
+    <button class="wa-fab" id="wa-fab" aria-label="Deschide WhatsApp">
+      <span class="wa-fab__ring"></span>
+      <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+    </button>
+
+  </div>
 
   <script>
     const track = document.querySelector('.slider-track');
@@ -140,6 +270,99 @@
       demoBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
       demoBtn.classList.add('btn-demo--highlight');
       setTimeout(function() { demoBtn.classList.remove('btn-demo--highlight'); }, 4000);
+    });
+
+    // WhatsApp widget
+    var waFab    = document.getElementById('wa-fab');
+    var waPopup  = document.getElementById('wa-popup');
+    var waClose  = document.getElementById('wa-close');
+
+    waFab.addEventListener('click', function() {
+      waPopup.classList.toggle('active');
+    });
+
+    waClose.addEventListener('click', function() {
+      waPopup.classList.remove('active');
+    });
+
+    // STARFIELD — stele + stele cazatoare
+    (function() {
+      var sf = document.getElementById('starfield');
+
+      // Stele statice sclipitoare
+      for (var s = 0; s < 120; s++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        var size = Math.random() * 2.2 + 0.5;
+        star.style.cssText = [
+          'width:'  + size + 'px',
+          'height:' + size + 'px',
+          'left:'   + (Math.random() * 100) + '%',
+          'top:'    + (Math.random() * 100) + '%',
+          '--dur:'    + (2 + Math.random() * 4) + 's',
+          '--delay:'  + (-Math.random() * 5)    + 's',
+          '--min-op:' + (0.2 + Math.random() * 0.4)
+        ].join(';');
+        sf.appendChild(star);
+      }
+
+      // Stele cazatoare pe diagonala
+      var shootData = [
+        { top: '8%',  len: '70px', dur: '5s',  delay: '0s'   },
+        { top: '20%', len: '45px', dur: '7s',  delay: '1.8s' },
+        { top: '35%', len: '80px', dur: '6s',  delay: '3.2s' },
+        { top: '50%', len: '55px', dur: '8s',  delay: '0.7s' },
+        { top: '65%', len: '75px', dur: '5.5s',delay: '4.1s' },
+        { top: '15%', len: '40px', dur: '9s',  delay: '2.5s' },
+        { top: '78%', len: '60px', dur: '6.5s',delay: '5s'   },
+      ];
+
+      shootData.forEach(function(d) {
+        var ss = document.createElement('div');
+        ss.className = 'shooting-star';
+        ss.style.cssText = [
+          '--top:'        + d.top,
+          '--len:'        + d.len,
+          '--shoot-dur:'  + d.dur,
+          '--shoot-delay:'+ d.delay,
+          'top:'          + d.top
+        ].join(';');
+        sf.appendChild(ss);
+      });
+    })();
+
+    // 24/7 → NON-STOP typewriter animation
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var el = document.getElementById('nonstop-anim');
+        var i = 3; // lungimea '24/7'
+
+        el.style.borderRight = '2px solid #fff';
+
+        // Sterge '24/7' alb
+        var eraseInterval = setInterval(function() {
+          if (i > 0) {
+            el.textContent = '24/7'.slice(0, --i);
+          } else {
+            clearInterval(eraseInterval);
+            el.style.color = '#FFD700';
+            el.style.textShadow = '0 0 14px rgba(255,215,0,0.6)';
+            el.style.borderRightColor = '#FFD700';
+
+            // Tasteaza NON-STOP galben
+            var target = 'NON-STOP';
+            var j = 0;
+            var typeInterval = setInterval(function() {
+              if (j < target.length) {
+                el.textContent = target.slice(0, ++j);
+              } else {
+                clearInterval(typeInterval);
+                el.style.borderRight = 'none';
+              }
+            }, 90);
+          }
+        }, 70);
+      }, 1400);
     });
   </script>
 </body>

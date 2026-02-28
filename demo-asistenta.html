@@ -995,6 +995,63 @@
     .cal-card--call    { border-left-color: #2DD4BF; }
     .cal-status--call  { background: rgba(45,212,191,0.13); color: #0D9488; }
 
+    .phone-cta-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 0 20px 10px;
+      text-align: center;
+    }
+
+    .phone-cta-text {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a3a52;
+      line-height: 1.55;
+      min-height: 4em;
+      border-right: 2px solid #1dadc0;
+      animation: blink-cursor 0.75s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      0%, 100% { border-right-color: #1dadc0; }
+      50%       { border-right-color: transparent; }
+    }
+
+    .phone-cta-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 30px;
+      background: #1dadc0;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      pointer-events: auto;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    @keyframes pump {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 16px rgba(29,173,192,0.35); }
+      50%       { transform: scale(1.09); box-shadow: 0 6px 24px rgba(29,173,192,0.6); }
+    }
+
+    .phone-cta-btn.visible {
+      opacity: 1;
+      animation: pump 1.6s ease-in-out infinite;
+    }
+
+    .phone-cta-btn:hover {
+      opacity: 0.85;
+      animation: none;
+    }
+
     @media (max-width: 768px) {
       main {
         padding: 70px 0 0;
@@ -1034,11 +1091,14 @@
       <span></span>
     </label>
     <nav class="navbar__nav">
-      <a href="despre-noi.html" class="nav-link">Despre noi</a>
+      <a href="index.html#despre-noi" class="nav-link">Despre noi</a>
       <a href="servicii.html" class="nav-link">Servicii</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
   </header>
+
+  <!-- SPATIU STELE -->
+  <div class="starfield" id="starfield"></div>
 
   <main>
     <div class="demo-container">
@@ -1076,6 +1136,10 @@
 
             <div class="phone-notch"></div>
             <div class="phone-content">
+              <div class="phone-cta-block">
+                <p class="phone-cta-text" id="phone-type-text"></p>
+              </div>
+              <a href="index.html#servicii" class="phone-cta-btn" id="phone-cta-btn">Implementează acum</a>
               <div class="phone-icons">
                 <div class="phone-icon">
                   <img src="Iconite/wapp.png" alt="WhatsApp" />
@@ -1470,6 +1534,62 @@
       wappMessages.appendChild(div);
       wappMessages.scrollTop = wappMessages.scrollHeight;
     }
+  </script>
+
+  <script>
+    // STARFIELD
+    (function() {
+      var sf = document.getElementById('starfield');
+      for (var s = 0; s < 120; s++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        var size = Math.random() * 2.2 + 0.5;
+        star.style.cssText = [
+          'width:' + size + 'px', 'height:' + size + 'px',
+          'left:' + (Math.random() * 100) + '%',
+          'top:' + (Math.random() * 100) + '%',
+          '--dur:' + (2 + Math.random() * 4) + 's',
+          '--delay:' + (-Math.random() * 5) + 's',
+          '--min-op:' + (0.2 + Math.random() * 0.4)
+        ].join(';');
+        sf.appendChild(star);
+      }
+      var shootData = [
+        { top: '8%',  len: '70px', dur: '5s',  delay: '0s'   },
+        { top: '20%', len: '45px', dur: '7s',  delay: '1.8s' },
+        { top: '35%', len: '80px', dur: '6s',  delay: '3.2s' },
+        { top: '50%', len: '55px', dur: '8s',  delay: '0.7s' },
+        { top: '65%', len: '75px', dur: '5.5s',delay: '4.1s' },
+        { top: '15%', len: '40px', dur: '9s',  delay: '2.5s' },
+        { top: '78%', len: '60px', dur: '6.5s',delay: '5s'   },
+      ];
+      shootData.forEach(function(d) {
+        var ss = document.createElement('div');
+        ss.className = 'shooting-star';
+        ss.style.cssText = ['--top:'+d.top,'--len:'+d.len,'--shoot-dur:'+d.dur,'--shoot-delay:'+d.delay,'top:'+d.top].join(';');
+        sf.appendChild(ss);
+      });
+    })();
+
+    // TYPEWRITER pe ecranul telefonului
+    window.addEventListener('load', function() {
+      var el = document.getElementById('phone-type-text');
+      var btn = document.getElementById('phone-cta-btn');
+      var text = 'Apasă pe fiecare iconiță și descoperă cum funcționează Asistenta Ariana';
+      var i = 0;
+      el.textContent = '';
+      setTimeout(function() {
+        var iv = setInterval(function() {
+          if (i < text.length) {
+            el.textContent += text[i++];
+          } else {
+            clearInterval(iv);
+            el.style.borderRight = 'none';
+            btn.classList.add('visible');
+          }
+        }, 38);
+      }, 600);
+    });
   </script>
 
 </body>

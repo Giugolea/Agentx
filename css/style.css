@@ -13,8 +13,60 @@ html {
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #0a1628;
+  background: linear-gradient(170deg, #0a1220 0%, #0f172a 30%, #1a2744 65%, #1e3a8a 100%);
+  background-attachment: fixed;
   color: #e8ecf4;
+}
+
+/* =====================
+   STARFIELD — spatiu + stele cazatoare
+===================== */
+.starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: var(--min-op, 0.35); transform: scale(1); }
+  50%       { opacity: 1;                  transform: scale(1.4); }
+}
+
+.shooting-star {
+  position: absolute;
+  width: var(--len, 60px);
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.95) 100%);
+  box-shadow: 0 0 4px 1px rgba(255,255,255,0.3);
+  transform: rotate(18deg);
+  transform-origin: center center;
+  animation: shoot var(--shoot-dur, 3s) linear infinite var(--shoot-delay, 0s);
+  opacity: 0;
+}
+
+@media (max-width: 600px) {
+  .shooting-star {
+    width: calc(var(--len, 60px) * 0.5);
+    height: 1px;
+  }
+}
+
+@keyframes shoot {
+  0%   { left: -20%; top: var(--top); opacity: 0; }
+  5%   { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { left: 120%; top: calc(var(--top) + 40%); opacity: 0; }
 }
 
 /* =====================
@@ -115,8 +167,9 @@ main {
   align-items: center;
   gap: 24px;
   box-sizing: border-box;
-  background: linear-gradient(170deg, #0f172a 0%, #1a2744 35%, #1e3a8a 100%);
+  background: transparent;
   position: relative;
+  z-index: 1;
 }
 
 /* =====================
@@ -218,17 +271,54 @@ main {
 
 .hero__subtitle {
   font-size: clamp(14px, 1.5vw, 17px);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.78);
+  font-weight: 800;
+  color: #ffffff;
   line-height: 1.85;
 }
 
 .hero__support {
   font-size: clamp(14px, 1.5vw, 17px);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.78);
+  font-weight: 800;
+  color: #ffffff;
   line-height: 1.85;
   letter-spacing: 0.2px;
+}
+
+/* =====================
+   PROMO BADGE — bulina galbena
+===================== */
+.promo-badge {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  background: #FFD700;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  text-align: center;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-shadow:
+    0 0 0 6px rgba(255, 215, 0, 0.2),
+    0 0 24px rgba(255, 215, 0, 0.45),
+    0 0 48px rgba(255, 215, 0, 0.2);
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: calc(3% - 20px);
+  top: calc(38% - 30px);
+  z-index: 3;
+  animation: promo-pulse 2.8s ease-in-out infinite;
+  cursor: default;
+  user-select: none;
+}
+
+@keyframes promo-pulse {
+  0%, 100% { transform: rotate(-15deg) scale(1);    box-shadow: 0 0 0 6px rgba(255,215,0,0.2), 0 0 24px rgba(255,215,0,0.45), 0 0 48px rgba(255,215,0,0.2); }
+  50%       { transform: rotate(-15deg) scale(1.07); box-shadow: 0 0 0 10px rgba(255,215,0,0.15), 0 0 36px rgba(255,215,0,0.6), 0 0 64px rgba(255,215,0,0.25); }
 }
 
 /* =====================
@@ -237,7 +327,7 @@ main {
 .btn-cta {
   margin-top: 20px;
   padding: 14px 38px;
-  background: linear-gradient(135deg, #4fc3f7 0%, #5b7cfa 100%);
+  background: linear-gradient(135deg, #1dadc0 0%, #0f8a9a 100%);
   color: #ffffff;
   font-size: 15px;
   font-weight: 700;
@@ -246,13 +336,13 @@ main {
   cursor: pointer;
   letter-spacing: 0.5px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 20px rgba(79, 195, 247, 0.3), 0 0 40px rgba(91, 124, 250, 0.15);
+  box-shadow: 0 4px 20px rgba(29, 173, 192, 0.35), 0 0 40px rgba(29, 173, 192, 0.15);
   position: relative;
 }
 
 .btn-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(79, 195, 247, 0.45), 0 0 60px rgba(91, 124, 250, 0.2);
+  box-shadow: 0 6px 28px rgba(29, 173, 192, 0.5), 0 0 60px rgba(29, 173, 192, 0.25);
 }
 
 /* =====================
@@ -562,7 +652,6 @@ main {
   width: 100%;
   padding: 80px 40px;
   background: linear-gradient(180deg, transparent 0%, rgba(79, 195, 247, 0.04) 40%, transparent 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .about__inner {
@@ -720,6 +809,14 @@ main {
     font-size: 14px;
   }
 
+  .promo-badge {
+    width: 110px;
+    height: 110px;
+    font-size: 10.5px;
+    right: 4%;
+    bottom: 8%;
+  }
+
   /* Hero glow + blobs mai mici pe mobil */
   .hero-glow {
     width: 250px;
@@ -852,5 +949,466 @@ main {
 
   .about__belief {
     font-size: 16px !important;
+  }
+}
+
+/* =====================
+   WHATSAPP WIDGET
+===================== */
+.wa-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Buton flotant */
+.wa-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.wa-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.6);
+}
+
+.wa-fab__ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(37, 211, 102, 0.45);
+  animation: wa-ring-pulse 2.2s ease-out infinite;
+}
+
+@keyframes wa-ring-pulse {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* Popup */
+.wa-popup {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+  display: none;
+  flex-direction: column;
+  transform: translateY(12px) scale(0.97);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.wa-popup.active {
+  display: flex;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Header */
+.wa-popup__header {
+  background: linear-gradient(135deg, #0a1628 0%, #1a2744 100%);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-popup__logo {
+  height: 46px;
+  width: auto;
+  flex-shrink: 0;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.wa-popup__logo-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.wa-popup__status {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 14px;
+  margin-top: -11px;
+}
+
+.wa-online-dot {
+  width: 8px;
+  height: 8px;
+  background: #25D366;
+  border-radius: 50%;
+  display: inline-block;
+  animation: wa-online-blink 2.5s ease-in-out infinite;
+}
+
+@keyframes wa-online-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.wa-popup__close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.wa-popup__close:hover {
+  color: #ffffff;
+}
+
+/* Body — chat bubble */
+.wa-popup__body {
+  background: #ECE5DD;
+  padding: 20px 14px 14px;
+}
+
+.wa-bubble {
+  background: #ffffff;
+  border-radius: 0 12px 12px 12px;
+  padding: 12px 14px 8px;
+  max-width: 90%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.wa-bubble p {
+  font-size: 14px;
+  color: #111;
+  line-height: 1.55;
+  margin-bottom: 4px;
+}
+
+.wa-bubble p:first-child {
+  font-weight: 700;
+}
+
+.wa-bubble__time {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #8696a0;
+  margin-top: 4px;
+}
+
+/* Footer — buton WhatsApp */
+.wa-popup__footer {
+  padding: 12px 14px;
+  background: #ffffff;
+}
+
+.wa-btn-chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: #25D366;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 3px 12px rgba(37, 211, 102, 0.35);
+}
+
+.wa-btn-chat:hover {
+  background: #1ebe5d;
+  transform: translateY(-1px);
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+  .wa-widget {
+    bottom: 20px;
+    right: 16px;
+  }
+
+  .wa-popup {
+    width: calc(100vw - 32px);
+    max-width: 320px;
+  }
+}
+
+/* =====================
+   SERVICII — Pricing Cards
+===================== */
+.services {
+  padding: 90px 5% 110px;
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 70px;
+}
+
+.services__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services__title {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.services__subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.05rem;
+  margin-bottom: 64px;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* BASE CARD */
+.service-card {
+  background: rgba(10, 18, 35, 0.75);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid #1dadc0;
+  border-radius: 18px;
+  padding: 36px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+/* BADGE */
+.service-card__badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1dadc0;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.service-card__badge--gold {
+  background: linear-gradient(90deg, #d97706, #fbbf24);
+  color: #1a0e00;
+}
+
+/* PACKAGE LABEL */
+.service-card__pkg {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1dadc0;
+}
+
+.service-card__icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.service-card__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-top: -4px;
+}
+
+.service-card__desc {
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: -8px;
+}
+
+/* FEATURES LIST */
+.service-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 14px;
+}
+
+.service-card__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.service-card__features li::before {
+  content: '✓';
+  color: #1dadc0;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* TAGLINE (Pachet D) */
+.service-card__tagline {
+  font-size: 0.82rem;
+  color: rgba(251, 191, 36, 0.85);
+  font-style: italic;
+  line-height: 1.5;
+  border-left: 2px solid #fbbf24;
+  padding-left: 10px;
+}
+
+/* PRICE */
+.service-card__price {
+  margin-top: 4px;
+}
+
+.service-card__amount {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.service-card__amount--custom {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.service-card__period {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-left: 3px;
+}
+
+/* CTA BUTTON */
+.service-card__cta {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+  background: #1dadc0;
+  color: #fff;
+  margin-top: 4px;
+}
+
+.service-card__cta:hover {
+  opacity: 0.88;
+  transform: scale(1.02);
+}
+
+.service-card__cta--gold {
+  background: linear-gradient(135deg, #d97706, #fbbf24);
+  color: #1a0e00;
+}
+
+/* PER-CARD OVERRIDES */
+.service-card--b {
+  border-top-color: #1dadc0;
+}
+
+.service-card--b .service-card__pkg       { color: #1dadc0; }
+.service-card--b .service-card__features li::before { color: #1dadc0; }
+.service-card--b .service-card__cta       { background: #1dadc0; }
+
+.service-card--c {
+  border-top-color: #1dadc0;
+}
+
+.service-card--c .service-card__pkg       { color: #1dadc0; }
+.service-card--c .service-card__features li::before { color: #1dadc0; }
+
+.service-card__note {
+  font-size: 0.82rem;
+  color: #1dadc0;
+  font-style: italic;
+  line-height: 1.55;
+  border-top: 1px solid rgba(24, 132, 142, 0.25);
+  padding-top: 12px;
+}
+.service-card--c .service-card__cta       {
+  background: #1dadc0;
+  color: #fff;
+}
+
+.service-card--d {
+  border-top-color: #d97706;
+  background: rgba(20, 13, 3, 0.8);
+}
+
+.service-card--d .service-card__pkg       { color: #fbbf24; }
+.service-card--d .service-card__features li::before { color: #fbbf24; }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services {
+    padding: 60px 4% 80px;
   }
 }
