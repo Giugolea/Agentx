@@ -814,7 +814,7 @@ main {
     height: 110px;
     font-size: 10.5px;
     right: 4%;
-    bottom: 8%;
+    bottom: calc(8% + 40px);
   }
 
   /* Hero glow + blobs mai mici pe mobil */
@@ -1119,6 +1119,62 @@ main {
   font-size: 11px;
   color: #8696a0;
   margin-top: 4px;
+}
+
+/* =====================
+   SITE FOOTER
+   ===================== */
+.site-footer {
+  padding: 48px 5% 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  background: rgba(10, 18, 35, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid #1dadc0;
+  border-radius: 18px;
+  padding: 36px 40px 32px;
+}
+
+.site-footer__col {
+  flex: 1;
+  min-width: 140px;
+}
+
+.site-footer__heading {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0 0 18px;
+}
+
+.site-footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.site-footer__links a {
+  color: #1dadc0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.site-footer__links a:hover {
+  color: #ffffff;
 }
 
 /* Footer — buton WhatsApp */
