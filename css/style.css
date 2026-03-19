@@ -59,6 +59,7 @@ body {
   .shooting-star {
     width: calc(var(--len, 60px) * 0.5);
     height: 1px;
+    transform: rotate(30deg);
   }
 }
 
