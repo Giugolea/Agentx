@@ -23,7 +23,7 @@
     <nav class="navbar__nav">
       <a href="#despre-noi" class="nav-link">Despre noi</a>
       <a href="#servicii" class="nav-link">Servicii</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="#" class="nav-link" id="contact-trigger-nav">Contact</a>
     </nav>
   </header>
 
@@ -47,7 +47,7 @@
         Doar eficiență, automatizare și pacienți mulțumiți.
       </p>
       <p class="hero__support">
-        Agentul nostru AI pentru cabinete stomatologice este deja activ și preia munca repetitivă din locul tău sau al receptionistei tale 24/7.<br>
+        Ariana răspunde la apelurile si mesajele pacienților atunci când recepția este ocupată și îți trimite instant detaliile programării<br>
         Următorii agenți sunt pe drum!
       </p>
       <button class="btn-cta" id="cta-btn">Descoperă cum funcționează</button>
@@ -128,6 +128,13 @@
 
           <!-- PACHET A -->
           <div class="service-card service-card--a">
+            <div class="card-info">
+              <span class="card-info__icon">i</span>
+              <div class="card-info__tooltip">
+                <strong>WhatsApp Assistant</strong>
+                Ariana răspunde automat pe WhatsApp la întrebările pacienților, trimite reminder-e de confirmare și este disponibilă non-stop. Ideal pentru cabinete care vor să reducă munca repetitivă a recepției fără costuri suplimentare de personal.
+              </div>
+            </div>
             <span class="service-card__pkg">Pachet A</span>
             <div class="service-card__icon">💬</div>
             <h3 class="service-card__title">WhatsApp Assistant</h3>
@@ -137,15 +144,23 @@
               <li>Răspunsuri automate la întrebări frecvente</li>
               <li>Reminder-e pentru confirmarea programărilor</li>
             </ul>
+            <p class="service-card__note">Ariana răspunde instant pe WhatsApp, non-stop. Recepția ta nu mai pierde niciun mesaj, chiar și în afara programului sau în momentele aglomerate.</p>
             <div class="service-card__price">
               <span class="service-card__amount">179 RON</span>
               <span class="service-card__period">/lunar</span>
             </div>
-            <a href="#" class="service-card__cta">Alege pachetul</a>
+            <a href="#" class="service-card__cta pkg-cta" data-wa="Bun%C4%83%2C%20sunt%20interesat%20de%20Pachetul%20A%20-%20WhatsApp%20Assistant%20(179%20RON%2Flunar).%20Putem%20discuta%3F" data-mail="Pachet%20A%20-%20WhatsApp%20Assistant">Alege pachetul</a>
           </div>
 
           <!-- PACHET B -->
           <div class="service-card service-card--b">
+            <div class="card-info">
+              <span class="card-info__icon">i</span>
+              <div class="card-info__tooltip">
+                <strong>Review Automation</strong>
+                Tot ce include Pachetul A, plus un sistem automat de colectare recenzii Google după fiecare consultație. Pacienții primesc un mesaj prietenos care îi invită să lase o recenzie — fără niciun efort din partea ta. Mai multe recenzii = mai mulți pacienți noi.
+              </div>
+            </div>
             <span class="service-card__badge">⭐ Cel mai popular</span>
             <span class="service-card__pkg">Pachet B</span>
             <div class="service-card__icon">🌟</div>
@@ -156,15 +171,23 @@
               <li>Cerere automată de review Google după fiecare consultație</li>
               <li>Mai multe recenzii pozitive, fără niciun efort</li>
             </ul>
+            <p class="service-card__note">Fiecare pacient plecat fericit devine o recenzie în plus pe Google. Reputația cabinetului crește automat, fără ca tu sau echipa ta să ridicați un deget.</p>
             <div class="service-card__price">
               <span class="service-card__amount">219 RON</span>
               <span class="service-card__period">/lunar</span>
             </div>
-            <a href="#" class="service-card__cta">Alege pachetul</a>
+            <a href="#" class="service-card__cta pkg-cta" data-wa="Bun%C4%83%2C%20sunt%20interesat%20de%20Pachetul%20B%20-%20Review%20Automation%20(219%20RON%2Flunar).%20Putem%20discuta%3F" data-mail="Pachet%20B%20-%20Review%20Automation">Alege pachetul</a>
           </div>
 
           <!-- PACHET C -->
           <div class="service-card service-card--c">
+            <div class="card-info">
+              <span class="card-info__icon">i</span>
+              <div class="card-info__tooltip">
+                <strong>Full Communication</strong>
+                Comunicare completă pe WhatsApp și telefon. Ariana preia apelurile când recepția e ocupată, salvează automat detaliile programării și le trimite echipei instant pe WhatsApp. Zero apeluri pierdute, zero pacienți frustrați care nu mai revin.
+              </div>
+            </div>
             <span class="service-card__pkg">Pachet C</span>
             <div class="service-card__icon">📞</div>
             <h3 class="service-card__title">Full Communication</h3>
@@ -176,11 +199,18 @@
               <li>Zero apeluri pierdute</li>
             </ul>
             <p class="service-card__note">Preluare apeluri 24/7 atunci când recepția este ocupată. Toate solicitările pacienților sunt salvate automat și trimise instant către echipă, pentru programări rapide și fără apeluri pierdute.</p>
-            <a href="#" class="service-card__cta">Solicită ofertă</a>
+            <a href="#" class="service-card__cta pkg-cta" data-wa="Bun%C4%83%2C%20sunt%20interesat%20de%20Pachetul%20C%20-%20Full%20Communication.%20Putem%20discuta%3F" data-mail="Pachet%20C%20-%20Full%20Communication">Solicită ofertă</a>
           </div>
 
           <!-- PACHET D -->
           <div class="service-card service-card--d">
+            <div class="card-info">
+              <span class="card-info__icon card-info__icon--gold">i</span>
+              <div class="card-info__tooltip card-info__tooltip--left">
+                <strong>Clinic Intelligence</strong>
+                Automatizare totală a cabinetului. CRM integrat, gestiune stoc și scaune, bot admin intern, dashboard complet cu analize avansate, panou de control în timp real și rapoarte automate. Ariana nu doar comunică — gestionează întreg fluxul operațional al clinicii tale.
+              </div>
+            </div>
             <span class="service-card__badge service-card__badge--gold">👑 Cel mai complet</span>
             <span class="service-card__pkg">Pachet D</span>
             <div class="service-card__icon">🏆</div>
@@ -193,17 +223,115 @@
               <li>Bot admin intern</li>
               <li>Statistici live pe WhatsApp sau Email</li>
               <li>Bază de date clienți completă</li>
+              <li>Dashboard complet — totul într-un singur loc</li>
+              <li>Analize avansate: programări, venituri, activitate</li>
+              <li>Panou de control în timp real</li>
+              <li>Rapoarte automate săptămânale &amp; lunare</li>
             </ul>
             <p class="service-card__tagline">"Lucrează 24/7. Fără concediu.<br>Fără zile libere. Fără greșeli."</p>
             <div class="service-card__price">
               <span class="service-card__amount service-card__amount--custom">Solicită ofertă</span>
             </div>
-            <a href="#" class="service-card__cta service-card__cta--gold">Solicită ofertă</a>
+            <a href="#" class="service-card__cta service-card__cta--gold pkg-cta" data-wa="Bun%C4%83%2C%20sunt%20interesat%20de%20Pachetul%20D%20-%20Clinic%20Intelligence.%20Putem%20discuta%3F" data-mail="Pachet%20D%20-%20Clinic%20Intelligence">Solicită ofertă</a>
           </div>
 
         </div>
       </div>
     </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="faq__inner">
+      <h2 class="faq__title">Întrebări frecvente</h2>
+      <p class="faq__subtitle">Tot ce vrei să știi despre Ariana și AgentX</p>
+
+      <div class="faq__list">
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Pacienții mei vor ști că vorbesc cu un AI?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Ariana comunică natural, ca un om. Poți alege să fie transparentă sau să se prezinte pur și simplu ca asistenta cabinetului. Decizia îți aparține — noi configurăm totul după preferințele tale.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Ce se întâmplă dacă Ariana nu știe răspunsul la o întrebare?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Ariana nu improvizează niciodată. Dacă nu știe răspunsul, îi spune pacientului că îl va contacta cineva din echipă și îți trimite imediat o notificare. Zero răspunsuri greșite.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Cât durează implementarea?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>De obicei între <strong>3 și 7 zile lucrătoare</strong>. Noi ne ocupăm de tot — configurare, testare, integrare cu numărul tău de WhatsApp sau telefon. Tu nu trebuie să faci nimic tehnic.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Funcționează și noaptea, în weekend sau de sărbători?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Da. Ariana nu doarme, nu are concediu și nu cere bonus de sărbători. Este activă <strong>24/7, 365 de zile pe an</strong> — inclusiv Crăciun și Revelion.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Pot personaliza ce spune Ariana?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Absolut. Tonul, stilul, informațiile despre cabinet, serviciile oferite, prețurile, orarul — totul este configurat specific pentru tine. Ariana vorbește exact cum ai vrea tu să vorbești cu pacienții tăi.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Cum primesc programările făcute de Ariana?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Instant — pe WhatsApp, email sau direct în aplicația de calendar pe care o folosești deja. Fiecare programare vine cu numele pacientului, numărul de telefon și motivul vizitei.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Pot să renunț oricând?
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Da, fără penalizări. Trimiți un email cu 15 zile înainte de următoarea facturare și abonamentul se oprește. Nu există contracte pe termen lung sau taxe ascunse de ieșire.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q">
+            Este sigur pentru datele pacienților mei? (GDPR)
+            <span class="faq__icon">+</span>
+          </button>
+          <div class="faq__a">
+            <p>Da. Datele sunt stocate pe servere securizate, în conformitate cu regulamentul GDPR. Îți punem la dispoziție și un acord de prelucrare a datelor (DPA) pe care îl semnăm împreună înainte de start.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -218,22 +346,56 @@
       <div class="site-footer__col">
         <h4 class="site-footer__heading">Legal</h4>
         <ul class="site-footer__links">
-          <li><a href="#">Termeni și condiții</a></li>
-          <li><a href="#">Politica de confidențialitate</a></li>
+          <li><a href="termeni.html">Termeni și condiții</a></li>
+          <li><a href="confidentialitate.html">Politica de confidențialitate</a></li>
           <li><a href="#">Politica cookie</a></li>
+          <li><a href="dpa.html">Data Processing Agreement</a></li>
         </ul>
       </div>
       <div class="site-footer__col">
         <h4 class="site-footer__heading">Companie</h4>
         <ul class="site-footer__links">
           <li><a href="#despre-noi">Despre</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#" id="contact-trigger">Contact</a></li>
         </ul>
       </div>
     </div>
+    <div class="site-footer__bottom">
+      Made with <span class="footer-heart">♥</span> in Bukowina &nbsp;<span class="ro-flag"><span></span><span></span><span></span></span>&nbsp;&#x1F332;
+    </div>
   </footer>
 
-  </main>
+  <!-- CONTACT MODAL -->
+  <div class="contact-overlay" id="contact-overlay">
+    <div class="contact-modal">
+      <button class="contact-modal__close" id="contact-close" aria-label="Închide">&#10005;</button>
+      <h3 class="contact-modal__title">Hai să vorbim</h3>
+      <p class="contact-modal__sub">Alege cum vrei să ne contactezi</p>
+      <div class="contact-modal__options">
+        <a href="https://wa.me/40750403392?text=Bun%C4%83%2C%20sunt%20interesat%20de%20Asistenta%20Virtual%C4%83%20!" target="_blank" rel="noopener" class="contact-option contact-option--wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+          <span>
+            <strong>WhatsApp</strong>
+            <small>Răspund în câteva minute</small>
+          </span>
+        </a>
+        <a href="tel:+40750403392" class="contact-option contact-option--phone" id="modal-phone-option">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.613 21 3 13.387 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+          <span>
+            <strong>Apel</strong>
+            <small>+40 750 403 392</small>
+          </span>
+        </a>
+        <a href="mailto:contact@agentx.ro" class="contact-option contact-option--email">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>
+            <strong>Email</strong>
+            <small>contact@agentx.ro</small>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- WHATSAPP WIDGET -->
   <div class="wa-widget">
@@ -255,7 +417,7 @@
         </div>
       </div>
       <div class="wa-popup__footer">
-        <a href="#" class="wa-btn-chat" id="wa-open-chat">
+        <a href="https://wa.me/40750403392?text=Bun%C4%83%2C%20sunt%20interesat%20de%20Asistenta%20Virtual%C4%83%20!" target="_blank" rel="noopener" class="wa-btn-chat" id="wa-open-chat">
           <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
           Hai să discutăm pe WhatsApp!
         </a>
@@ -298,6 +460,55 @@
       demoBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
       demoBtn.classList.add('btn-demo--highlight');
       setTimeout(function() { demoBtn.classList.remove('btn-demo--highlight'); }, 4000);
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq__q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq__item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq__item.open').forEach(function(el) { el.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Contact modal
+    var contactOverlay = document.getElementById('contact-overlay');
+    var modalWaLink = contactOverlay.querySelector('.contact-option--wa');
+    var modalEmailLink = contactOverlay.querySelector('.contact-option--email');
+    var modalPhoneOption = document.getElementById('modal-phone-option');
+    var defaultWa = modalWaLink.href;
+    var defaultEmail = modalEmailLink.href;
+
+    function openContactModal(showPhone) {
+      modalPhoneOption.style.display = showPhone ? '' : 'none';
+      contactOverlay.classList.add('active');
+    }
+
+    ['contact-trigger', 'contact-trigger-nav'].forEach(function(id) {
+      document.getElementById(id).addEventListener('click', function(e) {
+        e.preventDefault();
+        modalWaLink.href = defaultWa;
+        modalEmailLink.href = defaultEmail;
+        openContactModal(true);
+      });
+    });
+
+    document.querySelectorAll('.pkg-cta').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var waText = btn.getAttribute('data-wa');
+        var mailText = decodeURIComponent(btn.getAttribute('data-mail'));
+        modalWaLink.href = 'https://wa.me/40750403392?text=' + waText;
+        modalEmailLink.href = 'mailto:contact@agentx.ro?subject=' + encodeURIComponent('Interesat: ' + mailText);
+        openContactModal(false);
+      });
+    });
+    document.getElementById('contact-close').addEventListener('click', function() {
+      contactOverlay.classList.remove('active');
+    });
+    contactOverlay.addEventListener('click', function(e) {
+      if (e.target === contactOverlay) contactOverlay.classList.remove('active');
     });
 
     // WhatsApp widget
