@@ -814,10 +814,11 @@ main {
     width: 110px;
     height: 110px;
     font-size: 10.5px;
+    position: absolute;
     left: auto;
     top: auto;
     right: 4%;
-    bottom: calc(8% + 60px);
+    bottom: calc(8% + 20px);
   }
 
   /* Hero glow + blobs mai mici pe mobil */
