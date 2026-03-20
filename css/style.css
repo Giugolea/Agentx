@@ -357,6 +357,7 @@ main {
   padding: 20px 0 0;
   width: 100%;
   position: relative;
+  z-index: 2;
   transform: translateY(65px);
 }
 
