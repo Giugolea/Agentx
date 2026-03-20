@@ -649,6 +649,12 @@
       if (e.target === contactOverlay) contactOverlay.classList.remove('active');
     });
 
+    // Deschide modalul de contact automat daca URL-ul contine #contact
+    if (window.location.hash === '#contact') {
+      openContactModal(true);
+      history.replaceState(null, '', window.location.pathname);
+    }
+
     // WhatsApp widget
     var waFab    = document.getElementById('wa-fab');
     var waPopup  = document.getElementById('wa-popup');
