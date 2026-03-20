@@ -3,8 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AGX — Automatizare cu AI</title>
+  <title>AgentX — Automatizare AI pentru Cabinete Stomatologice</title>
+  <meta name="description" content="AgentX automatizează comunicarea cu pacienții pentru cabinete stomatologice. Asistent AI pe WhatsApp, programări automate și remindere non-stop — fără să angajezi personal suplimentar." />
+  <meta name="keywords" content="automatizare cabinet stomatologic, agent AI Romania, asistent virtual WhatsApp, programari automate dentist, receptie automata, AI stomatologie" />
+  <meta name="robots" content="index, follow" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <meta name="author" content="AgentX" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agentx.ro/" />
+  <meta property="og:title" content="AgentX — Automatizare AI pentru Cabinete Stomatologice" />
+  <meta property="og:description" content="Ariana răspunde la mesaje și apeluri 24/7, trimite remindere automate și colectează recenzii Google — fără niciun efort din partea ta." />
+  <meta property="og:image" content="https://agentx.ro/Indicatii/LOGO_FINAL.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AgentX — Automatizare AI pentru Cabinete Stomatologice" />
+  <meta name="twitter:description" content="Ariana răspunde la mesaje și apeluri 24/7, trimite remindere automate și colectează recenzii Google." />
+  <meta name="twitter:image" content="https://agentx.ro/Indicatii/LOGO_FINAL.png" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AgentX",
+    "description": "Asistent AI pentru automatizarea comunicării în cabinete stomatologice",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://agentx.ro",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "RON",
+      "price": "179"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "AgentX",
+      "url": "https://agentx.ro"
+    }
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="Indicatii/LOGO_FINAL.png" />
+  <link rel="apple-touch-icon" href="Indicatii/LOGO_FINAL.png" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Google Analytics — se incarca doar dupa accept cookie -->
+  <script id="ga-script" type="text/plain" data-cookiecategory="analytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-21W31KKTJV');
+  </script>
 </head>
 <body>
 
@@ -100,6 +152,43 @@
 
       <button class="slider-arrow slider-arrow--next" aria-label="Următor">&#8250;</button>
 
+    </section>
+
+    <!-- SECTIUNE CUM FUNCTIONEAZA -->
+    <section class="how" id="cum-functioneaza">
+      <div class="how__inner">
+        <h2 class="how__title">Cum funcționează</h2>
+        <p class="how__subtitle">3 pași simpli până la o recepție care lucrează singură</p>
+
+        <div class="how__steps">
+
+          <div class="how__step">
+            <div class="how__step-num">01</div>
+            <div class="how__step-icon">📞</div>
+            <h3 class="how__step-title">Ne contactezi</h3>
+            <p class="how__step-desc">Trimiți un mesaj sau suni. Discutăm nevoile cabinetului tău și alegem pachetul potrivit — fără obligații.</p>
+          </div>
+
+          <div class="how__arrow">&#8594;</div>
+
+          <div class="how__step">
+            <div class="how__step-num">02</div>
+            <div class="how__step-icon">⚙️</div>
+            <h3 class="how__step-title">Configurăm Ariana</h3>
+            <p class="how__step-desc">Ne ocupăm noi de tot. Personalizăm asistenta cu informațiile cabinetului tău și o integrăm în 3–7 zile lucrătoare.</p>
+          </div>
+
+          <div class="how__arrow">&#8594;</div>
+
+          <div class="how__step">
+            <div class="how__step-num">03</div>
+            <div class="how__step-icon">🚀</div>
+            <h3 class="how__step-title">Funcționează automat</h3>
+            <p class="how__step-desc">Ariana preia mesajele, programările și apelurile 24/7. Tu te concentrezi pe pacienți, ea se ocupă de restul.</p>
+          </div>
+
+        </div>
+      </div>
     </section>
 
     <!-- SECTIUNE DESPRE NOI -->
@@ -365,6 +454,17 @@
     </div>
   </footer>
 
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner" id="cookie-banner">
+    <div class="cookie-banner__text">
+      Folosim cookie-uri pentru analiză și îmbunătățirea experienței. Vezi <a href="confidentialitate.html">Politica de confidențialitate</a>.
+    </div>
+    <div class="cookie-banner__actions">
+      <button class="cookie-btn cookie-btn--accept" id="cookie-accept">Accept</button>
+      <button class="cookie-btn cookie-btn--decline" id="cookie-decline">Refuz</button>
+    </div>
+  </div>
+
   <!-- CONTACT MODAL -->
   <div class="contact-overlay" id="contact-overlay">
     <div class="contact-modal">
@@ -431,6 +531,44 @@
     </button>
 
   </div>
+
+  <script>
+    // Cookie consent
+    (function() {
+      var banner = document.getElementById('cookie-banner');
+      var consent = localStorage.getItem('cookie-consent');
+
+      function loadGA() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-21W31KKTJV';
+        document.head.appendChild(s);
+        s.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-21W31KKTJV');
+        };
+      }
+
+      if (consent === 'accepted') {
+        loadGA();
+      } else if (consent === null) {
+        banner.classList.add('visible');
+      }
+
+      document.getElementById('cookie-accept').addEventListener('click', function() {
+        localStorage.setItem('cookie-consent', 'accepted');
+        banner.classList.remove('visible');
+        loadGA();
+      });
+
+      document.getElementById('cookie-decline').addEventListener('click', function() {
+        localStorage.setItem('cookie-consent', 'declined');
+        banner.classList.remove('visible');
+      });
+    })();
+  </script>
 
   <script>
     const track = document.querySelector('.slider-track');

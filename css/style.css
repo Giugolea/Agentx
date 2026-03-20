@@ -1126,6 +1126,101 @@ main {
 }
 
 /* =====================
+   CUM FUNCTIONEAZA
+   ===================== */
+.how {
+  padding: 90px 5% 100px;
+  position: relative;
+  z-index: 1;
+}
+.how__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.how__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.how__subtitle {
+  font-size: 1.1rem;
+  color: rgba(200, 215, 255, 0.7);
+  margin-bottom: 60px;
+}
+.how__steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+.how__step {
+  flex: 1;
+  max-width: 260px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 36px 24px 32px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+}
+.how__step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(99, 179, 237, 0.15);
+}
+.how__step-num {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(99, 179, 237, 0.2);
+  line-height: 1;
+  margin-bottom: 12px;
+  letter-spacing: -2px;
+}
+.how__step-icon {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+}
+.how__step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.how__step-desc {
+  font-size: 0.95rem;
+  color: rgba(200, 215, 255, 0.75);
+  line-height: 1.6;
+}
+.how__arrow {
+  font-size: 2rem;
+  color: rgba(99, 179, 237, 0.4);
+  padding: 0 16px;
+  align-self: center;
+  margin-top: -20px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .how__steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .how__step {
+    max-width: 100%;
+    width: 100%;
+  }
+  .how__arrow {
+    transform: rotate(90deg);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* =====================
    FAQ
    ===================== */
 .faq {
@@ -1357,6 +1452,68 @@ main {
   background: rgba(168, 85, 247, 0.12);
   border-color: rgba(168, 85, 247, 0.25);
   color: #a855f7;
+}
+
+/* =====================
+   COOKIE BANNER
+   ===================== */
+.cookie-banner {
+  position: fixed;
+  bottom: -120px;
+  left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(10, 22, 40, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 5%;
+  transition: bottom 0.4s ease;
+}
+.cookie-banner.visible {
+  bottom: 0;
+}
+.cookie-banner__text {
+  font-size: 0.9rem;
+  color: rgba(200, 215, 255, 0.8);
+  line-height: 1.5;
+}
+.cookie-banner__text a {
+  color: #63b3ed;
+  text-decoration: underline;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.cookie-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.cookie-btn:hover { opacity: 0.85; }
+.cookie-btn--accept {
+  background: #63b3ed;
+  color: #0a1220;
+}
+.cookie-btn--decline {
+  background: rgba(255,255,255,0.1);
+  color: #e8ecf4;
+}
+@media (max-width: 600px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+  }
 }
 
 /* =====================
