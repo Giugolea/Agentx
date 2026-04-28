@@ -18,8 +18,9 @@ body {
   color: #e8ecf4;
 }
 
+
 /* =====================
-   STARFIELD — spatiu + stele cazatoare
+   STARFIELD — stele statice
 ===================== */
 .starfield {
   position: fixed;
@@ -42,32 +43,21 @@ body {
   50%       { opacity: 1;                  transform: scale(1.4); }
 }
 
-.shooting-star {
-  position: absolute;
-  width: var(--len, 60px);
-  height: 1.5px;
-  border-radius: 999px;
-  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.95) 100%);
-  box-shadow: 0 0 4px 1px rgba(255,255,255,0.3);
-  transform: rotate(18deg);
-  transform-origin: center center;
-  animation: shoot var(--shoot-dur, 3s) linear infinite var(--shoot-delay, 0s);
-  opacity: 0;
+/* =====================
+   NAV FLOAT ANIMATION
+===================== */
+@keyframes nav-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
 }
 
-@media (max-width: 600px) {
-  .shooting-star {
-    width: calc(var(--len, 60px) * 0.5);
-    height: 1px;
-    transform: rotate(30deg);
-  }
+.nav-float-a {
+  animation: nav-float 2s ease-in-out infinite;
 }
 
-@keyframes shoot {
-  0%   { left: -20%; top: var(--top); opacity: 0; }
-  5%   { opacity: 1; }
-  80%  { opacity: 0.8; }
-  100% { left: 120%; top: calc(var(--top) + 40%); opacity: 0; }
+.nav-float-b {
+  animation: nav-float 2s ease-in-out infinite;
+  animation-delay: -1s;
 }
 
 /* =====================
@@ -92,7 +82,7 @@ body {
   overflow: visible;
 }
 
-/* Logo — stânga (dimensiuni neschimbate) */
+/* Logo — stânga */
 .navbar__logo {
   display: inline-flex;
   align-items: center;
@@ -114,6 +104,7 @@ body {
   pointer-events: none;
 }
 
+
 /* =====================
    NAV LINKS — dreapta
 ===================== */
@@ -121,6 +112,7 @@ body {
   display: flex;
   align-items: center;
   gap: 36px;
+  justify-self: end;
 }
 
 .nav-link {
@@ -415,12 +407,11 @@ main {
 .character-img {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-height: 100%;
-  max-width: 100%;
-  width: auto;
-  height: auto;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
   display: block;
   transition: transform 0.3s ease;
   -webkit-user-drag: none;
@@ -429,27 +420,11 @@ main {
 }
 
 .character-card:hover .character-img {
-  transform: translateX(-50%) translateY(-6px);
+  transform: translateY(-6px);
 }
 
-/* Asistenta — ajustare verticală */
 .asistenta-img {
-  bottom: -25px;
-}
-
-/* Receptionista — micșorată */
-.receptionista-img {
-  max-height: 82%;
-  transform-origin: bottom center;
-  transform: translateX(-50%) scale(0.85);
-}
-
-/* Manager — micșorat */
-.manager-img {
-  bottom: 0;
-  max-height: 86%;
-  transform: translateX(-50%) scale(0.86);
-  transform-origin: bottom center;
+  object-position: bottom center;
 }
 
 /* Imagine estompată pentru Coming Soon */
@@ -462,6 +437,19 @@ main {
 ===================== */
 .character-card--asistenta {
   position: relative;
+}
+
+.character-card--asistenta .character-img-wrap {
+  width: 250px;
+  height: 290px;
+}
+
+.character-card--asistenta .asistenta-img {
+  transform: translateY(25px);
+}
+
+.character-card--asistenta:hover .asistenta-img {
+  transform: translateY(19px);
 }
 
 .arrow-callout {
