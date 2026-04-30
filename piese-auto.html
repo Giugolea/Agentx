@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asistent AI pentru Piese Auto și Dezmembrări — AGX</title>
+<title>Asistent Virtual Piese Auto si Dezmembrari 24/7</title>
 <meta name="description" content="Automatizează răspunsurile pentru magazinul tău de piese auto. Asistent virtual disponibil 24/7 pe WhatsApp și telefon — niciun client pierdut, nicio piesă neidentificată.">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -438,21 +438,22 @@ h2.section-title{
 #agx-nb .an a::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#4fc3f7;transition:width .25s}
 #agx-nb .an a:hover{color:#4fc3f7}
 #agx-nb .an a:hover::after{width:100%}
+
+.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}
+.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}
+.navbar__logo:hover{transform:scale(1.08);}
+.navbar__logo-img{max-height:171px;width:auto;display:block;}
+.navbar__nav{display:flex;align-items:center;gap:36px;}
+.nav-link{text-decoration:none;color:#ffffff;font-size:22px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}
+.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}
+.nav-link:hover{color:#4fc3f7;}
+.nav-link:hover::after{width:100%;}
 </style>
 </head>
 <body>
 
-<!-- ─── NAVBAR ─── -->
-<header id="agx-nb">
-  <a href="/" class="al">
-    <img src="Indicatii/LOGO_FINAL.png" alt="AGX" />
-  </a>
-  <nav class="an">
-    <a href="/#despre-noi">Despre noi</a>
-    <a href="/#servicii">Servicii</a>
-    <a href="/#contact">Contact</a>
-  </nav>
-</header>
+<!-- NAVBAR -->
+<header class="navbar"><a href="/" class="navbar__logo" aria-label="Acasa"><img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" /></a><nav class="navbar__nav"><a href="/#despre-noi" class="nav-link">Despre noi</a><a href="/#servicii" class="nav-link">Servicii</a><a href="/#contact" class="nav-link">Contact</a></nav></header>
 
 
 
@@ -464,7 +465,7 @@ h2.section-title{
         <span class="pulse"></span>
         Asistentul virtual este LIVE acum
       </div>
-      <h1>Niciun client pierdut.<br><span>Nicio piesă</span> neidentificată.</h1>
+      <h1>Asistent Virtual pentru <span>Piese Auto</span> și Dezmembrări — 24/7.</h1>
       <p class="hero-sub">Automatizează răspunsurile pentru magazinul tău de piese auto. Disponibil 24/7 pe WhatsApp și telefon.</p>
       <button class="btn-cta" onclick="openModal()">Solicită Demo →</button>
     </div>
