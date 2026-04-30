@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dezmembrări Auto — Asistent Virtual AI 24/7</title>
+<meta name="description" content="Automatizează răspunsurile pentru magazinul tău de piese auto. Asistent virtual disponibil 24/7 pe WhatsApp și telefon — niciun client pierdut, nicio piesă neidentificată.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#DC2626;
+  --red-dim:rgba(220,38,38,0.15);
+  --red-glow:rgba(220,38,38,0.35);
+  --bg:#0a0f1a;
+  --bg2:#0f1520;
+  --bg3:#111827;
+  --border:rgba(255,255,255,0.07);
+  --text:#e8eaf0;
+  --muted:#8892a4;
+  --card:rgba(255,255,255,0.04);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:system-ui,-apple-system,sans-serif;
+  background:linear-gradient(160deg,#0a0f1a 0%,#0d0a14 40%,#1a0505 100%);
+  background-attachment:fixed;
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+
+/* ─── SECTIONS ─── */
+section{padding:90px 24px}
+.container{max-width:1100px;margin:0 auto}
+.section-label{
+  display:inline-block;
+  font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+}
+h2.section-title{
+  font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;
+  margin-bottom:16px;
+}
+.section-sub{font-size:17px;color:var(--muted);max-width:560px;line-height:1.7}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding-top:90px;padding-bottom:60px;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.hero-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--red-dim);border:1px solid rgba(220,38,38,0.3);
+  border-radius:100px;padding:5px 14px;
+  font-size:12px;font-weight:600;color:var(--red);
+  margin-bottom:24px;
+}
+.hero-label .pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--red);
+  animation:pulse 1.6s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{
+  font-size:clamp(32px,4.5vw,58px);font-weight:900;line-height:1.1;
+  margin-bottom:20px;letter-spacing:-.02em;
+}
+.hero h1 span{color:var(--red)}
+.hero-sub{font-size:18px;color:var(--muted);margin-bottom:36px;line-height:1.7;max-width:480px}
+.btn-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--red);color:#fff;
+  padding:14px 28px;border-radius:8px;
+  font-size:16px;font-weight:700;border:none;cursor:pointer;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  text-decoration:none;
+}
+.btn-cta:hover{background:#b91c1c;transform:translateY(-2px);box-shadow:0 12px 32px var(--red-glow)}
+
+/* ─── WHATSAPP CHAT ─── */
+.chat-phone{
+  background:#0d1117;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,0.5);
+}
+.chat-topbar{
+  background:#1a2535;
+  padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid var(--border);
+}
+.chat-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--red);display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#fff;flex-shrink:0;
+}
+.chat-info{}
+.chat-name{font-size:14px;font-weight:700;color:#fff}
+.chat-status{font-size:11px;color:#25d366;font-weight:500}
+.chat-body{padding:18px;display:flex;flex-direction:column;gap:10px;min-height:280px}
+.bubble{
+  max-width:80%;padding:10px 14px;border-radius:14px;
+  font-size:14px;line-height:1.5;opacity:0;
+  animation:fadeIn .35s ease forwards;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.bubble.client{
+  background:#1e2d40;color:#d1d9e6;border-radius:14px 14px 14px 2px;
+  align-self:flex-start;
+}
+.bubble.agent{
+  background:#dc2626;color:#fff;border-radius:14px 14px 2px 14px;
+  align-self:flex-end;font-weight:500;
+}
+.typing-indicator{
+  display:none;align-items:center;gap:4px;
+  padding:10px 14px;background:#1e2d40;border-radius:14px 14px 14px 2px;
+  align-self:flex-start;width:fit-content;
+}
+.typing-indicator.visible{display:flex}
+.typing-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--muted);
+  animation:typingBounce .9s ease infinite;
+}
+.typing-dot:nth-child(2){animation-delay:.15s}
+.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes typingBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ─── PROOF BAR ─── */
+.proof-bar{
+  padding:60px 24px;
+  background:rgba(255,255,255,0.02);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.proof-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+}
+.proof-item{text-align:center}
+.proof-num{
+  font-size:42px;font-weight:900;color:var(--red);
+  display:block;line-height:1;margin-bottom:8px;
+}
+.proof-label{font-size:14px;color:var(--muted);line-height:1.5}
+
+/* ─── PAIN POINTS ─── */
+.pain-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  margin-top:48px;
+}
+.pain-card{
+  background:var(--card);
+  border:1px solid rgba(220,38,38,0.2);
+  border-radius:14px;padding:24px;
+  transition:transform .25s,box-shadow .25s;
+  cursor:default;
+}
+.pain-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px var(--red-glow);
+  border-color:rgba(220,38,38,0.5);
+}
+.pain-icon{font-size:28px;margin-bottom:12px;display:block}
+.pain-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.pain-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ─── DASHBOARD ─── */
+.dashboard-section{background:rgba(0,0,0,0.2)}
+.dashboard-mockup{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:18px;overflow:hidden;
+  margin-top:48px;
+  box-shadow:0 32px 80px rgba(0,0,0,0.4);
+  display:grid;grid-template-columns:200px 1fr 260px;
+  min-height:460px;
+}
+.dash-sidebar{
+  background:#f8fafc;
+  border-right:1px solid #e2e8f0;
+  padding:20px 0;
+}
+.dash-sidebar-header{
+  padding:0 18px 16px;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#94a3b8;border-bottom:1px solid #e2e8f0;margin-bottom:10px;
+}
+.dash-nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;font-size:13px;color:#64748b;cursor:pointer;
+  transition:background .2s,color .2s;border-radius:0;
+}
+.dash-nav-item:hover,.dash-nav-item.active{background:rgba(220,38,38,0.07);color:#DC2626}
+.dash-nav-item.active{border-right:2px solid var(--red);font-weight:700}
+.dash-nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.dash-center{padding:20px;overflow:hidden;background:#fff}
+.dash-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #e2e8f0;
+}
+.dash-title-text{font-size:14px;font-weight:700;color:#1e293b}
+.dash-badge{
+  background:rgba(34,197,94,0.12);color:#16a34a;
+  border:1px solid rgba(34,197,94,0.3);
+  border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600;
+}
+.dash-table{width:100%;border-collapse:collapse;font-size:13px}
+.dash-table th{
+  text-align:left;padding:8px 10px;
+  color:#94a3b8;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-bottom:1px solid #e2e8f0;
+}
+.dash-table td{
+  padding:10px 10px;border-bottom:1px solid #f1f5f9;
+  color:#334155;opacity:0;
+  animation:rowFadeIn .4s ease forwards;
+}
+@keyframes rowFadeIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.status-badge{
+  display:inline-block;padding:2px 10px;border-radius:100px;font-size:11px;font-weight:700;
+}
+.s-avail{background:rgba(34,197,94,0.12);color:#16a34a;border:1px solid rgba(34,197,94,0.3)}
+.s-sent{background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.3)}
+.s-picked{background:rgba(168,85,247,0.12);color:#7c3aed;border:1px solid rgba(168,85,247,0.3)}
+.s-sold{background:rgba(239,68,68,0.12);color:#dc2626;border:1px solid rgba(239,68,68,0.3)}
+.dash-right{
+  background:#f8fafc;
+  border-left:1px solid #e2e8f0;
+  padding:18px;display:flex;flex-direction:column;gap:0;
+}
+.dash-right-header{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#94a3b8;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #e2e8f0;
+}
+.dash-bubble{
+  padding:9px 12px;border-radius:10px;font-size:12px;line-height:1.5;
+  margin-bottom:8px;
+}
+.db-client{background:#e2e8f0;color:#334155;border-radius:10px 10px 10px 2px;align-self:flex-start;width:fit-content;max-width:90%}
+.db-agent{background:#DC2626;color:#fff;border-radius:10px 10px 2px 10px;align-self:flex-end;margin-left:auto;width:fit-content;max-width:90%}
+
+/* ─── FEATURES ─── */
+.features-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;
+}
+.feat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px 26px;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4);border-color:rgba(220,38,38,0.4)}
+.feat-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--red-dim);border:1px solid rgba(220,38,38,0.3);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  margin-bottom:18px;
+}
+.feat-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:10px}
+.feat-desc{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ─── BEFORE/AFTER ─── */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.ba-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px;
+}
+.ba-card.before{border-color:rgba(239,68,68,0.3)}
+.ba-card.after{border-color:rgba(34,197,94,0.3)}
+.ba-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  font-size:18px;font-weight:800;
+}
+.ba-header.before-h{color:#ef4444}
+.ba-header.after-h{color:#22c55e}
+.ba-item{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;
+  font-size:14px;color:var(--muted);line-height:1.5;
+}
+.ba-dot-x{color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px}
+.ba-dot-ok{color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ─── HOW IT WORKS ─── */
+.steps{display:flex;align-items:flex-start;gap:0;margin-top:56px;position:relative}
+.steps::before{
+  content:'';position:absolute;top:28px;left:calc(12.5% + 12px);
+  width:calc(75% - 24px);height:2px;
+  background:linear-gradient(90deg,var(--red),#7f1d1d);
+  animation:lineGrow 1.5s ease forwards;transform-origin:left;
+}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--red);color:#fff;font-size:20px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;position:relative;z-index:1;
+  box-shadow:0 0 0 6px rgba(220,38,38,0.15);
+  flex-shrink:0;
+}
+.step-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ─── ROI CALCULATOR ─── */
+.roi-box{
+  max-width:680px;margin:48px auto 0;
+  background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;
+}
+.roi-label{font-size:15px;font-weight:600;color:#fff;margin-bottom:16px}
+.roi-slider{
+  width:100%;-webkit-appearance:none;appearance:none;
+  height:6px;border-radius:3px;
+  background:linear-gradient(90deg,var(--red) 0%,#3d1a1a 0%);
+  outline:none;cursor:pointer;margin-bottom:8px;
+}
+.roi-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:var(--red);cursor:pointer;border:3px solid #fff;
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+.roi-slider-vals{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:32px}
+.roi-output{
+  background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);
+  border-radius:12px;padding:20px 24px;margin-bottom:12px;text-align:center;
+}
+.roi-output-num{font-size:36px;font-weight:900;color:var(--red);display:block;margin-bottom:4px}
+.roi-output-label{font-size:13px;color:var(--muted)}
+.roi-note{text-align:center;font-size:13px;color:var(--muted);margin-bottom:24px}
+.roi-cta{width:100%;padding:14px;text-align:center;font-size:15px;font-weight:700}
+
+/* ─── TESTIMONIALS ─── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.testi-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;
+  transition:transform .25s,box-shadow .25s;
+}
+.testi-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4)}
+.testi-stars{color:#f59e0b;font-size:16px;margin-bottom:14px}
+.testi-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px;font-style:italic}
+.testi-author{font-size:13px;font-weight:700;color:#fff}
+.testi-role{font-size:12px;color:var(--muted)}
+
+/* ─── CTA FINAL ─── */
+.cta-final{
+  background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#7f1d1d 100%);
+  padding:100px 24px;text-align:center;
+}
+.cta-final h2{font-size:clamp(28px,4vw,52px);font-weight:900;color:#fff;margin-bottom:16px;line-height:1.1}
+.cta-final p{font-size:18px;color:rgba(255,255,255,0.8);margin-bottom:36px}
+.btn-cta-white{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:#dc2626;
+  padding:16px 32px;border-radius:8px;
+  font-size:16px;font-weight:800;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;
+}
+.btn-cta-white:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
+.cta-perks{
+  display:flex;justify-content:center;gap:28px;margin-top:22px;
+  font-size:13px;color:rgba(255,255,255,0.7);flex-wrap:wrap;
+}
+.cta-perks span::before{content:'✓ ';color:rgba(255,255,255,0.9);font-weight:700}
+
+/* ─── MODAL ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#111827;border:1px solid var(--border);
+  border-radius:20px;padding:36px;max-width:440px;width:100%;
+  position:relative;animation:modalIn .3s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,0.07);border:none;color:#fff;
+  width:32px;height:32px;border-radius:50%;cursor:pointer;
+  font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.modal-close:hover{background:rgba(255,255,255,0.14)}
+.modal h3{font-size:24px;font-weight:800;color:#fff;margin-bottom:8px}
+.modal p{font-size:14px;color:var(--muted);margin-bottom:28px}
+.modal-options{display:flex;flex-direction:column;gap:12px}
+.modal-option{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;border-radius:12px;border:1px solid var(--border);
+  background:var(--card);text-decoration:none;color:#fff;
+  transition:background .2s,border-color .2s,transform .2s;cursor:pointer;
+}
+.modal-option:hover{background:rgba(255,255,255,0.07);border-color:rgba(220,38,38,0.5);transform:translateX(4px)}
+.modal-opt-icon{
+  width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.opt-wa .modal-opt-icon{background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3)}
+.opt-tel .modal-opt-icon{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3)}
+.opt-em .modal-opt-icon{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+.modal-opt-label{font-size:15px;font-weight:700}
+.modal-opt-val{font-size:12px;color:var(--muted)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .pain-grid{grid-template-columns:1fr}
+  .dashboard-mockup{grid-template-columns:1fr;grid-template-rows:auto}
+  .dash-sidebar{display:none}
+  .dash-right{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .steps{flex-direction:column;gap:24px}
+  .steps::before{display:none}
+  .step{flex-direction:row;text-align:left;gap:16px}
+  .step-num{flex-shrink:0;margin-bottom:0}
+  .testi-grid{grid-template-columns:1fr}
+  .cta-perks{flex-direction:column;gap:10px;align-items:center}
+}
+@media(max-width:480px){
+  .proof-grid{grid-template-columns:1fr}
+  section{padding:60px 18px}
+}
+/* ─── NAVBAR (identic Auto Dealer) ─── */
+#agx-nb{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,18,32,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:70px;overflow:visible;font-family:-apple-system,sans-serif}
+#agx-nb .al{display:inline-flex;align-items:center;text-decoration:none;transition:transform .25s ease;margin-left:-15px}
+#agx-nb .al:hover{transform:scale(1.08)}
+#agx-nb .al img{max-height:161px;width:auto;display:block}
+#agx-nb .an{display:flex;gap:36px;align-items:center}
+#agx-nb .an a{text-decoration:none;color:#fff;font-size:18px;font-weight:500;letter-spacing:.3px;transition:color .2s;position:relative;white-space:nowrap}
+#agx-nb .an a::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#4fc3f7;transition:width .25s}
+#agx-nb .an a:hover{color:#4fc3f7}
+#agx-nb .an a:hover::after{width:100%}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<header id="agx-nb">
+  <a href="/" class="al">
+    <img src="Indicatii/LOGO_FINAL.png" alt="AGX" />
+  </a>
+  <nav class="an">
+    <a href="/#despre-noi">Despre noi</a>
+    <a href="/#servicii">Servicii</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+
+
+<!-- ─── 1. HERO ─── -->
+<section class="hero" style="padding-left:24px;padding-right:24px">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">
+        <span class="pulse"></span>
+        Asistentul virtual este LIVE acum
+      </div>
+      <h1>Niciun client pierdut.<br><span>Nicio piesă</span> neidentificată.</h1>
+      <p class="hero-sub">Automatizează răspunsurile pentru magazinul tău de piese auto. Disponibil 24/7 pe WhatsApp și telefon.</p>
+      <button class="btn-cta" onclick="openModal()">Solicită Demo →</button>
+    </div>
+    <div>
+      <div class="chat-phone">
+        <div class="chat-topbar">
+          <div class="chat-avatar">A</div>
+          <div class="chat-info">
+            <div class="chat-name">Asistent Virtual AGX</div>
+            <div class="chat-status">● online acum</div>
+          </div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 2. PROOF BAR ─── -->
+<div class="proof-bar">
+  <div class="proof-grid">
+    <div class="proof-item">
+      <span class="proof-num" data-target="300" data-prefix="Peste " data-suffix="+">0</span>
+      <span class="proof-label">întrebări gestionate zilnic</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num" data-target="3" data-prefix="Sub " data-suffix=" sec">0</span>
+      <span class="proof-label">timp mediu de răspuns</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num" data-target="0" data-prefix="" data-suffix=" apeluri pierdute">0</span>
+      <span class="proof-label">de la implementare</span>
+    </div>
+    <div class="proof-item">
+      <span class="proof-num" data-target="7" data-prefix="Pornit în " data-suffix=" zile">0</span>
+      <span class="proof-label">fără efort tehnic</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 3. PAIN POINTS ─── -->
+<section>
+  <div class="container">
+    <span class="section-label">Situații familiare?</span>
+    <h2 class="section-title">Recunoști aceste situații?</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">📞</span>
+        <div class="pain-title">Telefon ocupat = client la concurență</div>
+        <div class="pain-desc">Când ești la un alt apel, clientul nu mai așteaptă. Sună la primul număr găsit pe Google.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🔁</span>
+        <div class="pain-title">Aceleași întrebări de 50 de ori pe zi</div>
+        <div class="pain-desc">"Aveți filtru ulei pentru Golf 7?" — răspuns repetat manual, ore întregi pierdute inutil.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🌙</span>
+        <div class="pain-title">Pierderi masive după program</div>
+        <div class="pain-desc">Jumătate din mesaje vin seara sau weekend. Fără răspuns, clienții pleacă la alți furnizori.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">🗒️</span>
+        <div class="pain-title">Rezervări verbale uitate</div>
+        <div class="pain-desc">Piesa e pusă deoparte, clientul nu mai vine, stocul stagnează. Pierzi bani fără să știi.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">👤</span>
+        <div class="pain-title">Imposibil să angajezi doar pentru răspunsuri</div>
+        <div class="pain-desc">Un angajat full-time pentru WhatsApp? Prea scump și ineficient pentru volumul actual.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">😤</span>
+        <div class="pain-title">Clienți frustrați că așteaptă</div>
+        <div class="pain-desc">Azi clienții vor răspuns în minute, nu în ore. Așteptarea înseamnă recenzii negative.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 4. DASHBOARD MOCKUP ─── -->
+<section class="dashboard-section">
+  <div class="container">
+    <span class="section-label">Panou de control</span>
+    <h2 class="section-title">Tot ce se întâmplă în magazinul tău,<br>într-un singur loc</h2>
+    <p class="section-sub">Stoc, comenzi, conversații și statistici — live, în timp real, accesibil de pe orice dispozitiv.</p>
+    <div class="dashboard-mockup" id="dashboardMockup">
+      <!-- Sidebar -->
+      <div class="dash-sidebar">
+        <div class="dash-sidebar-header">Meniu</div>
+        <div class="dash-nav-item active"><span class="dash-nav-icon">📦</span> Stoc Piese</div>
+        <div class="dash-nav-item"><span class="dash-nav-icon">🛒</span> Comenzi Active</div>
+        <div class="dash-nav-item"><span class="dash-nav-icon">💬</span> Conversații</div>
+        <div class="dash-nav-item"><span class="dash-nav-icon">📊</span> Statistici</div>
+        <div class="dash-nav-item"><span class="dash-nav-icon">⚙️</span> Setări</div>
+      </div>
+      <!-- Center panel -->
+      <div class="dash-center">
+        <div class="dash-header">
+          <span class="dash-title-text">Panou de control — Piese Auto</span>
+          <span class="dash-badge">53 conversații azi ↑</span>
+        </div>
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>Model mașină</th>
+              <th>Piesă</th>
+              <th>Preț</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dashTable">
+            <tr><td colspan="4" style="color:var(--muted);font-size:13px;text-align:center;padding:20px;opacity:1">Se încarcă datele...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Right panel -->
+      <div class="dash-right">
+        <div class="dash-right-header">💬 Conversație activă</div>
+        <div class="dash-bubble db-client">Bună! Am un Dacia Duster 1.5 dci 2018, aveți amortizor față stânga?</div>
+        <div class="dash-bubble db-agent">Da, avem! Cod OE 543020287R — 340 RON, stoc 2 buc. Doriți livrare prin curier?</div>
+        <div class="dash-bubble db-client">Da! Str. Mihai Viteazu 8, Brașov.</div>
+        <div class="dash-bubble db-agent">✅ Comandă înregistrată! Coletul pleacă în 24h. AWB-ul îl primiți pe WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 5. FEATURES ─── -->
+<section>
+  <div class="container">
+    <span class="section-label">Funcționalități</span>
+    <h2 class="section-title">Un asistent complet,<br>nu doar un chatbot</h2>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🤖</div>
+        <div class="feat-title">WhatsApp & SMS</div>
+        <div class="feat-desc">Asistentul virtual identifică piesa după model, an fabricație și motor. Răspunde instant, 24/7 — inclusiv când dormi.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📞</div>
+        <div class="feat-title">Agent Vocal</div>
+        <div class="feat-desc">Preia apelurile când ești ocupat. Extrage cererea, verifică stocul, trimite detaliile pe WhatsApp automat.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔔</div>
+        <div class="feat-title">Remindere automate</div>
+        <div class="feat-desc">Reamintește clientul că piesa îl așteaptă. Reduce rezervările uitate cu 80% — fără niciun efort din partea ta.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 6. BEFORE / AFTER ─── -->
+<section style="background:rgba(0,0,0,0.15)">
+  <div class="container">
+    <span class="section-label">Transformare</span>
+    <h2 class="section-title">Înainte vs. După</h2>
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-header before-h">❌ Înainte</div>
+        <div class="ba-item"><span class="ba-dot-x">✕</span> 40+ apeluri pierdute zilnic</div>
+        <div class="ba-item"><span class="ba-dot-x">✕</span> 3 ore pierdute pe WhatsApp în fiecare zi</div>
+        <div class="ba-item"><span class="ba-dot-x">✕</span> Clienți frustrați care pleacă fără răspuns</div>
+        <div class="ba-item"><span class="ba-dot-x">✕</span> Comenzi pierdute după program și weekend</div>
+        <div class="ba-item"><span class="ba-dot-x">✕</span> Venituri lipsă în fiecare zi, invizibile</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-header after-h">✅ După</div>
+        <div class="ba-item"><span class="ba-dot-ok">✓</span> Niciun apel pierdut — 24/7 acoperit</div>
+        <div class="ba-item"><span class="ba-dot-ok">✓</span> Răspuns automat în sub 3 secunde</div>
+        <div class="ba-item"><span class="ba-dot-ok">✓</span> Comenzi cu livrare procesate automat 24/7</div>
+        <div class="ba-item"><span class="ba-dot-ok">✓</span> Notificări instant cu detalii complete comandă</div>
+        <div class="ba-item"><span class="ba-dot-ok">✓</span> +35% vânzări raportate în prima lună</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 7. HOW IT WORKS ─── -->
+<section>
+  <div class="container">
+    <span class="section-label">Cum funcționează</span>
+    <h2 class="section-title">4 pași, simplu și automat</h2>
+    <div class="steps" id="stepsSection">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Clientul trimite mesaj</div>
+          <div class="step-desc">Pe WhatsApp, SMS sau sună la numărul tău</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Identifică piesa</div>
+          <div class="step-desc">Asistentul virtual extrage modelul, anul și motorul din mesaj</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Verifică stocul</div>
+          <div class="step-desc">Confirmă disponibilitatea și trimite prețul în timp real</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Echipa ta e notificată</div>
+          <div class="step-desc">Primești instant toate detaliile comenzii pe WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 8. ROI CALCULATOR ─── -->
+<section style="background:rgba(0,0,0,0.15)">
+  <div class="container" style="text-align:center">
+    <span class="section-label">Calculator ROI</span>
+    <h2 class="section-title">Câți bani pierzi acum?</h2>
+    <p class="section-sub" style="margin:0 auto">Calculează impactul real al apelurilor și mesajelor la care nu răspunzi.</p>
+    <div class="roi-box">
+      <div class="roi-label">Câte apeluri sau mesaje pierzi zilnic? <span id="roiSliderVal" style="color:var(--red);font-weight:800">20</span></div>
+      <input type="range" class="roi-slider" id="roiSlider" min="1" max="100" value="20">
+      <div class="roi-slider-vals"><span>1</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+      <div class="roi-output">
+        <span class="roi-output-num" id="roiResult">3.000 RON</span>
+        <span class="roi-output-label">estimat pierdut pe lună</span>
+      </div>
+      <p class="roi-note">Asistentul virtual recuperează acești bani automat</p>
+      <button class="btn-cta roi-cta" onclick="openModal()">Vreau să recuperez aceste venituri →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 9. TESTIMONIALE ─── -->
+<section>
+  <div class="container">
+    <span class="section-label">Testimoniale</span>
+    <h2 class="section-title">Ce spun clienții noștri</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"De când am asistentul virtual, nu mai pierd niciun client seara sau weekend. Asistentul răspunde instant, eu dorm liniștit. Au crescut vânzările vizibil din prima săptămână."</p>
+        <div class="testi-author">Mihai Ionescu</div>
+        <div class="testi-role">Dezmembrări Auto — Bacau</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Dupa implementare doar cu activarea unui singur buton asistentul virtual raspundea clientilor, oferea detalii daca avem piesa respectiva si castigam chiar si dupa program!"</p>
+        <div class="testi-author">Cristina Moldovan</div>
+        <div class="testi-role">Magazin Piese Auto — Cluj-Napoca</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Înainte petreceam 3 ore pe WhatsApp zilnic. Acum asistentul face asta automat și eu mă concentrez pe aprovizionare. E cea mai bună investiție din ultimii 2 ani."</p>
+        <div class="testi-author">Florin Dumitrescu</div>
+        <div class="testi-role">Piese Camioane & Auto — Timișoara</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 10. CTA FINAL ─── -->
+<div class="cta-final">
+  <h2>Gata să nu mai pierzi<br>niciun client?</h2>
+  <p>Asistentul virtual preia mesajele și apelurile tale din prima zi</p>
+  <button class="btn-cta-white" onclick="openModal()">Solicită Demo</button>
+  <div class="cta-perks">
+    <span>Fără card de credit</span>
+    <span>Setup în 7 zile</span>
+    <span>Suport inclus</span>
+  </div>
+</div>
+
+<!-- ─── MODAL CONTACT ─── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Hai să vorbim</h3>
+    <p>Alege cum vrei să ne contactezi</p>
+    <div class="modal-options">
+      <a href="https://wa.me/40750403392" target="_blank" class="modal-option opt-wa">
+        <div class="modal-opt-icon">💬</div>
+        <div>
+          <div class="modal-opt-label">WhatsApp</div>
+          <div class="modal-opt-val">+40 750 403 392</div>
+        </div>
+      </a>
+      <a href="tel:+40750403392" class="modal-option opt-tel">
+        <div class="modal-opt-icon">📞</div>
+        <div>
+          <div class="modal-opt-label">Apel telefonic</div>
+          <div class="modal-opt-val">+40 750 403 392</div>
+        </div>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#86e5e9e8f2e7e5f2c6e7e1e3e8f2fea8f4e9" class="modal-option opt-em">
+        <div class="modal-opt-icon">✉️</div>
+        <div>
+          <div class="modal-opt-label">Email</div>
+          <div class="modal-opt-val"><span class="__cf_email__" data-cfemail="aac9c5c4decbc9deeacbcdcfc4ded284d8c5">[email&#160;protected]</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── CHAT ANIMATION ───
+const chatMessages = [
+  { type:'client', text:'Bună, am un BMW E46 320d 2003, aveți turbosuflantă?' },
+  { type:'agent',  text:'Bună! Da, avem turbosuflantă compatibilă BMW E46 320d — cod OE 704361. Preț: 580 RON. Stoc: 1 bucată. Doriți livrare prin curier?', delay:1200 },
+  { type:'client', text:'Da, prin curier vă rog!', delay:600 },
+  { type:'agent',  text:'Perfect! Vă rog trimiteți adresa completă și numele destinatarului.', delay:900 },
+  { type:'client', text:'Ion Popescu, Str. Florilor 14, Cluj-Napoca.', delay:500 },
+  { type:'agent',  text:'✅ Comandă înregistrată! Coletul pleacă mâine. AWB-ul îl primiți pe WhatsApp!', delay:1100 },
+];
+
+function runChat(){
+  const body = document.getElementById('chatBody');
+  const typing = document.getElementById('typingIndicator');
+  let time = 600;
+  chatMessages.forEach((msg, i)=>{
+    const showDelay = msg.delay || 500;
+    // Show typing before agent messages
+    if(msg.type === 'agent'){
+      setTimeout(()=>{ typing.classList.add('visible'); }, time);
+      time += showDelay;
+    }
+    setTimeout(()=>{
+      typing.classList.remove('visible');
+      const b = document.createElement('div');
+      b.className = 'bubble ' + msg.type;
+      b.textContent = msg.text;
+      body.insertBefore(b, typing);
+    }, time);
+    time += 800;
+  });
+  // Restart chat loop
+  setTimeout(()=>{
+    const bubbles = body.querySelectorAll('.bubble');
+    bubbles.forEach(b=>b.remove());
+    runChat();
+  }, time + 3000);
+}
+runChat();
+
+// ─── COUNT UP ───
+const proofNums = document.querySelectorAll('.proof-num[data-target]');
+let counted = false;
+function countUp(){
+  if(counted) return;
+  const bar = document.querySelector('.proof-bar');
+  const rect = bar.getBoundingClientRect();
+  if(rect.top < window.innerHeight * 0.9){
+    counted = true;
+    proofNums.forEach(el=>{
+      const target = parseInt(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const step = target / (duration / 16);
+      let cur = 0;
+      const timer = setInterval(()=>{
+        cur = Math.min(cur + step, target);
+        el.textContent = prefix + Math.round(cur) + suffix;
+        if(cur >= target) clearInterval(timer);
+      }, 16);
+    });
+  }
+}
+window.addEventListener('scroll', countUp);
+countUp();
+
+// ─── DASHBOARD TABLE ───
+const tableData = [
+  { model:'BMW E46 320d', part:'Turbosuflantă', price:'580 RON', status:'trimis' },
+  { model:'Dacia Logan 1.5', part:'Amortizor față', price:'210 RON', status:'disponibil' },
+  { model:'VW Golf 7 1.6 TDI', part:'Filtru particule', price:'890 RON', status:'disponibil' },
+  { model:'Ford Focus 2.0 TDCI', part:'Injector', price:'440 RON', status:'vandut' },
+  { model:'Toyota Yaris 1.4 D4D', part:'Pompă apă', price:'180 RON', status:'disponibil' },
+  { model:'Opel Astra H 1.7', part:'Alternator', price:'320 RON', status:'ridicat' },
+];
+const statusMap = { disponibil:'s-avail', trimis:'s-sent', ridicat:'s-picked', vandut:'s-sold' };
+const statusLabel = { disponibil:'Disponibil', trimis:'Trimis', ridicat:'Ridicat', vandut:'Vândut' };
+
+function loadDashTable(){
+  const tbody = document.getElementById('dashTable');
+  tbody.innerHTML = '';
+  tableData.forEach((row, i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${row.model}</td><td>${row.part}</td><td style="font-weight:700;color:#1e293b">${row.price}</td><td><span class="status-badge ${statusMap[row.status]}">${statusLabel[row.status]}</span></td>`;
+    [...tr.querySelectorAll('td')].forEach(td=>{
+      td.style.animationDelay = (i * 120) + 'ms';
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+let dashLoaded = false;
+const dashObs = new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !dashLoaded){
+    dashLoaded = true;
+    loadDashTable();
+  }
+}, {threshold:0.2});
+dashObs.observe(document.getElementById('dashboardMockup'));
+
+// ─── ROI CALCULATOR ───
+const slider = document.getElementById('roiSlider');
+const sliderVal = document.getElementById('roiSliderVal');
+const roiResult = document.getElementById('roiResult');
+function calcROI(){
+  const calls = parseInt(slider.value);
+  const monthly = Math.round(calls * 500 * 0.30 * 30);
+  sliderVal.textContent = calls;
+  roiResult.textContent = monthly.toLocaleString('ro-RO') + ' RON';
+  // Update slider fill
+  const pct = ((calls - 1) / 99) * 100;
+  slider.style.background = `linear-gradient(90deg, var(--red) ${pct}%, #3d1a1a ${pct}%)`;
+}
+slider.addEventListener('input', calcROI);
+calcROI();
+
+// ─── MODAL ───
+function openModal(){ document.getElementById('modalOverlay').classList.add('open'); }
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+function handleOverlayClick(e){ if(e.target === document.getElementById('modalOverlay')) closeModal(); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
