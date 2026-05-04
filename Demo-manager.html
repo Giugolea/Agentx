@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent AI Vânzări Auto | Dashboard & Rapoarte — AgentX</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0d1528 50%, #0a1020 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      padding: 40px 20px;
+      animation: fadeInPage 0.6s ease forwards;
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .page-header h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .page-header h1 span { color: #2ecc8f; }
+    .page-header p {
+      font-size: 17px;
+      color: #6b8099;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* MacBook shell */
+    .macbook-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      perspective: 1800px;
+    }
+
+    .macbook-lid {
+      transform-origin: bottom center;
+      transform: rotateX(-92deg);
+      animation: openLid 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+      will-change: transform;
+    }
+
+    @keyframes openLid {
+      0%   { transform: rotateX(-92deg); }
+      60%  { transform: rotateX(4deg); }
+      80%  { transform: rotateX(-2deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    .macbook-screen {
+      background: #1a1a2a;
+      border-radius: 16px 16px 0 0;
+      border: 2px solid #2a2a3e;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+      position: relative;
+    }
+    .macbook-titlebar {
+      background: #111120;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      border-bottom: 1px solid #1e1e30;
+      position: relative;
+    }
+    .traffic-light {
+      width: 12px; height: 12px; border-radius: 50%;
+    }
+    .tl-red { background: #ff5f57; }
+    .tl-yellow { background: #febc2e; }
+    .tl-green { background: #28c840; }
+    .macbook-url {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e1e30;
+      border-radius: 6px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: #8899bb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .macbook-url span.lock { color: #2ecc8f; font-size: 11px; }
+
+    .macbook-content {
+      height: 620px;
+      overflow: hidden;
+      position: relative;
+    }
+    .macbook-base {
+      background: linear-gradient(to bottom, #2a2a3e, #1a1a2a);
+      height: 22px;
+      border-radius: 0 0 4px 4px;
+      position: relative;
+    }
+    .macbook-base::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 8px;
+      background: #111120;
+      border-radius: 0 0 6px 6px;
+    }
+    .macbook-stand {
+      width: 120px;
+      height: 8px;
+      background: linear-gradient(to bottom, #1a1a2a, #111118);
+      margin: 0 auto;
+      border-radius: 0 0 4px 4px;
+    }
+    .macbook-foot {
+      width: 260px;
+      height: 6px;
+      background: #0d0d18;
+      margin: 0 auto;
+      border-radius: 3px;
+    }
+
+    /* App inside macbook */
+    .app-shell {
+      display: flex;
+      height: 100%;
+      background: #0f1520;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background: #0a0f1a;
+      border-right: 1px solid #1a2030;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      padding: 0 16px 16px;
+      border-bottom: 1px solid #1a2030;
+      margin-bottom: 12px;
+    }
+    .sidebar-logo .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 24px; height: 24px;
+      background: #2ecc8f;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #0a0f1a;
+    }
+    .sidebar-item {
+      padding: 9px 16px;
+      font-size: 12px;
+      color: #4a6080;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 0;
+      transition: all 0.15s;
+    }
+    .sidebar-item:hover { background: #111820; color: #8ab0cc; }
+    .sidebar-item.active { background: #111e2e; color: #fff; border-left: 2px solid #2ecc8f; }
+    .sidebar-item .icon { font-size: 14px; width: 16px; text-align: center; }
+    .sidebar-section {
+      font-size: 10px;
+      color: #2a3a4e;
+      padding: 12px 16px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .sidebar-badge {
+      margin-left: auto;
+      background: #2ecc8f;
+      color: #0a0f1a;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 8px;
+    }
+    .sidebar-badge-red {
+      margin-left: auto;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 8px;
+    }
+
+    /* Main area */
+    .main-area {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Tabs */
+    .tabs-bar {
+      display: flex;
+      background: #0a0f1a;
+      border-bottom: 1px solid #1a2030;
+      padding: 0 16px;
+      gap: 0;
+    }
+    .tab-btn {
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #4a6080;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: #8ab0cc; }
+    .tab-btn.active { color: #2ecc8f; border-bottom-color: #2ecc8f; }
+
+    /* CHAT PAGE */
+    .chat-page {
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+    }
+    .chat-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      padding: 12px 16px;
+      background: #0d1420;
+      border-bottom: 1px solid #1a2030;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-avatar {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #2ecc8f, #1a9966);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+    }
+    .chat-header-info h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .chat-header-info p {
+      font-size: 11px;
+      color: #2ecc8f;
+    }
+    .chat-header-right {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .score-badge {
+      background: #0d2818;
+      border: 1px solid #2ecc8f;
+      color: #2ecc8f;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .intent-badge {
+      background: #1a1a0d;
+      border: 1px solid #f0a500;
+      color: #f0a500;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #1a2030; border-radius: 2px; }
+
+    .msg-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      width: 100%;
+    }
+    .msg-row.client { justify-content: flex-end; margin-left: auto; }
+    .msg-row.agent { justify-content: flex-start; }
+    .msg-row.client .msg-meta { align-items: flex-end; }
+
+    .msg-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .msg-avatar.ai { background: linear-gradient(135deg, #2ecc8f22, #2ecc8f44); border: 1px solid #2ecc8f55; font-size: 14px; }
+    .msg-avatar.client-av { background: #1a2a3e; border: 1px solid #2a3a50; color: #8ab0cc; font-size: 10px; font-weight: 700; }
+
+    .msg-bubble {
+      max-width: 62%;
+      padding: 9px 13px;
+      border-radius: 16px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .msg-bubble.agent {
+      background: #111e2e;
+      color: #c8d8e8;
+      border-radius: 16px 16px 16px 4px;
+      border: 1px solid #1a2a3e;
+    }
+    .msg-bubble.client {
+      background: #2ecc8f;
+      color: #0a1a0f;
+      border-radius: 16px 16px 4px 16px;
+      font-weight: 500;
+    }
+    .msg-time {
+      font-size: 10px;
+      color: #2a3a4e;
+      margin-top: 3px;
+    }
+    .msg-row.client .msg-time { text-align: right; }
+    .msg-row.agent .msg-time { text-align: left; }
+    .msg-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 10px 14px;
+      background: #111e2e;
+      border-radius: 16px 16px 16px 4px;
+      border: 1px solid #1a2a3e;
+      width: fit-content;
+    }
+    .typing-dot {
+      width: 6px; height: 6px;
+      background: #2ecc8f;
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .chat-input-bar {
+      padding: 10px 16px;
+      background: #0d1420;
+      border-top: 1px solid #1a2030;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .chat-input {
+      flex: 1;
+      background: #111820;
+      border: 1px solid #1a2a3e;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #8ab0cc;
+      outline: none;
+    }
+    .chat-send-btn {
+      width: 32px; height: 32px;
+      background: #2ecc8f;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    /* AI sidebar in chat */
+    .ai-sidebar {
+      width: 190px;
+      background: #0a0f1a;
+      border-left: 1px solid #1a2030;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+    .ai-sidebar-title {
+      font-size: 10px;
+      color: #2a3a50;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .ai-card {
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .ai-card-label {
+      font-size: 10px;
+      color: #4a6080;
+      margin-bottom: 6px;
+    }
+    .ai-card-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2ecc8f;
+    }
+    .ai-card-sub {
+      font-size: 10px;
+      color: #2a3a50;
+      margin-top: 2px;
+    }
+    .mini-bar {
+      height: 4px;
+      background: #1a2030;
+      border-radius: 2px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .mini-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, #2ecc8f, #1a9966);
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #111e2e;
+      border: 1px solid #1a2a3e;
+      color: #8ab0cc;
+    }
+    .tag.hot { background: #1a0d0d; border-color: #e74c3c55; color: #e74c3c; }
+    .tag.warm { background: #1a120d; border-color: #f0a50055; color: #f0a500; }
+    .tag.green { background: #0d1a10; border-color: #2ecc8f55; color: #2ecc8f; }
+
+    /* DASHBOARD PAGE */
+    .dashboard-page {
+      padding: 16px;
+      overflow-y: auto;
+      height: 100%;
+    }
+    .dashboard-page::-webkit-scrollbar { width: 4px; }
+    .dashboard-page::-webkit-scrollbar-thumb { background: #1a2030; border-radius: 2px; }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .dash-header h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .dash-header p { font-size: 11px; color: #4a6080; }
+    .date-badge {
+      font-size: 11px;
+      color: #4a6080;
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .metric-card {
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .metric-card-label {
+      font-size: 10px;
+      color: #4a6080;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .metric-card-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .metric-card-delta {
+      font-size: 10px;
+      color: #2ecc8f;
+    }
+    .metric-card-delta.down { color: #e74c3c; }
+
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .chart-card {
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .chart-card h4 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #8ab0cc;
+      margin-bottom: 10px;
+    }
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 80px;
+    }
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bar-rect {
+      width: 100%;
+      background: linear-gradient(to top, #2ecc8f, #2ecc8f99);
+      border-radius: 3px 3px 0 0;
+      transition: height 1s ease;
+    }
+    .bar-rect.accent { background: linear-gradient(to top, #3a8ef0, #3a8ef099); }
+    .bar-label {
+      font-size: 8px;
+      color: #4a6080;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .donut-svg { flex-shrink: 0; }
+    .donut-legend { display: flex; flex-direction: column; gap: 6px; }
+    .donut-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: #8ab0cc;
+    }
+    .donut-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    .leads-table {
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .table-header {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+      padding: 8px 14px;
+      background: #0a0f1a;
+      font-size: 10px;
+      color: #2a3a50;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #1a2030;
+    }
+    .table-row {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr;
+      padding: 8px 14px;
+      font-size: 11px;
+      color: #8ab0cc;
+      border-bottom: 1px solid #0f1820;
+      align-items: center;
+    }
+    .table-row:last-child { border-bottom: none; }
+    .status-pill {
+      display: inline-block;
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .status-pill.hot { background: #2a0d0d; color: #e74c3c; }
+    .status-pill.warm { background: #2a1a0d; color: #f0a500; }
+    .status-pill.new { background: #0d2a20; color: #2ecc8f; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 6px; }
+    .score-bar {
+      flex: 1; height: 4px; background: #1a2030; border-radius: 2px; overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; background: #2ecc8f; border-radius: 2px; }
+
+    /* ARCHITECTURE PAGE */
+    .arch-page {
+      padding: 16px;
+      overflow-y: auto;
+      height: 100%;
+    }
+    .arch-page::-webkit-scrollbar { width: 4px; }
+    .arch-page::-webkit-scrollbar-thumb { background: #1a2030; border-radius: 2px; }
+
+    .arch-header {
+      margin-bottom: 16px;
+    }
+    .arch-header h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .arch-header p { font-size: 11px; color: #4a6080; }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .arch-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .arch-icon-box {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      position: relative;
+    }
+    .arch-icon-box.blue { background: #0d1a2e; border: 1px solid #3a8ef055; }
+    .arch-icon-box.green { background: #0d2218; border: 1px solid #2ecc8f55; }
+    .arch-icon-box.purple { background: #1a0d2e; border: 1px solid #9b59b655; }
+    .arch-icon-box.orange { background: #2a180d; border: 1px solid #e67e2255; }
+    .arch-icon-box.teal { background: #0d1e22; border: 1px solid #1abc9c55; }
+    .arch-node-label {
+      font-size: 9px;
+      color: #4a6080;
+      text-align: center;
+      max-width: 60px;
+      line-height: 1.3;
+    }
+    .arch-arrow {
+      font-size: 14px;
+      color: #1a2a3e;
+      padding: 0 4px;
+      margin-bottom: 20px;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .arch-card {
+      background: #0d1520;
+      border: 1px solid #1a2030;
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .arch-card-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .arch-card h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .arch-card p {
+      font-size: 11px;
+      color: #4a6080;
+      line-height: 1.5;
+    }
+    .arch-card-features {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .arch-feature {
+      font-size: 10px;
+      color: #2ecc8f;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .arch-feature::before { content: '✓'; font-size: 9px; }
+
+    .hidden { display: none !important; }
+  </style>
+  <meta name="description" content="Testează Agentul AI de Vânzări Auto — dashboard live, lead scoring automat și rapoarte în timp real. Demo complet, fără înregistrare." />
+  <link rel="canonical" href="https://agentx.ro/demo-manager" />
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Agent AI de <span>Vânzări Auto</span> — Lead-uri & Rapoarte</h1>
+  <h2 style="font-size:clamp(14px,1.6vw,18px);font-weight:500;color:rgba(255,255,255,0.6);margin:10px 0 0;">Automatizează vânzările, gestionează lead-urile și monitorizează echipa — 24/7</h2>
+  <p style="margin-top:12px;">Conversații automate, lead scoring în timp real și dashboard complet pentru echipa ta de vânzări.</p>
+</div>
+
+<div class="macbook-wrapper">
+  <div class="macbook-lid">
+    <div class="macbook-screen">
+      <div class="macbook-titlebar">
+        <div class="traffic-light tl-red"></div>
+        <div class="traffic-light tl-yellow"></div>
+        <div class="traffic-light tl-green"></div>
+        <div class="macbook-url">
+          <span class="lock">🔒</span>
+          agentx.ro/dashboard
+        </div>
+      </div>
+      <div class="macbook-content" id="app-root"></div>
+    </div>
+  </div>
+  <div class="macbook-base"></div>
+  <div class="macbook-stand"></div>
+  <div class="macbook-foot"></div>
+</div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+// ── CHAT DATA ──────────────────────────────────────────────────────────────────
+const CONVERSATION = [
+  { id: 1, from: 'client', text: 'Bună ziua, am văzut pe site un Mercedes GLC 220d și aș vrea mai multe detalii despre el.', time: '14:02' },
+  { id: 2, from: 'agent', text: 'Bună ziua! Da, GLC 220d este disponibil. Este un exemplar din 2021, 85.000 km, culoare gri selenitgri metalizat. Ce anume vă interesează mai mult — dotările, starea mașinii sau prețul?', time: '14:02', typing: 1400 },
+  { id: 3, from: 'client', text: 'Aș vrea să știu ce dotări are.', time: '14:03' },
+  { id: 4, from: 'agent', text: 'Are pachetul AMG Line exterior, MBUX cu ecran 12.3", scaune față încălzite din piele, camera 360°, faruri LED Multibeam, Parktronic față-spate și asistent activ de viteză. Dacă doriți lista completă, v-o trimit pe email.', time: '14:04', typing: 2000 },
+  { id: 5, from: 'client', text: 'Și cum rămâne cu finanțarea? Ce avans ar trebui să pun?', time: '14:05' },
+  { id: 6, from: 'agent', text: 'Avem mai multe variante. Cu un avans de 20% aveți leasing pe 48 de luni la aproximativ 620€/lună. Cu 10% avans, rata ajunge în jur de 780€/lună pe 60 de luni. Dacă îmi spuneți ce sumă aveți disponibilă, calculez o simulare exactă.', time: '14:06', typing: 2400 },
+  { id: 7, from: 'client', text: 'Am un BMW X3 din 2020 pe care vreau să-l dau la schimb. Faceți și buyback?', time: '14:07' },
+  { id: 8, from: 'agent', text: 'Da, facem evaluare gratuită. Pentru un X3 2020 estimăm undeva între 24.000 și 28.000€, în funcție de kilometraj și stare. Valoarea se scade direct din prețul mașinii, ceea ce reduce și avansul necesar. Câți km are?', time: '14:08', typing: 2100 },
+  { id: 9, from: 'client', text: 'Are 67.000 km, stare bună, fără accidente. Aș vrea să vin și la un test drive.', time: '14:09' },
+  { id: 10, from: 'agent', text: 'Perfect. Pot să vă programez mâine dimineață la 10:00 sau joi după-amiază la 15:30. Înainte să confirmăm, puteți să-mi lăsați un număr de telefon sau un nume ca să vă rezerv locul?', time: '14:10', typing: 1900 },
+];
+
+// ── TYPING INDICATOR ───────────────────────────────────────────────────────────
+function TypingIndicator() {
+  return (
+    <div style={{display:'flex',gap:'8px',alignItems:'flex-end'}}>
+      <div className="msg-avatar ai">🤖</div>
+      <div className="typing-indicator">
+        <div className="typing-dot"></div>
+        <div className="typing-dot"></div>
+        <div className="typing-dot"></div>
+      </div>
+    </div>
+  );
+}
+
+// ── CHAT PAGE ──────────────────────────────────────────────────────────────────
+function ChatPage() {
+  const [visibleMsgs, setVisibleMsgs] = useState([CONVERSATION[0]]);
+  const [typing, setTyping] = useState(false);
+  const [score, setScore] = useState(42);
+  const [intent, setIntent] = useState('Explorare');
+  const msgEndRef = useRef(null);
+  const indexRef = useRef(1);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    const scheduleNext = () => {
+      if (indexRef.current >= CONVERSATION.length) return;
+      const next = CONVERSATION[indexRef.current];
+      const delay = next.from === 'agent' ? 800 : 1600;
+      timerRef.current = setTimeout(() => {
+        if (next.from === 'agent') {
+          setTyping(true);
+          setTimeout(() => {
+            setTyping(false);
+            setVisibleMsgs(prev => [...prev, next]);
+            setScore(prev => Math.min(98, prev + Math.floor(Math.random() * 12) + 6));
+            if (indexRef.current >= 5) setIntent('Interes ridicat');
+            if (indexRef.current >= 7) setIntent('Intenție cumpărare');
+            indexRef.current++;
+            scheduleNext();
+          }, next.typing || 1500);
+        } else {
+          setVisibleMsgs(prev => [...prev, next]);
+          indexRef.current++;
+          scheduleNext();
+        }
+      }, delay);
+    };
+    scheduleNext();
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (msgEndRef.current) {
+      msgEndRef.current.parentElement.scrollTop = msgEndRef.current.parentElement.scrollHeight;
+    }
+  }, [visibleMsgs, typing]);
+
+  return (
+    <div className="chat-page">
+      <div className="chat-main">
+        <div className="chat-header">
+          <div className="chat-avatar">🤖</div>
+          <div className="chat-header-info">
+            <h3>Agent AI — Mercedes Vânzări</h3>
+            <p>● Online acum</p>
+          </div>
+          <div className="chat-header-right">
+            <span className="intent-badge">{intent}</span>
+            <span className="score-badge">Scor {score}%</span>
+          </div>
+        </div>
+
+        <div className="chat-messages">
+          <div style={{textAlign:'center',fontSize:'10px',color:'#2a3a4e',marginBottom:'4px'}}>Astăzi, 14:01</div>
+          {visibleMsgs.map(msg => (
+            <div key={msg.id} className={`msg-row ${msg.from === 'client' ? 'client' : 'agent'}`}>
+              {msg.from === 'agent' && <div className="msg-avatar ai">🤖</div>}
+              <div className="msg-meta">
+                <div className={`msg-bubble ${msg.from === 'client' ? 'client' : 'agent'}`}
+                  style={{whiteSpace:'pre-line'}}>
+                  {msg.text}
+                </div>
+                <div className="msg-time">{msg.time}</div>
+              </div>
+              {msg.from === 'client' && <div className="msg-avatar client-av">AN</div>}
+            </div>
+          ))}
+          {typing && <TypingIndicator />}
+          <div ref={msgEndRef}></div>
+        </div>
+
+        <div className="chat-input-bar">
+          <div className="chat-input">Scrieți un mesaj...</div>
+          <button className="chat-send-btn">➤</button>
+        </div>
+      </div>
+
+      <div className="ai-sidebar">
+        <div className="ai-sidebar-title">🧠 AI Insights</div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Scor Lead</div>
+          <div className="ai-card-value">{score}%</div>
+          <div className="mini-bar"><div className="mini-bar-fill" style={{width:`${score}%`}}></div></div>
+          <div className="ai-card-sub">Probabilitate conversie</div>
+        </div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Intenție detectată</div>
+          <div style={{fontSize:'12px',fontWeight:'600',color:'#f0a500'}}>{intent}</div>
+        </div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Subiecte discutate</div>
+          <div className="tag-list">
+            <span className="tag green">Dotări</span>
+            <span className="tag green">Finanțare</span>
+            <span className="tag warm">Buyback</span>
+            <span className="tag">Test drive</span>
+            <span className="tag">Evaluare schimb</span>
+          </div>
+        </div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Model interesat</div>
+          <div style={{fontSize:'12px',fontWeight:'600',color:'#fff'}}>GLC 220d 4MATIC</div>
+          <div className="ai-card-sub">2021 · 85.000 km · SH</div>
+        </div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Acțiune sugerată</div>
+          <div style={{fontSize:'11px',color:'#2ecc8f',fontWeight:'500'}}>Programare test drive</div>
+          <div className="ai-card-sub">Trimite ofertă PDF</div>
+        </div>
+
+        <div className="ai-card">
+          <div className="ai-card-label">Timp răspuns AI</div>
+          <div className="ai-card-value" style={{fontSize:'14px'}}>1.2s</div>
+          <div className="ai-card-sub">Medie sesiune</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── DASHBOARD PAGE ─────────────────────────────────────────────────────────────
+function DashboardPage() {
+  const bars = [
+    {label:'Lu',h:55,h2:30},
+    {label:'Ma',h:70,h2:45},
+    {label:'Mi',h:45,h2:25},
+    {label:'Jo',h:80,h2:60},
+    {label:'Vi',h:90,h2:70},
+    {label:'Sâ',h:40,h2:20},
+    {label:'Du',h:20,h2:10},
+  ];
+  return (
+    <div className="dashboard-page">
+      <div className="dash-header">
+        <div>
+          <h2>Dashboard Vânzări AI</h2>
+          <p>Performanță agent automat · Mai 2025</p>
+        </div>
+        <div className="date-badge">📅 4 Mai 2025</div>
+      </div>
+
+      <div className="metrics-grid">
+        {[
+          {label:'💬 Conversații azi',val:'247',delta:'+18% vs ieri'},
+          {label:'🎯 Lead-uri calificate',val:'89',delta:'+24% vs ieri'},
+          {label:'🚗 Test drive-uri',val:'23',delta:'+8 față de ieri'},
+          {label:'💰 Valoare pipeline',val:'1.8M€',delta:'+340K vs ieri'},
+          {label:'⚡ Răspuns mediu',val:'1.1s',delta:'–0.2s îmbunătățit'},
+          {label:'📊 Rată conversie',val:'36%',delta:'+4% vs luna trecută'},
+          {label:'🔄 Buyback solicitat',val:'31',delta:'+12 față de ieri'},
+          {label:'⭐ Satisfacție client',val:'4.9',delta:'din 5 · 128 reviews'},
+        ].map((m,i) => (
+          <div key={i} className="metric-card">
+            <div className="metric-card-label">{m.label}</div>
+            <div className="metric-card-value">{m.val}</div>
+            <div className={`metric-card-delta${m.delta.includes('–') || m.delta.includes('-')&&!m.delta.includes('+')?' down':''}`}>{m.delta}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="charts-row">
+        <div className="chart-card">
+          <h4>Conversații / Test Drive-uri — săptămâna curentă</h4>
+          <div className="bar-chart">
+            {bars.map((b,i) => (
+              <div key={i} className="bar-col">
+                <div style={{position:'relative',flex:1,width:'100%',display:'flex',alignItems:'flex-end',gap:'2px'}}>
+                  <div className="bar-rect" style={{height:`${b.h}%`,flex:1}}></div>
+                  <div className="bar-rect accent" style={{height:`${b.h2}%`,flex:1}}></div>
+                </div>
+                <div className="bar-label">{b.label}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{display:'flex',gap:'12px',marginTop:'8px'}}>
+            <div style={{display:'flex',alignItems:'center',gap:'4px',fontSize:'9px',color:'#4a6080'}}>
+              <div style={{width:'8px',height:'8px',background:'#2ecc8f',borderRadius:'2px'}}></div>Conversații
+            </div>
+            <div style={{display:'flex',alignItems:'center',gap:'4px',fontSize:'9px',color:'#4a6080'}}>
+              <div style={{width:'8px',height:'8px',background:'#3a8ef0',borderRadius:'2px'}}></div>Test drive
+            </div>
+          </div>
+        </div>
+
+        <div className="chart-card">
+          <h4>Distribuție intenție clienți</h4>
+          <div className="donut-wrap">
+            <svg className="donut-svg" viewBox="0 0 80 80" width="80" height="80">
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#0d1520" strokeWidth="14"/>
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#2ecc8f" strokeWidth="14"
+                strokeDasharray="52 124" strokeDashoffset="0" transform="rotate(-90 40 40)"/>
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#f0a500" strokeWidth="14"
+                strokeDasharray="37 139" strokeDashoffset="-52" transform="rotate(-90 40 40)"/>
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#3a8ef0" strokeWidth="14"
+                strokeDasharray="25 151" strokeDashoffset="-89" transform="rotate(-90 40 40)"/>
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#e74c3c" strokeWidth="14"
+                strokeDasharray="62 114" strokeDashoffset="-114" transform="rotate(-90 40 40)"/>
+              <text x="40" y="44" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="700">247</text>
+            </svg>
+            <div className="donut-legend">
+              {[
+                {color:'#2ecc8f',label:'Cumpărare',pct:'42%'},
+                {color:'#f0a500',label:'Finanțare',pct:'30%'},
+                {color:'#3a8ef0',label:'Test drive',pct:'20%'},
+                {color:'#e74c3c',label:'Altele',pct:'8%'},
+              ].map((d,i)=>(
+                <div key={i} className="donut-item">
+                  <div className="donut-dot" style={{background:d.color}}></div>
+                  <span>{d.label}</span>
+                  <span style={{marginLeft:'auto',color:'#fff',fontWeight:'600'}}>{d.pct}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="leads-table">
+        <div className="table-header">
+          <span>Client</span><span>Model interesat</span><span>Status</span><span>Scor AI</span><span>Ultima activitate</span>
+        </div>
+        {[
+          {name:'Andrei N.', model:'GLC 220d 2024', status:'hot', score:94, time:'acum 2 min'},
+          {name:'Maria P.', model:'C 300 AMG 2024', status:'warm', score:76, time:'acum 15 min'},
+          {name:'Ion M.', model:'EQS 450+ 2024', status:'new', score:88, time:'acum 28 min'},
+          {name:'Elena D.', model:'GLE 400d 2024', status:'warm', score:61, time:'1h în urmă'},
+          {name:'Radu T.', model:'A 220 2024', status:'new', score:45, time:'2h în urmă'},
+        ].map((r,i)=>(
+          <div key={i} className="table-row">
+            <span style={{color:'#fff',fontWeight:'500'}}>{r.name}</span>
+            <span>{r.model}</span>
+            <span><span className={`status-pill ${r.status}`}>{r.status==='hot'?'🔥 Fierbinte':r.status==='warm'?'♨️ Interesat':'🆕 Nou'}</span></span>
+            <span>
+              <div className="score-bar-wrap">
+                <div className="score-bar"><div className="score-bar-fill" style={{width:`${r.score}%`,background:r.score>80?'#2ecc8f':r.score>60?'#f0a500':'#3a8ef0'}}></div></div>
+                <span style={{fontSize:'10px',color:'#fff',width:'24px',textAlign:'right'}}>{r.score}</span>
+              </div>
+            </span>
+            <span style={{color:'#4a6080'}}>{r.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── ARCHITECTURE PAGE ──────────────────────────────────────────────────────────
+function ArchPage() {
+  const flowNodes = [
+    {icon:'💬', label:'Website / WhatsApp / Email', cls:'blue'},
+    {icon:'⚙️', label:'Motor NLP & Intent', cls:'purple'},
+    {icon:'🧠', label:'LLM Agent Core', cls:'green'},
+    {icon:'🗃️', label:'CRM & Stoc auto', cls:'orange'},
+    {icon:'📊', label:'Dashboard & Rapoarte', cls:'teal'},
+  ];
+
+  const cards = [
+    {
+      icon:'🔍', cls:'blue', title:'Procesare NLP',
+      desc:'Detectează intenția clientului în timp real: cumpărare, finanțare, test drive, buyback.',
+      features:['Detecție intenție', 'Analiză sentiment', 'Entitate extracție', 'Multilingv RO/EN']
+    },
+    {
+      icon:'🤖', cls:'green', title:'Agent LLM',
+      desc:'Model AI antrenat pe produse auto, prețuri, dotări și politici de vânzare.',
+      features:['Context conversație', 'Răspunsuri personalizate', 'Actualizare stoc real-time', 'Ton adaptat clientului']
+    },
+    {
+      icon:'📈', cls:'purple', title:'Lead Scoring',
+      desc:'Calculează probabilitatea de conversie pe baza comportamentului și răspunsurilor clientului.',
+      features:['Scor 0–100 live', 'Prioritizare automată', 'Alertă agent uman', 'Istoric comportament']
+    },
+    {
+      icon:'🔗', cls:'orange', title:'Integrare CRM',
+      desc:'Sincronizare bidirecțională cu CRM-ul existent. Fiecare lead e înregistrat automat.',
+      features:['HubSpot / Salesforce', 'Auto-creare contact', 'Task urmărire', 'Pipeline actualizat']
+    },
+    {
+      icon:'📅', cls:'teal', title:'Automatizări',
+      desc:'Programare automată test drive, trimitere oferte PDF, follow-up prin email/SMS.',
+      features:['Test drive scheduling', 'Ofertă PDF auto', 'Follow-up secvențe', 'Notificări WhatsApp']
+    },
+    {
+      icon:'🛡️', cls:'blue', title:'Escaladare Umană',
+      desc:'Când scorul e >85% sau clientul cere, agentul uman preia conversația instant.',
+      features:['Trigger automat', 'Handover instant', 'Context complet', 'Istoric conversație']
+    },
+  ];
+
+  const colorMap = {blue:'#0d1a2e',green:'#0d2218',purple:'#1a0d2e',orange:'#2a180d',teal:'#0d1e22'};
+  const borderMap = {blue:'#3a8ef055',green:'#2ecc8f55',purple:'#9b59b655',orange:'#e67e2255',teal:'#1abc9c55'};
+
+  return (
+    <div className="arch-page">
+      <div className="arch-header">
+        <h2>Arhitectura Sistemului AI</h2>
+        <p>Cum funcționează agentul de vânzări auto de la intrare la conversie</p>
+      </div>
+
+      <div className="arch-flow">
+        {flowNodes.map((n,i) => (
+          <React.Fragment key={i}>
+            <div className="arch-node">
+              <div className={`arch-icon-box ${n.cls}`}>{n.icon}</div>
+              <div className="arch-node-label">{n.label}</div>
+            </div>
+            {i < flowNodes.length - 1 && <div className="arch-arrow">→</div>}
+          </React.Fragment>
+        ))}
+      </div>
+
+      <div className="arch-grid">
+        {cards.map((c,i) => (
+          <div key={i} className="arch-card">
+            <div className="arch-card-icon" style={{background:colorMap[c.cls],border:`1px solid ${borderMap[c.cls]}`}}>
+              {c.icon}
+            </div>
+            <h4>{c.title}</h4>
+            <p>{c.desc}</p>
+            <div className="arch-card-features">
+              {c.features.map((f,j) => <div key={j} className="arch-feature">{f}</div>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── APP SHELL ──────────────────────────────────────────────────────────────────
+function App() {
+  const [activeTab, setActiveTab] = useState('chat');
+  const [activeSide, setActiveSide] = useState('conversatii');
+
+  const sideItems = [
+    {id:'conversatii', label:'Conversații', icon:'💬', badge:'12'},
+    {id:'leads', label:'Lead-uri', icon:'🎯', badge:'89'},
+    {id:'calendar', label:'Test Drive-uri', icon:'📅', badge:'5'},
+    {id:'oferte', label:'Oferte trimise', icon:'📄'},
+    {section:'Setări'},
+    {id:'model', label:'Model AI', icon:'🤖'},
+    {id:'integrari', label:'Integrări', icon:'🔗'},
+    {id:'echipa', label:'Echipă', icon:'👥'},
+    {section:''},
+    {id:'notificari', label:'Notificări', icon:'🔔', badgeRed:'3'},
+  ];
+
+  return (
+    <div className="app-shell">
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <div className="logo-text">
+            <div className="logo-dot">A</div>
+            AgentX
+          </div>
+        </div>
+        {sideItems.map((item,i) => {
+          if (item.section !== undefined) {
+            return <div key={i} className="sidebar-section">{item.section}</div>;
+          }
+          return (
+            <div
+              key={i}
+              className={`sidebar-item${activeSide === item.id ? ' active' : ''}`}
+              onClick={() => setActiveSide(item.id)}
+            >
+              <span className="icon">{item.icon}</span>
+              {item.label}
+              {item.badge && <span className="sidebar-badge">{item.badge}</span>}
+              {item.badgeRed && <span className="sidebar-badge-red">{item.badgeRed}</span>}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="main-area">
+        <div className="tabs-bar">
+          <div className={`tab-btn${activeTab==='chat'?' active':''}`} onClick={()=>setActiveTab('chat')}>💬 Chat Live</div>
+          <div className={`tab-btn${activeTab==='dashboard'?' active':''}`} onClick={()=>setActiveTab('dashboard')}>📊 Dashboard</div>
+          <div className={`tab-btn${activeTab==='arch'?' active':''}`} onClick={()=>setActiveTab('arch')}>🧠 Arhitectură AI</div>
+        </div>
+        {activeTab === 'chat' && <ChatPage />}
+        {activeTab === 'dashboard' && <DashboardPage />}
+        {activeTab === 'arch' && <ArchPage />}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('app-root'));
+root.render(<App />);
+</script>
+</body>
+</html>

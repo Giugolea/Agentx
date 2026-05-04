@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asistent Virtual Piese Auto si Dezmembrari 24/7</title>
-<meta name="description" content="Automatizează răspunsurile pentru magazinul tău de piese auto. Asistent virtual disponibil 24/7 pe WhatsApp și telefon — niciun client pierdut, nicio piesă neidentificată.">
+<meta name="description" content="Asistent virtual AI pentru piese auto și dezmembrări — răspunde la orice întrebare despre piese, 24/7, pe WhatsApp și telefon." />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -47,7 +47,8 @@ h2.section-title{
 /* ─── HERO ─── */
 .hero{
   min-height:100vh;display:flex;align-items:center;
-  padding-top:80px;padding-bottom:60px;
+  padding-top:240px;padding-bottom:60px;
+  position:relative;
 }
 .hero-inner{
   max-width:1100px;margin:0 auto;width:100%;
@@ -448,7 +449,40 @@ h2.section-title{
 .nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}
 .nav-link:hover{color:#4fc3f7;}
 .nav-link:hover::after{width:100%;}
+
+/* ─── AGX PIESE AUTO LOGO ─── */
+.piese-logo-wrap{
+  position:absolute;
+  top:95px;
+  left:50%;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  z-index:10;
+  animation:logoFloat 3.6s ease-in-out infinite;
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-10px)}
+}
+.piese-icon-box{
+  position:relative;
+  width:86px;height:86px;
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(220,38,38,0.22) 0%,rgba(150,15,15,0.10) 100%);
+  border:2px solid rgba(220,38,38,0.55);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 50px rgba(220,38,38,0.4),0 0 100px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.07);
+}
+.piese-icon-box::before{
+  content:'';position:absolute;inset:-1px;border-radius:21px;
+  background:linear-gradient(135deg,rgba(220,38,38,0.6) 0%,transparent 55%);
+  z-index:-1;
+}
+.piese-logo-name{display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1;}
+.piese-logo-agx{font-size:24px;font-weight:900;color:#ffffff;letter-spacing:-.5px;}
+.piese-logo-sub{font-size:12px;font-weight:800;color:#DC2626;letter-spacing:.5px;text-transform:uppercase;}
 </style>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="canonical" href="https://agentx.ro/piese-auto" />
 </head>
 <body>
 
@@ -459,6 +493,41 @@ h2.section-title{
 
 <!-- ─── 1. HERO ─── -->
 <section class="hero" style="padding-left:24px;padding-right:24px">
+
+  <!-- AGX PIESE AUTO LOGO — centrat deasupra -->
+  <div class="piese-logo-wrap">
+    <div class="piese-icon-box">
+      <svg width="56" height="56" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 18px rgba(220,38,38,0.8))">
+        <defs>
+          <radialGradient id="hubGrad" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="100%" stop-color="#7f1d1d"/>
+          </radialGradient>
+        </defs>
+        <circle cx="45" cy="45" r="42" fill="#0e0e0e"/>
+        <circle cx="45" cy="45" r="42" stroke="#DC2626" stroke-width="1.5" fill="none" opacity=".5"/>
+        <circle cx="45" cy="45" r="38.5" stroke="#DC2626" stroke-width="1" fill="none" opacity=".2"/>
+        <circle cx="45" cy="45" r="30" fill="rgba(220,38,38,0.07)" stroke="#DC2626" stroke-width="2"/>
+        <g fill="#DC2626">
+          <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(0 45 45)"/>
+          <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(72 45 45)"/>
+          <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(144 45 45)"/>
+          <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(216 45 45)"/>
+          <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(288 45 45)"/>
+        </g>
+        <circle cx="45" cy="45" r="13" fill="#0e0e0e" stroke="#DC2626" stroke-width="1.5"/>
+        <circle cx="45" cy="45" r="9" fill="url(#hubGrad)"/>
+        <circle cx="45" cy="45" r="5" fill="#0e0e0e"/>
+        <circle cx="45" cy="45" r="2.5" fill="rgba(220,38,38,0.7)"/>
+        <ellipse cx="36" cy="27" rx="7" ry="3" fill="rgba(255,255,255,0.06)" transform="rotate(-35 36 27)"/>
+      </svg>
+    </div>
+    <div class="piese-logo-name">
+      <span class="piese-logo-agx">AGX</span>
+      <span class="piese-logo-sub">Piese Auto</span>
+    </div>
+  </div>
+
   <div class="hero-inner">
     <div>
       <div class="hero-label">
@@ -466,6 +535,7 @@ h2.section-title{
         Asistentul virtual este LIVE acum
       </div>
       <h1>Asistent Virtual pentru <span>Piese Auto</span> și Dezmembrări — 24/7.</h1>
+      <h2 style="font-size:18px;font-weight:600;color:rgba(255,255,255,0.65);margin-bottom:16px;letter-spacing:0.2px;">Răspunsuri automate la orice întrebare despre piese — WhatsApp & Telefon</h2>
       <p class="hero-sub">Automatizează răspunsurile pentru magazinul tău de piese auto. Disponibil 24/7 pe WhatsApp și telefon.</p>
       <button class="btn-cta" onclick="openModal()">Solicită Demo →</button>
     </div>

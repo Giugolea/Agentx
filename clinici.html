@@ -25,7 +25,7 @@
     if(done||!document.body)return;
     if(document.querySelector('.navbar')){done=true;return;}
     done=true;
-    var s=document.createElement('style');s.textContent="\n.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}\n.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}\n.navbar__logo:hover{transform:scale(1.08);}\n.navbar__logo-img{max-height:171px;width:auto;display:block;}\n.navbar__nav{display:flex;align-items:center;gap:36px;}\n.nav-link{text-decoration:none;color:#ffffff;font-size:22px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}\n.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}\n.nav-link:hover{color:#4fc3f7;}\n.nav-link:hover::after{width:100%;}\n";document.head.appendChild(s);
+    var s=document.createElement('style');s.textContent="\n.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}\n.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}\n.navbar__logo:hover{transform:scale(1.08);}\n.navbar__logo-img{max-height:171px;width:auto;display:block;}\n.navbar__nav{display:flex;align-items:center;gap:36px;}\n.nav-link{text-decoration:none;color:#ffffff;font-size:22px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}\n.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}\n.nav-link:hover{color:#4fc3f7;}\n.nav-link:hover::after{width:100%;}\n";document.head.appendChild(s);
     var d=document.createElement('div');d.innerHTML="<header class=\"navbar\"><a href=\"/\" class=\"navbar__logo\" aria-label=\"Acasa\"><img src=\"Indicatii/LOGO_FINAL.png\" alt=\"AGX Logo\" class=\"navbar__logo-img\" /></a><nav class=\"navbar__nav\"><a href=\"/#despre-noi\" class=\"nav-link\">Despre noi</a><a href=\"/#servicii\" class=\"nav-link\">Servicii</a><a href=\"/#contact\" class=\"nav-link\">Contact</a></nav></header>";
     document.body.insertBefore(d.firstChild,document.body.firstChild);
     document.body.style.paddingTop='80px';
@@ -35,6 +35,87 @@
   window.addEventListener('load',inject);
 })();
   </script>
+  <script>
+(function(){
+  var done=false;
+  function updateH1(){
+    if(done)return;
+    var h1=document.querySelector('h1');
+    if(!h1)return;
+    done=true;
+    h1.textContent='Receptionist AI pentru Clinici — CRM & Programări';
+  }
+  var t=setInterval(function(){if(document.body){updateH1();if(done)clearInterval(t);}},50);
+  setTimeout(function(){clearInterval(t);},10000);
+  window.addEventListener('load',updateH1);
+})();
+  </script>
+  <script>
+(function(){
+  var done=false;
+  function addH2(){
+    if(done)return;
+    var h1=document.querySelector('h1');
+    if(!h1||document.querySelector('.agx-h2'))return;
+    done=true;
+    var h2=document.createElement('h2');
+    h2.className='agx-h2';
+    h2.textContent='Programări automate, CRM și SMS pentru orice clinică medicală';
+    h2.style.cssText='font-size:18px;font-weight:500;color:rgba(255,255,255,0.6);margin-top:10px;margin-bottom:24px;';
+    h1.insertAdjacentElement('afterend',h2);
+  }
+  var t=setInterval(function(){if(document.body){addH2();if(done)clearInterval(t);}},50);
+  setTimeout(function(){clearInterval(t);},10000);
+  window.addEventListener('load',addH2);
+})();
+  </script>
+  <script>
+(function(){
+  var modalCSS = '#agx-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:99999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s}#agx-modal-overlay.active{opacity:1;pointer-events:all}.agx-modal{background:rgba(10,18,35,0.97);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:36px 32px;width:90%;max-width:380px;position:relative;transform:translateY(20px);transition:transform 0.25s;font-family:-apple-system,sans-serif}#agx-modal-overlay.active .agx-modal{transform:translateY(0)}.agx-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer}.agx-modal-close:hover{color:#fff}.agx-modal h3{color:#fff;font-size:1.4rem;font-weight:700;margin-bottom:6px}.agx-modal p{color:rgba(255,255,255,0.45);font-size:0.9rem;margin-bottom:22px}.agx-opts{display:flex;flex-direction:column;gap:12px}.agx-opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);text-decoration:none;color:#fff;transition:transform 0.2s}.agx-opt:hover{transform:translateY(-2px)}.agx-opt span{display:flex;flex-direction:column}.agx-opt strong{font-size:.95rem;font-weight:700}.agx-opt small{font-size:.82rem;opacity:.7}.agx-opt-wa{background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.25);color:#25d366}.agx-opt-ph{background:rgba(29,173,192,0.1);border-color:rgba(29,173,192,0.2);color:#1dadc0}.agx-opt-em{background:rgba(255,255,255,0.04)}';
+
+  var modalHTML = '<div id="agx-modal-overlay"><div class="agx-modal"><button class="agx-modal-close" id="agx-mc">&#10005;</button><h3>Hai sa vorbim</h3><p>Alege cum vrei sa ne contactezi</p><div class="agx-opts"><a href="https://wa.me/40750403392?text=Bun%C4%83%2C+sunt+interesat+de+AGX+Clinic.+Putem+discuta%3F" target="_blank" class="agx-opt agx-opt-wa"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg><span><strong>WhatsApp</strong><small>Raspund in cateva minute</small></span></a><a href="tel:+40750403392" class="agx-opt agx-opt-ph"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.613 21 3 13.387 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg><span><strong>Apel</strong><small>+40 750 403 392</small></span></a><a href="mailto:contact@agentx.ro" class="agx-opt agx-opt-em"><svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span><strong>Email</strong><small>contact@agentx.ro</small></span></a></div></div></div>';
+
+  function openModal(){ document.getElementById('agx-modal-overlay').classList.add('active'); }
+
+  var done=false;
+  function setup(){
+    if(done||!document.body)return;
+
+    // Find trial/demo buttons
+    var btns=document.querySelectorAll('button,a');
+    var found=false;
+    btns.forEach(function(b){
+      var t=b.textContent.trim();
+      if(t.includes('gratuit')||t.includes('Gratuit')||t.includes('demo')||t.includes('Demo')||t.includes('30 de zile')){
+        // Change "Incearca gratuit 30 de zile" to "Incearca Gratuit"
+        if(t.includes('30 de zile')||t.includes('30 zile')){
+          b.textContent='Incearca Gratuit';
+        }
+        b.removeAttribute('href');
+        b.style.cursor='pointer';
+        b.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
+        found=true;
+      }
+    });
+
+    if(!found)return;
+    done=true;
+
+    // Inject modal CSS + HTML
+    var s=document.createElement('style');s.textContent=modalCSS;document.head.appendChild(s);
+    var d=document.createElement('div');d.innerHTML=modalHTML;document.body.appendChild(d.firstChild);
+    document.getElementById('agx-mc').addEventListener('click',function(){ document.getElementById('agx-modal-overlay').classList.remove('active'); });
+    document.getElementById('agx-modal-overlay').addEventListener('click',function(e){ if(e.target===this)this.classList.remove('active'); });
+  }
+
+  var t=setInterval(function(){setup();if(done)clearInterval(t);},100);
+  setTimeout(function(){clearInterval(t);},10000);
+  window.addEventListener('load',setup);
+})();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Receptionist AI pentru clinici medicale — programări automate, CRM și SMS 24/7. Nicio programare pierdută, niciun pacient ignorat." />
+  <link rel="canonical" href="https://agentx.ro/clinici" />
 </head>
 <body>
   <div id="__bundler_thumbnail">

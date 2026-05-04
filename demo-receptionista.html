@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Receptionista AI — Gestionare Clienti & Reclamatii | AgentX</title>
+  <meta name="description" content="Testează Recepționista AI — gestionează reclamații, programări și solicitări 24/7, escaladează automat și rezolvă instant." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── DEMO LAYOUT ── */
+    main { padding-top: 100px; padding-bottom: 60px; display: flex; justify-content: center; }
+    .demo-container { display: flex; align-items: flex-start; gap: 48px; max-width: 1100px; width: 100%; padding: 0 24px; justify-content: center; }
+
+    /* ── PHONE FRAME ── */
+    .phone-frame { flex-shrink: 0; width: 320px; }
+    .phone-body {
+      position: relative;
+      width: 320px; height: 640px;
+      background: #1a1a1a;
+      border-radius: 48px;
+      box-shadow: 0 0 0 2px #3a3a3a, 0 0 0 5px #1a1a1a, 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(99,179,237,0.1);
+      overflow: hidden;
+    }
+    .phone-btn-vol1, .phone-btn-vol2 { position: absolute; left: -4px; width: 4px; height: 28px; background: #2a2a2a; border-radius: 2px 0 0 2px; }
+    .phone-btn-vol1 { top: 120px; }
+    .phone-btn-vol2 { top: 160px; }
+    .phone-btn-power { position: absolute; right: -4px; top: 140px; width: 4px; height: 40px; background: #2a2a2a; border-radius: 0 2px 2px 0; }
+    .phone-screen { position: absolute; inset: 0; border-radius: 46px; overflow: hidden; }
+
+    /* ── WALLPAPER / HOME ── */
+    .phone-wallpaper {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 50%, #0f2744 100%);
+      display: flex; flex-direction: column;
+    }
+    .pw-statusbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px 8px; color: #fff; font-size: 12px; font-weight: 600;
+    }
+    .pw-time { font-size: 15px; font-weight: 700; }
+    .pw-icons { display: flex; align-items: center; gap: 6px; }
+    .pw-signal { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+    .pw-bar { width: 3px; background: #fff; border-radius: 1px; }
+    .pw-bar--1 { height: 4px; } .pw-bar--2 { height: 6px; } .pw-bar--3 { height: 9px; } .pw-bar--4 { height: 12px; }
+    .pw-wifi { font-size: 11px; }
+    .pw-battery { width: 22px; height: 11px; border: 1.5px solid #fff; border-radius: 3px; position: relative; }
+    .pw-battery::after { content: ''; position: absolute; right: -5px; top: 2px; width: 3px; height: 6px; background: #fff; border-radius: 0 2px 2px 0; }
+    .pw-battery-fill { position: absolute; inset: 1px; right: 2px; background: #fff; border-radius: 1px; }
+    .pw-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 110px; height: 30px; background: #1a1a1a; border-radius: 0 0 18px 18px; z-index: 10; }
+    .pw-date { color: #fff; text-align: center; margin-top: 24px; }
+    .pw-date-day { font-size: 13px; opacity: 0.7; }
+    .pw-date-num { font-size: 56px; font-weight: 200; line-height: 1; }
+    .pw-apps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; padding: 30px 28px 16px; margin-top: auto;
+    }
+    .phone-icon {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; transition: transform 0.15s;
+    }
+    .phone-icon:hover { transform: scale(1.08); }
+    .phone-icon-img {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+    }
+    .phone-icon-label { color: #fff; font-size: 10px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .phone-icon--msg .phone-icon-img { background: linear-gradient(135deg, #34C759, #30D158); }
+    .phone-icon--robot .phone-icon-img { background: linear-gradient(135deg, #5E5CE6, #7C3AED); }
+    .phone-icon--crm .phone-icon-img { background: linear-gradient(135deg, #FF9500, #FF6B00); }
+    .phone-home { width: 120px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 2px; margin: 12px auto 16px; }
+
+    /* ── SCREENS (absolute over wallpaper) ── */
+    .imsg-chat, .robot-info, .robot-screen, .crm-screen {
+      position: absolute; inset: 0; border-radius: 46px;
+      display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+      overflow: hidden;
+    }
+    .imsg-chat.active, .robot-info.active, .robot-screen.active, .crm-screen.active { transform: translateX(0); }
+
+    /* ── iMESSAGE CHAT ── */
+    .imsg-chat { background: #f5f5f7; }
+    .imsg-header {
+      background: rgba(245,245,247,0.9); backdrop-filter: blur(10px);
+      border-bottom: 0.5px solid #c6c6c8;
+      padding: 50px 16px 12px; display: flex; align-items: center; gap: 12px;
+    }
+    .imsg-back { background: none; border: none; color: #007AFF; font-size: 16px; font-weight: 500; cursor: pointer; padding: 0; }
+    .imsg-contact { flex: 1; text-align: center; }
+    .imsg-avatar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .imsg-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #34C759, #007AFF); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; margin: 0 auto; }
+    .imsg-name { font-size: 13px; font-weight: 600; color: #000; }
+    .imsg-status { font-size: 11px; color: #34C759; }
+    .imsg-video { color: #007AFF; font-size: 20px; }
+    .imsg-messages { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
+    .imsg-date-label { text-align: center; font-size: 11px; color: #8e8e93; margin: 8px 0; }
+    .imsg-bubble {
+      max-width: 75%; padding: 9px 13px; border-radius: 18px;
+      font-size: 14px; line-height: 1.45; word-break: break-word;
+    }
+    .imsg-bubble--recv { background: #e5e5ea; color: #000; align-self: flex-start; border-bottom-left-radius: 4px; }
+    .imsg-bubble--sent { background: #007AFF; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .imsg-bubble-wrap { display: flex; flex-direction: column; }
+    .imsg-bubble-wrap--recv { align-items: flex-start; }
+    .imsg-bubble-wrap--sent { align-items: flex-end; }
+    .imsg-typing { display: flex; gap: 4px; align-items: center; padding: 10px 14px; background: #e5e5ea; border-radius: 18px; border-bottom-left-radius: 4px; align-self: flex-start; width: fit-content; }
+    .imsg-typing-dot { width: 7px; height: 7px; border-radius: 50%; background: #8e8e93; animation: imsgBounce 1s infinite; }
+    .imsg-typing-dot:nth-child(2) { animation-delay: .15s; }
+    .imsg-typing-dot:nth-child(3) { animation-delay: .3s; }
+    @keyframes imsgBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+    .imsg-input-bar {
+      background: rgba(245,245,247,0.95); backdrop-filter: blur(10px);
+      border-top: 0.5px solid #c6c6c8;
+      padding: 10px 12px 24px; display: flex; align-items: center; gap: 8px;
+    }
+    .imsg-input {
+      flex: 1; background: #fff; border: 1px solid #c6c6c8; border-radius: 18px;
+      padding: 8px 14px; font-size: 14px; color: #000; outline: none;
+    }
+    .imsg-send {
+      width: 32px; height: 32px; border-radius: 50%; background: #007AFF;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .imsg-send svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* ── ROBOT INFO POPUP ── */
+    .robot-info { background: #fff; }
+    .ri-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 52px 20px 16px; border-bottom: 1px solid #e5e7eb;
+    }
+    .ri-header-left { display: flex; align-items: center; gap: 10px; }
+    .ri-header-icon { font-size: 22px; }
+    .ri-header-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .ri-close { background: none; border: none; font-size: 16px; color: #64748b; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #f1f5f9; }
+    .ri-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+    .ri-subtitle { font-size: 12px; color: #64748b; margin-bottom: 16px; line-height: 1.6; }
+    .ri-steps { display: flex; flex-direction: column; gap: 14px; }
+    .ri-step { display: flex; gap: 12px; align-items: flex-start; }
+    .ri-step-num { width: 24px; height: 24px; border-radius: 50%; background: #5E5CE6; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ri-step-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+    .ri-step-desc { font-size: 11px; color: #64748b; line-height: 1.5; }
+    .ri-step-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+    .ri-tag { background: #f1f5f9; color: #5E5CE6; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid #e2e8f0; }
+    .ri-footer { padding: 12px 20px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e5e7eb; }
+
+    /* ── ROBOT SCREEN (flow) ── */
+    .robot-screen { background: #0f172a; }
+    .robot-header { display: flex; align-items: center; gap: 12px; padding: 52px 16px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .robot-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #5E5CE6, #7C3AED); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .robot-title-name { font-size: 13px; font-weight: 700; color: #fff; }
+    .robot-title-sub { font-size: 10px; color: rgba(255,255,255,0.5); }
+    .robot-close { margin-left: auto; background: rgba(255,255,255,0.08); border: none; color: #fff; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 12px; }
+    .robot-body { flex: 1; overflow-y: auto; padding: 16px; }
+    .robot-intro { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 14px; line-height: 1.5; }
+    .flow-step { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; opacity: 0; transition: opacity 0.4s, transform 0.4s; transform: translateY(8px); }
+    .flow-step.visible { opacity: 1; transform: translateY(0); }
+    .flow-step-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .flow-step-icon--msg { background: rgba(52,199,89,0.15); }
+    .flow-step-icon--ai { background: rgba(94,92,230,0.15); }
+    .flow-step-icon--crm { background: rgba(255,149,0,0.15); }
+    .flow-step-icon--bell { background: rgba(255,59,48,0.15); }
+    .flow-step-label { font-size: 12px; font-weight: 600; color: #fff; }
+    .flow-step-desc { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .flow-check { margin-left: auto; color: #34C759; font-size: 14px; opacity: 0; transition: opacity 0.3s; }
+    .flow-check.visible { opacity: 1; }
+    .flow-arrow { text-align: center; color: rgba(255,255,255,0.2); font-size: 16px; margin: 4px 0; opacity: 0; transition: opacity 0.3s; }
+    .flow-arrow.visible { opacity: 1; }
+    .robot-footer { padding: 12px 16px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* ── CRM SCREEN ── */
+    .crm-screen { background: #f8fafc; }
+    .crm-header { display: flex; justify-content: space-between; align-items: center; padding: 52px 16px 12px; border-bottom: 1px solid #e2e8f0; background: #fff; }
+    .crm-header-left { display: flex; align-items: center; gap: 8px; }
+    .crm-header-icon { font-size: 20px; }
+    .crm-header-title { font-size: 14px; font-weight: 700; color: #0f172a; }
+    .crm-close { background: #f1f5f9; border: none; color: #64748b; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 12px; }
+    .crm-badge { background: rgba(94,92,230,0.1); color: #5E5CE6; border: 1px solid rgba(94,92,230,0.2); border-radius: 999px; padding: 2px 10px; font-size: 10px; font-weight: 600; }
+    .crm-date-bar { padding: 8px 16px; font-size: 11px; color: #64748b; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
+    .crm-body { flex: 1; overflow-y: auto; padding: 12px; }
+    .crm-ticket { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; display: flex; gap: 10px; align-items: flex-start; }
+    .crm-ticket-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .crm-ticket--complaint .crm-ticket-icon { background: rgba(239,68,68,0.1); }
+    .crm-ticket--info .crm-ticket-icon { background: rgba(59,130,246,0.1); }
+    .crm-ticket--schedule .crm-ticket-icon { background: rgba(34,197,94,0.1); }
+    .crm-ticket--escalated .crm-ticket-icon { background: rgba(245,158,11,0.1); }
+    .crm-ticket-title { font-size: 12px; font-weight: 700; color: #0f172a; margin-bottom: 2px; }
+    .crm-ticket-sub { font-size: 10px; color: #64748b; }
+    .crm-ticket-status { margin-left: auto; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; flex-shrink: 0; }
+    .crm-status--resolved { background: rgba(34,197,94,0.1); color: #16a34a; }
+    .crm-status--escalated { background: rgba(245,158,11,0.1); color: #d97706; }
+    .crm-status--pending { background: rgba(59,130,246,0.1); color: #2563eb; }
+    .crm-ticket--new { border-left: 3px solid #5E5CE6; animation: slideIn 0.5s ease 0.5s both; }
+    @keyframes slideIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+    .crm-footer { padding: 10px 16px; text-align: center; font-size: 10px; color: #94a3b8; border-top: 1px solid #e2e8f0; background: #fff; }
+
+    /* ── SIDE PANEL ── */
+    .demo-info {
+      flex: 1; max-width: 460px; padding-top: 20px;
+    }
+    .demo-info__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(94,92,230,0.1); border: 1px solid rgba(94,92,230,0.25);
+      border-radius: 999px; padding: 5px 14px; margin-bottom: 20px;
+      font-size: 12px; font-weight: 700; color: #a78bfa;
+    }
+    .demo-info__badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #7C3AED; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,0.6)} 50%{box-shadow:0 0 0 6px rgba(124,58,237,0)} }
+    .demo-info h1 { font-size: clamp(22px, 3vw, 32px); font-weight: 900; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+    .demo-info h1 span { color: #a78bfa; }
+    .demo-info__sub { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 28px; }
+    .demo-info__steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .demo-info__step { display: flex; gap: 14px; align-items: flex-start; }
+    .demo-info__step-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(94,92,230,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .demo-info__step-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .demo-info__step-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .demo-info__cta { display: inline-flex; align-items: center; gap: 8px; background: #5E5CE6; color: #fff; padding: 13px 24px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .demo-info__cta:hover { background: #4f46e5; transform: translateY(-2px); }
+
+    /* ── PHONE CTA BUTTON ── */
+    .phone-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #5E5CE6, #7C3AED);
+      color: #fff; padding: 12px 22px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      border: none; cursor: pointer; margin-top: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(94,92,230,0.4);
+    }
+    .phone-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(94,92,230,0.5); }
+
+    @media (max-width: 900px) {
+      .demo-container { flex-direction: column; align-items: center; }
+      .demo-info { max-width: 100%; }
+    }
+  </style>
+  <link rel="canonical" href="https://agentx.ro/demo-receptionista" />
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/" class="navbar__logo" aria-label="Acasă">
+      <img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" />
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-hamburger" aria-label="Meniu">
+      <span></span><span></span><span></span>
+    </label>
+    <nav class="navbar__nav">
+      <a href="/#despre-noi" class="nav-link">Despre noi</a>
+      <a href="/#servicii" class="nav-link">Servicii</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <div class="starfield" id="starfield"></div>
+
+  <main>
+    <div class="demo-container">
+
+      <!-- PHONE -->
+      <div class="phone-frame">
+        <div class="phone-body">
+          <div class="phone-btn-vol1"></div>
+          <div class="phone-btn-vol2"></div>
+          <div class="phone-btn-power"></div>
+          <div class="phone-screen">
+            <div class="pw-notch"></div>
+
+            <!-- HOME SCREEN -->
+            <div class="phone-wallpaper">
+              <div class="pw-statusbar">
+                <span class="pw-time">9:41</span>
+                <div class="pw-icons">
+                  <div class="pw-signal">
+                    <div class="pw-bar pw-bar--1"></div><div class="pw-bar pw-bar--2"></div>
+                    <div class="pw-bar pw-bar--3"></div><div class="pw-bar pw-bar--4"></div>
+                  </div>
+                  <span style="font-size:11px;">WiFi</span>
+                  <div class="pw-battery"><div class="pw-battery-fill"></div></div>
+                </div>
+              </div>
+                <div class="pw-date">
+                <div class="pw-date-day">Marți</div>
+                <div class="pw-date-num">21</div>
+              </div>
+              <div class="pw-apps">
+                <div class="phone-icon" id="msg-icon">
+                  <div class="phone-icon-img phone-icon--msg">💬</div>
+                  <span class="phone-icon-label">Mesaje</span>
+                </div>
+                <div class="phone-icon" id="robot-icon">
+                  <div class="phone-icon-img phone-icon--robot">🤖</div>
+                  <span class="phone-icon-label">Arhitectură AI</span>
+                </div>
+                <div class="phone-icon" id="crm-icon">
+                  <div class="phone-icon-img phone-icon--crm">📋</div>
+                  <span class="phone-icon-label">CRM Tickete</span>
+                </div>
+              </div>
+              <div class="phone-home"></div>
+            </div>
+
+            <!-- iMESSAGE CHAT -->
+            <div class="imsg-chat" id="imsg-chat">
+              <div class="imsg-header">
+                <button class="imsg-back" id="imsg-back">‹ Înapoi</button>
+                <div class="imsg-contact">
+                  <div class="imsg-avatar-wrap">
+                    <div class="imsg-avatar">👩‍💼</div>
+                    <div class="imsg-name">Recepționista AI</div>
+                    <div class="imsg-status">● online</div>
+                  </div>
+                </div>
+                <span class="imsg-video">📞</span>
+              </div>
+              <div class="imsg-messages" id="imsg-messages">
+                <div class="imsg-date-label">Astăzi, 9:41</div>
+              </div>
+              <div class="imsg-input-bar">
+                <input class="imsg-input" id="imsg-input" type="text"
+                  value="Buna ziua, am o problema cu factura primita luna trecuta, suma nu e corecta" readonly />
+                <button class="imsg-send" id="imsg-send">
+                  <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- ROBOT INFO POPUP (Arhitectură) -->
+            <div class="robot-info" id="robot-info">
+              <div class="ri-header">
+                <div class="ri-header-left">
+                  <div class="ri-header-icon">🤖</div>
+                  <div class="ri-header-title">Cum funcționează Recepționista AI</div>
+                </div>
+                <button class="ri-close" id="ri-close">✕</button>
+              </div>
+              <div class="ri-body">
+                <p class="ri-subtitle">Preia automat orice solicitare — reclamații, programări, întrebări — le analizează și acționează instant, fără intervenție umană.</p>
+                <div class="ri-steps">
+                  <div class="ri-step">
+                    <div class="ri-step-num">1</div>
+                    <div>
+                      <div class="ri-step-title">Recepționează</div>
+                      <div class="ri-step-desc">Preia mesaje prin iMessage, WhatsApp, Email, apel telefonic — 24/7, fără să rateze nicio solicitare, indiferent de oră.</div>
+                    </div>
+                  </div>
+                  <div class="ri-step">
+                    <div class="ri-step-num">2</div>
+                    <div>
+                      <div class="ri-step-title">Clasifică & Prioritizează</div>
+                      <div class="ri-step-desc">Înțelege intenția: reclamație, informație, programare sau urgență. Prioritizează automat și decide dacă escaladează.</div>
+                    </div>
+                  </div>
+                  <div class="ri-step">
+                    <div class="ri-step-num">3</div>
+                    <div>
+                      <div class="ri-step-title">Acționează & Escaladează</div>
+                      <div class="ri-step-desc">Rezolvă direct ce poate, creează ticket în CRM și escaladează automat problemele complexe la persoana responsabilă.</div>
+                      <div class="ri-step-tags">
+                        <span class="ri-tag">CRM automat</span>
+                        <span class="ri-tag">Escaladare</span>
+                        <span class="ri-tag">Tickete</span>
+                        <span class="ri-tag">Notificări echipă</span>
+                        <span class="ri-tag">Rapoarte</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ri-footer">Zero solicitări pierdute. Zero clienți ignorați.</div>
+            </div>
+
+            <!-- ROBOT SCREEN (flow automation) -->
+            <div class="robot-screen" id="robot-screen">
+              <div class="robot-header">
+                <div class="robot-avatar">🤖</div>
+                <div>
+                  <div class="robot-title-name">Recepționista AI — AGX</div>
+                  <div class="robot-title-sub">Procesare automată completă</div>
+                </div>
+                <button class="robot-close" id="robot-close">✕</button>
+              </div>
+              <div class="robot-body">
+                <p class="robot-intro">Iată ce s-a întâmplat automat<br>în spatele acestei conversații:</p>
+                <div class="flow-step" id="step-1">
+                  <div class="flow-step-icon flow-step-icon--msg">💬</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Mesaj iMessage primit</div>
+                    <div class="flow-step-desc">Clientul a raportat problema cu factura</div>
+                  </div>
+                  <div class="flow-check" id="check-1">✅</div>
+                </div>
+                <div class="flow-arrow" id="arrow-1">↓</div>
+                <div class="flow-step" id="step-2">
+                  <div class="flow-step-icon flow-step-icon--ai">🤖</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Recepționista AI a analizat</div>
+                    <div class="flow-step-desc">A clasificat: reclamație factură, prioritate medie</div>
+                  </div>
+                  <div class="flow-check" id="check-2">✅</div>
+                </div>
+                <div class="flow-arrow" id="arrow-2">↓</div>
+                <div class="flow-step" id="step-3">
+                  <div class="flow-step-icon flow-step-icon--crm">📋</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Ticket creat automat în CRM</div>
+                    <div class="flow-step-desc">TKT-2891 — Diferență factură 200 RON</div>
+                  </div>
+                  <div class="flow-check" id="check-3">✅</div>
+                </div>
+                <div class="flow-arrow" id="arrow-3">↓</div>
+                <div class="flow-step" id="step-4">
+                  <div class="flow-step-icon flow-step-icon--bell">🔔</div>
+                  <div class="flow-step-text">
+                    <div class="flow-step-label">Escalat departamentul financiar</div>
+                    <div class="flow-step-desc">Clientul va primi factura corectată în 24h</div>
+                  </div>
+                  <div class="flow-check" id="check-4">✅</div>
+                </div>
+              </div>
+              <div class="robot-footer">Totul s-a rezolvat automat, fără intervenție umană.</div>
+            </div>
+
+            <!-- CRM SCREEN -->
+            <div class="crm-screen" id="crm-screen">
+              <div class="crm-header">
+                <div class="crm-header-left">
+                  <div class="crm-header-icon">📋</div>
+                  <div class="crm-header-title">CRM Tickete azi</div>
+                </div>
+                <div class="crm-badge">AI activ ✨</div>
+                <button class="crm-close" id="crm-close">✕</button>
+              </div>
+              <div class="crm-date-bar">Marți, 21 Ianuarie · 12 tickete · 0 nerezolvate</div>
+              <div class="crm-body">
+                <div class="crm-ticket crm-ticket--complaint crm-ticket--new">
+                  <div class="crm-ticket-icon">⚠️</div>
+                  <div>
+                    <div class="crm-ticket-title">TKT-2891 — Factură incorectă</div>
+                    <div class="crm-ticket-sub">Ion Popescu · Escalat financiar · Acum</div>
+                  </div>
+                  <div class="crm-ticket-status crm-status--escalated">Escalat</div>
+                </div>
+                <div class="crm-ticket crm-ticket--schedule">
+                  <div class="crm-ticket-icon">📅</div>
+                  <div>
+                    <div class="crm-ticket-title">Reprogramare consultație</div>
+                    <div class="crm-ticket-sub">Maria Ionescu · Rezolvat automat · 09:15</div>
+                  </div>
+                  <div class="crm-ticket-status crm-status--resolved">Rezolvat</div>
+                </div>
+                <div class="crm-ticket crm-ticket--info">
+                  <div class="crm-ticket-icon">ℹ️</div>
+                  <div>
+                    <div class="crm-ticket-title">Info program de funcționare</div>
+                    <div class="crm-ticket-sub">Andrei Radu · Răspuns automat · 08:50</div>
+                  </div>
+                  <div class="crm-ticket-status crm-status--resolved">Rezolvat</div>
+                </div>
+                <div class="crm-ticket crm-ticket--complaint">
+                  <div class="crm-ticket-icon">🔴</div>
+                  <div>
+                    <div class="crm-ticket-title">Reclamație serviciu lent</div>
+                    <div class="crm-ticket-sub">Elena Constantin · Escalat manager · 08:20</div>
+                  </div>
+                  <div class="crm-ticket-status crm-status--escalated">Escalat</div>
+                </div>
+                <div class="crm-ticket crm-ticket--schedule">
+                  <div class="crm-ticket-icon">✅</div>
+                  <div>
+                    <div class="crm-ticket-title">Programare nouă — online</div>
+                    <div class="crm-ticket-sub">Alexandru Pop · Adăugat CRM · 07:55</div>
+                  </div>
+                  <div class="crm-ticket-status crm-status--resolved">Rezolvat</div>
+                </div>
+              </div>
+              <div class="crm-footer">12 solicitări gestionate automat · 0 pierdute</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDE INFO PANEL -->
+      <div class="demo-info">
+        <div class="demo-info__badge">
+          <span class="demo-info__badge-dot"></span>
+          Recepționista AI — LIVE
+        </div>
+        <h1>Recepționista AI care <span>nu pierde nicio</span> solicitare</h1>
+        <p class="demo-info__sub">
+          Atinge iconița <strong>💬 Mesaje</strong> pentru a vedea cum Recepționista AI gestionează o reclamație în timp real.<br><br>
+          Atinge <strong>🤖 Arhitectură AI</strong> pentru a vedea cum funcționează în spate.<br><br>
+          Atinge <strong>📋 CRM</strong> pentru a vedea toate ticketele gestionate automat azi.
+        </p>
+        <div class="demo-info__steps">
+          <div class="demo-info__step">
+            <div class="demo-info__step-icon">📥</div>
+            <div>
+              <div class="demo-info__step-title">Preia orice tip de solicitare</div>
+              <div class="demo-info__step-desc">Reclamații, programări, întrebări, urgențe — prin orice canal, oricând, fără să rateze nimic.</div>
+            </div>
+          </div>
+          <div class="demo-info__step">
+            <div class="demo-info__step-icon">🧠</div>
+            <div>
+              <div class="demo-info__step-title">Clasifică și prioritizează automat</div>
+              <div class="demo-info__step-desc">Înțelege intenția clientului și decide instant dacă rezolvă direct sau escaladează la echipă.</div>
+            </div>
+          </div>
+          <div class="demo-info__step">
+            <div class="demo-info__step-icon">📋</div>
+            <div>
+              <div class="demo-info__step-title">CRM automat — zero admin</div>
+              <div class="demo-info__step-desc">Creează ticket, notifică echipa, urmărește statusul — totul fără intervenție umană.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="demo-info__cta" id="phone-cta-btn" onclick="openContactModal();return false;">
+          Implementează Recepționista AI →
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CONTACT MODAL -->
+  <div id="contact-overlay" class="contact-overlay">
+    <div class="contact-modal">
+      <button class="contact-modal__close" id="contact-close">&#10005;</button>
+      <h3 class="contact-modal__title">Hai să vorbim</h3>
+      <p class="contact-modal__sub">Alege cum vrei să ne contactezi</p>
+      <div class="contact-modal__options">
+        <a href="https://wa.me/40750403392?text=Bun%C4%83%2C+sunt+interesat+de+Receptionista+AI.+Putem+discuta%3F" target="_blank" rel="noopener" class="contact-option contact-option--wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L0 24l6.335-1.51A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.37l-.36-.214-3.727.888.936-3.619-.235-.372A9.818 9.818 0 1112 21.818z"/></svg>
+          <span><strong>WhatsApp</strong><small>Răspund în câteva minute</small></span>
+        </a>
+        <a href="tel:+40750403392" class="contact-option contact-option--phone">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.613 21 3 13.387 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+          <span><strong>Apel</strong><small>+40 750 403 392</small></span>
+        </a>
+        <a href="mailto:contact@agentx.ro" class="contact-option contact-option--email">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span><strong>Email</strong><small>contact@agentx.ro</small></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── STARFIELD ──
+    (function() {
+      var sf = document.getElementById('starfield');
+      if (!sf) return;
+      for (var s = 0; s < 80; s++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        var size = Math.random() * 2 + 0.5;
+        star.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;--dur:'+(2+Math.random()*4)+'s;--delay:'+(-Math.random()*5)+'s;--min-op:'+(0.2+Math.random()*0.4);
+        sf.appendChild(star);
+      }
+    })();
+
+    // ── ELEMENTS ──
+    var msgIcon    = document.getElementById('msg-icon');
+    var robotIcon  = document.getElementById('robot-icon');
+    var crmIcon    = document.getElementById('crm-icon');
+    var imsgChat   = document.getElementById('imsg-chat');
+    var imsgBack   = document.getElementById('imsg-back');
+    var imsgSend   = document.getElementById('imsg-send');
+    var imsgMessages = document.getElementById('imsg-messages');
+    var imsgInput  = document.getElementById('imsg-input');
+    var robotInfo  = document.getElementById('robot-info');
+    var riClose    = document.getElementById('ri-close');
+    var robotScreen = document.getElementById('robot-screen');
+    var robotClose = document.getElementById('robot-close');
+    var crmScreen  = document.getElementById('crm-screen');
+    var crmClose   = document.getElementById('crm-close');
+
+    // ── OPEN SCREENS ──
+    msgIcon.addEventListener('click', function() { imsgChat.classList.add('active'); });
+    imsgBack.addEventListener('click', function() {
+      imsgChat.classList.remove('active');
+      imsgMessages.querySelectorAll('.imsg-bubble-wrap').forEach(function(el){ el.remove(); });
+      imsgInput.value = 'Buna ziua, am o problema cu factura primita luna trecuta, suma nu e corecta';
+    });
+    robotIcon.addEventListener('click', function() { robotInfo.classList.add('active'); });
+    riClose.addEventListener('click', function() { robotInfo.classList.remove('active'); });
+    robotClose.addEventListener('click', function() { robotScreen.classList.remove('active'); resetFlow(); });
+    crmIcon.addEventListener('click', function() { crmScreen.classList.add('active'); });
+    crmClose.addEventListener('click', function() { crmScreen.classList.remove('active'); });
+
+    // ── iMESSAGE CONVERSATION ──
+    var conversation = [
+      { from: 'recv', text: 'Bună ziua! Sunt Recepționista AI AgentX. Cum vă pot ajuta astăzi? 😊', delay: 800 },
+      { from: 'sent', text: 'Am primit factura #2024-0892 cu suma de 850 RON, dar ar trebui să fie 650 RON.', delay: 1800 },
+      { from: 'recv', text: 'Înțeleg, vă mulțumesc că ne-ați contactat! Am identificat factura în sistem. Pot să vă rog numărul de telefon pentru verificare?', delay: 1200 },
+      { from: 'sent', text: '0745 123 456', delay: 1500 },
+      { from: 'recv', text: '✅ Am verificat. Factura a inclus din eroare o taxă de procesare. Am creat ticket TKT-2891 și am escalat departamentului financiar. Veți primi factura corectată în maxim 24 de ore.', delay: 2000 },
+      { from: 'sent', text: 'Mulțumesc mult, sper să se rezolve rapid!', delay: 1200 },
+      { from: 'recv', text: 'Cu siguranță! Am marcat solicitarea ca prioritară. Vă vom contacta noi. O zi excelentă! 🙏', delay: 1000 },
+    ];
+
+    function addBubble(from, text) {
+      var wrap = document.createElement('div');
+      wrap.className = 'imsg-bubble-wrap imsg-bubble-wrap--' + from;
+      var bubble = document.createElement('div');
+      bubble.className = 'imsg-bubble imsg-bubble--' + from;
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      imsgMessages.appendChild(wrap);
+      imsgMessages.scrollTop = imsgMessages.scrollHeight;
+    }
+
+    function showTyping() {
+      var t = document.createElement('div');
+      t.className = 'imsg-typing'; t.id = 'typing-ind';
+      for (var i = 0; i < 3; i++) {
+        var d = document.createElement('div'); d.className = 'imsg-typing-dot'; t.appendChild(d);
+      }
+      imsgMessages.appendChild(t);
+      imsgMessages.scrollTop = imsgMessages.scrollHeight;
+    }
+    function hideTyping() { var t = document.getElementById('typing-ind'); if (t) t.remove(); }
+
+    var convStarted = false;
+    function startConversation() {
+      if (convStarted) return;
+      convStarted = true;
+      // Add first sent message
+      addBubble('sent', imsgInput.value);
+      imsgInput.value = 'Mulțumesc mult, sper să se rezolve rapid!';
+
+      var delay = 400;
+      conversation.forEach(function(msg, i) {
+        if (msg.from === 'recv') {
+          setTimeout(function(){ showTyping(); }, delay);
+          delay += msg.delay;
+          setTimeout(function(m){ hideTyping(); addBubble('recv', m); }
+            .bind(null, msg.text), delay);
+        } else if (i > 0) {
+          delay += msg.delay;
+          setTimeout(function(m){ addBubble('sent', m); }.bind(null, msg.text), delay);
+        }
+        delay += 200;
+      });
+
+      // After conversation, open robot screen
+      setTimeout(function() { openRobotScreen(); }, delay + 1000);
+    }
+
+    imsgSend.addEventListener('click', startConversation);
+
+    // ── ROBOT FLOW ANIMATION ──
+    function resetFlow() {
+      ['step-1','step-2','step-3','step-4'].forEach(function(id){ document.getElementById(id).classList.remove('visible'); });
+      ['check-1','check-2','check-3','check-4'].forEach(function(id){ document.getElementById(id).classList.remove('visible'); });
+      ['arrow-1','arrow-2','arrow-3'].forEach(function(id){ document.getElementById(id).classList.remove('visible'); });
+    }
+
+    function openRobotScreen() {
+      imsgChat.classList.remove('active');
+      robotScreen.classList.add('active');
+      resetFlow();
+      var steps = [
+        {step:'step-1', check:'check-1', arrow:'arrow-1', delay:300},
+        {step:'step-2', check:'check-2', arrow:'arrow-2', delay:900},
+        {step:'step-3', check:'check-3', arrow:'arrow-3', delay:1500},
+        {step:'step-4', check:'check-4', arrow:null,      delay:2100},
+      ];
+      steps.forEach(function(s){
+        setTimeout(function(){ document.getElementById(s.step).classList.add('visible'); }, s.delay);
+        setTimeout(function(){ document.getElementById(s.check).classList.add('visible'); }, s.delay + 400);
+        if (s.arrow) setTimeout(function(){ document.getElementById(s.arrow).classList.add('visible'); }, s.delay + 600);
+      });
+    }
+
+    // ── CONTACT MODAL ──
+    var overlay = document.getElementById('contact-overlay');
+    document.getElementById('contact-close').addEventListener('click', function(){ overlay.classList.remove('active'); });
+    overlay.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('active'); });
+    function openContactModal(){ overlay.classList.add('active'); }
+    document.getElementById('phone-cta-btn').addEventListener('click', openContactModal);
+  </script>
+</body>
+</html>

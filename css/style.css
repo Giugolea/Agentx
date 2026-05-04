@@ -262,6 +262,14 @@ main {
   letter-spacing: -0.3px;
 }
 
+.hero__tagline {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 20px;
+  letter-spacing: 0.2px;
+}
+
 .hero__subtitle {
   font-size: clamp(14px, 1.5vw, 17px);
   font-weight: 800;
