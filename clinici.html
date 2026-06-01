@@ -20,18 +20,18 @@
   <title>Receptionist AI pentru Clinici | CRM & Programari</title>
   <script>
 (function(){
-  var done=false;
   function inject(){
-    if(done||!document.body)return;
-    if(document.querySelector('.navbar')){done=true;return;}
-    done=true;
-    var s=document.createElement('style');s.textContent="\n.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}\n.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}\n.navbar__logo:hover{transform:scale(1.08);}\n.navbar__logo-img{max-height:171px;width:auto;display:block;}\n.navbar__nav{display:flex;align-items:center;gap:36px;}\n.nav-link{text-decoration:none;color:#ffffff;font-size:22px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}\n.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}\n.nav-link:hover{color:#4fc3f7;}\n.nav-link:hover::after{width:100%;}\n";document.head.appendChild(s);
+    if(!document.body)return;
+    if(document.querySelector('.navbar'))return;
+    var s=document.createElement('style');s.textContent="\n.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}\n.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}\n.navbar__logo:hover{transform:scale(1.08);}\n.navbar__logo-img{max-height:171px;width:auto;display:block;}\n.navbar__nav{display:flex;align-items:center;gap:36px;}\n.nav-link{text-decoration:none;color:#ffffff;font-size:18px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}\n.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}\n.nav-link:hover{color:#4fc3f7;}\n.nav-link:hover::after{width:100%;}\n";document.head.appendChild(s);
     var d=document.createElement('div');d.innerHTML="<header class=\"navbar\"><a href=\"/\" class=\"navbar__logo\" aria-label=\"Acasa\"><img src=\"Indicatii/LOGO_FINAL.png\" alt=\"AGX Logo\" class=\"navbar__logo-img\" /></a><nav class=\"navbar__nav\"><a href=\"/#despre-noi\" class=\"nav-link\">Despre noi</a><a href=\"/#servicii\" class=\"nav-link\">Servicii</a><a href=\"/#contact\" class=\"nav-link\">Contact</a></nav></header>";
     document.body.insertBefore(d.firstChild,document.body.firstChild);
     document.body.style.paddingTop='80px';
   }
-  var t=setInterval(function(){if(document.body){inject();if(done)clearInterval(t);}},30);
+  var t=setInterval(function(){if(document.body){inject();clearInterval(t);}},30);
   setTimeout(function(){clearInterval(t);},10000);
+  var obs=new MutationObserver(function(){obs.disconnect();setTimeout(inject,0);});
+  obs.observe(document,{childList:true});
   window.addEventListener('load',inject);
 })();
   </script>
