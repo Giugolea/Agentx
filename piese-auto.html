@@ -2,15 +2,19 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asistent Virtual Piese Auto si Dezmembrari 24/7</title>
 <meta name="description" content="Asistent virtual AI pentru piese auto și dezmembrări — răspunde la orice întrebare despre piese, 24/7, pe WhatsApp și telefon." />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --red:#DC2626;
-  --red-dim:rgba(220,38,38,0.15);
-  --red-glow:rgba(220,38,38,0.35);
+  --accent:#38bdf8;
+  --accent-dim:rgba(56,189,248,0.15);
+  --accent-glow:rgba(56,189,248,0.35);
   --bg:#0a0f1a;
   --bg2:#0f1520;
   --bg3:#111827;
@@ -21,8 +25,8 @@
 }
 html{scroll-behavior:smooth}
 body{
-  font-family:system-ui,-apple-system,sans-serif;
-  background:linear-gradient(160deg,#0a0f1a 0%,#0d0a14 40%,#1a0505 100%);
+  font-family:var(--font-body,Inter,system-ui,sans-serif);
+  background:linear-gradient(160deg,#070c15 0%,#0b1120 45%,#0d1a2b 100%);
   background-attachment:fixed;
   color:var(--text);
   line-height:1.6;
@@ -36,7 +40,7 @@ section{padding:90px 24px}
 .section-label{
   display:inline-block;
   font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--red);margin-bottom:14px;
+  color:var(--accent);margin-bottom:14px;
 }
 h2.section-title{
   font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.15;
@@ -56,13 +60,13 @@ h2.section-title{
 }
 .hero-label{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--red-dim);border:1px solid rgba(220,38,38,0.3);
+  background:var(--accent-dim);border:1px solid rgba(56,189,248,0.3);
   border-radius:100px;padding:5px 14px;
-  font-size:12px;font-weight:600;color:var(--red);
+  font-size:12px;font-weight:600;color:var(--accent);
   margin-bottom:24px;
 }
 .hero-label .pulse{
-  width:8px;height:8px;border-radius:50%;background:var(--red);
+  width:8px;height:8px;border-radius:50%;background:var(--accent);
   animation:pulse 1.6s ease infinite;
 }
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
@@ -70,17 +74,17 @@ h2.section-title{
   font-size:clamp(32px,4.5vw,58px);font-weight:900;line-height:1.1;
   margin-bottom:20px;letter-spacing:-.02em;
 }
-.hero h1 span{color:var(--red)}
+.hero h1 span{color:var(--accent)}
 .hero-sub{font-size:18px;color:var(--muted);margin-bottom:36px;line-height:1.7;max-width:480px}
 .btn-cta{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--red);color:#fff;
+  background:var(--accent);color:#fff;
   padding:14px 28px;border-radius:8px;
   font-size:16px;font-weight:700;border:none;cursor:pointer;
   transition:background .2s,transform .2s,box-shadow .2s;
   text-decoration:none;
 }
-.btn-cta:hover{background:#b91c1c;transform:translateY(-2px);box-shadow:0 12px 32px var(--red-glow)}
+.btn-cta:hover{background:#0284c7;transform:translateY(-2px);box-shadow:0 12px 32px var(--accent-glow)}
 
 /* ─── WHATSAPP CHAT ─── */
 .chat-phone{
@@ -98,7 +102,7 @@ h2.section-title{
 }
 .chat-avatar{
   width:36px;height:36px;border-radius:50%;
-  background:var(--red);display:flex;align-items:center;justify-content:center;
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
   font-size:14px;font-weight:800;color:#fff;flex-shrink:0;
 }
 .chat-info{}
@@ -116,7 +120,7 @@ h2.section-title{
   align-self:flex-start;
 }
 .bubble.agent{
-  background:#dc2626;color:#fff;border-radius:14px 14px 2px 14px;
+  background:#38bdf8;color:#fff;border-radius:14px 14px 2px 14px;
   align-self:flex-end;font-weight:500;
 }
 .typing-indicator{
@@ -146,7 +150,7 @@ h2.section-title{
 }
 .proof-item{text-align:center}
 .proof-num{
-  font-size:42px;font-weight:900;color:var(--red);
+  font-size:42px;font-weight:900;color:var(--accent);
   display:block;line-height:1;margin-bottom:8px;
 }
 .proof-label{font-size:14px;color:var(--muted);line-height:1.5}
@@ -158,15 +162,15 @@ h2.section-title{
 }
 .pain-card{
   background:var(--card);
-  border:1px solid rgba(220,38,38,0.2);
+  border:1px solid rgba(56,189,248,0.2);
   border-radius:14px;padding:24px;
   transition:transform .25s,box-shadow .25s;
   cursor:default;
 }
 .pain-card:hover{
   transform:translateY(-6px);
-  box-shadow:0 16px 40px var(--red-glow);
-  border-color:rgba(220,38,38,0.5);
+  box-shadow:0 16px 40px var(--accent-glow);
+  border-color:rgba(56,189,248,0.5);
 }
 .pain-icon{font-size:28px;margin-bottom:12px;display:block}
 .pain-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
@@ -198,8 +202,8 @@ h2.section-title{
   padding:10px 18px;font-size:13px;color:#64748b;cursor:pointer;
   transition:background .2s,color .2s;border-radius:0;
 }
-.dash-nav-item:hover,.dash-nav-item.active{background:rgba(220,38,38,0.07);color:#DC2626}
-.dash-nav-item.active{border-right:2px solid var(--red);font-weight:700}
+.dash-nav-item:hover,.dash-nav-item.active{background:rgba(56,189,248,0.07);color:#38bdf8}
+.dash-nav-item.active{border-right:2px solid var(--accent);font-weight:700}
 .dash-nav-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0}
 .dash-center{padding:20px;overflow:hidden;background:#fff}
 .dash-header{
@@ -229,8 +233,8 @@ h2.section-title{
 }
 .s-avail{background:rgba(34,197,94,0.12);color:#16a34a;border:1px solid rgba(34,197,94,0.3)}
 .s-sent{background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.3)}
-.s-picked{background:rgba(168,85,247,0.12);color:#7c3aed;border:1px solid rgba(168,85,247,0.3)}
-.s-sold{background:rgba(239,68,68,0.12);color:#dc2626;border:1px solid rgba(239,68,68,0.3)}
+.s-picked{background:rgba(168,85,247,0.12);color:#0284c7;border:1px solid rgba(168,85,247,0.3)}
+.s-sold{background:rgba(125,211,252,0.12);color:#38bdf8;border:1px solid rgba(125,211,252,0.3)}
 .dash-right{
   background:#f8fafc;
   border-left:1px solid #e2e8f0;
@@ -245,7 +249,7 @@ h2.section-title{
   margin-bottom:8px;
 }
 .db-client{background:#e2e8f0;color:#334155;border-radius:10px 10px 10px 2px;align-self:flex-start;width:fit-content;max-width:90%}
-.db-agent{background:#DC2626;color:#fff;border-radius:10px 10px 2px 10px;align-self:flex-end;margin-left:auto;width:fit-content;max-width:90%}
+.db-agent{background:#38bdf8;color:#fff;border-radius:10px 10px 2px 10px;align-self:flex-end;margin-left:auto;width:fit-content;max-width:90%}
 
 /* ─── FEATURES ─── */
 .features-grid{
@@ -255,10 +259,10 @@ h2.section-title{
   background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px 26px;
   transition:transform .25s,box-shadow .25s,border-color .25s;
 }
-.feat-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4);border-color:rgba(220,38,38,0.4)}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4);border-color:rgba(56,189,248,0.4)}
 .feat-icon{
   width:48px;height:48px;border-radius:12px;
-  background:var(--red-dim);border:1px solid rgba(220,38,38,0.3);
+  background:var(--accent-dim);border:1px solid rgba(56,189,248,0.3);
   display:flex;align-items:center;justify-content:center;font-size:22px;
   margin-bottom:18px;
 }
@@ -270,19 +274,19 @@ h2.section-title{
 .ba-card{
   background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px;
 }
-.ba-card.before{border-color:rgba(239,68,68,0.3)}
+.ba-card.before{border-color:rgba(125,211,252,0.3)}
 .ba-card.after{border-color:rgba(34,197,94,0.3)}
 .ba-header{
   display:flex;align-items:center;gap:12px;margin-bottom:20px;
   font-size:18px;font-weight:800;
 }
-.ba-header.before-h{color:#ef4444}
+.ba-header.before-h{color:#7dd3fc}
 .ba-header.after-h{color:#22c55e}
 .ba-item{
   display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;
   font-size:14px;color:var(--muted);line-height:1.5;
 }
-.ba-dot-x{color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px}
+.ba-dot-x{color:#7dd3fc;font-size:16px;flex-shrink:0;margin-top:1px}
 .ba-dot-ok{color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px}
 
 /* ─── HOW IT WORKS ─── */
@@ -290,17 +294,17 @@ h2.section-title{
 .steps::before{
   content:'';position:absolute;top:28px;left:calc(12.5% + 12px);
   width:calc(75% - 24px);height:2px;
-  background:linear-gradient(90deg,var(--red),#7f1d1d);
+  background:linear-gradient(90deg,var(--accent),#0c4a6e);
   animation:lineGrow 1.5s ease forwards;transform-origin:left;
 }
 @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px}
 .step-num{
   width:56px;height:56px;border-radius:50%;
-  background:var(--red);color:#fff;font-size:20px;font-weight:900;
+  background:var(--accent);color:#fff;font-size:20px;font-weight:900;
   display:flex;align-items:center;justify-content:center;
   margin-bottom:20px;position:relative;z-index:1;
-  box-shadow:0 0 0 6px rgba(220,38,38,0.15);
+  box-shadow:0 0 0 6px rgba(56,189,248,0.15);
   flex-shrink:0;
 }
 .step-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
@@ -315,20 +319,20 @@ h2.section-title{
 .roi-slider{
   width:100%;-webkit-appearance:none;appearance:none;
   height:6px;border-radius:3px;
-  background:linear-gradient(90deg,var(--red) 0%,#3d1a1a 0%);
+  background:linear-gradient(90deg,var(--accent) 0%,#12263a 0%);
   outline:none;cursor:pointer;margin-bottom:8px;
 }
 .roi-slider::-webkit-slider-thumb{
   -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
-  background:var(--red);cursor:pointer;border:3px solid #fff;
+  background:var(--accent);cursor:pointer;border:3px solid #fff;
   box-shadow:0 2px 8px rgba(0,0,0,0.4);
 }
 .roi-slider-vals{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:32px}
 .roi-output{
-  background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);
+  background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);
   border-radius:12px;padding:20px 24px;margin-bottom:12px;text-align:center;
 }
-.roi-output-num{font-size:36px;font-weight:900;color:var(--red);display:block;margin-bottom:4px}
+.roi-output-num{font-size:36px;font-weight:900;color:var(--accent);display:block;margin-bottom:4px}
 .roi-output-label{font-size:13px;color:var(--muted)}
 .roi-note{text-align:center;font-size:13px;color:var(--muted);margin-bottom:24px}
 .roi-cta{width:100%;padding:14px;text-align:center;font-size:15px;font-weight:700}
@@ -340,21 +344,21 @@ h2.section-title{
   transition:transform .25s,box-shadow .25s;
 }
 .testi-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.4)}
-.testi-stars{color:#f59e0b;font-size:16px;margin-bottom:14px}
+.testi-stars{color:#38bdf8;font-size:16px;margin-bottom:14px}
 .testi-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px;font-style:italic}
 .testi-author{font-size:13px;font-weight:700;color:#fff}
 .testi-role{font-size:12px;color:var(--muted)}
 
 /* ─── CTA FINAL ─── */
 .cta-final{
-  background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#7f1d1d 100%);
+  background:linear-gradient(135deg,#0c4a6e 0%,#38bdf8 50%,#0c4a6e 100%);
   padding:100px 24px;text-align:center;
 }
 .cta-final h2{font-size:clamp(28px,4vw,52px);font-weight:900;color:#fff;margin-bottom:16px;line-height:1.1}
 .cta-final p{font-size:18px;color:rgba(255,255,255,0.8);margin-bottom:36px}
 .btn-cta-white{
   display:inline-flex;align-items:center;gap:8px;
-  background:#fff;color:#dc2626;
+  background:#fff;color:#38bdf8;
   padding:16px 32px;border-radius:8px;
   font-size:16px;font-weight:800;border:none;cursor:pointer;
   transition:transform .2s,box-shadow .2s;
@@ -398,13 +402,13 @@ h2.section-title{
   background:var(--card);text-decoration:none;color:#fff;
   transition:background .2s,border-color .2s,transform .2s;cursor:pointer;
 }
-.modal-option:hover{background:rgba(255,255,255,0.07);border-color:rgba(220,38,38,0.5);transform:translateX(4px)}
+.modal-option:hover{background:rgba(255,255,255,0.07);border-color:rgba(56,189,248,0.5);transform:translateX(4px)}
 .modal-opt-icon{
   width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
 }
 .opt-wa .modal-opt-icon{background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3)}
 .opt-tel .modal-opt-icon{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3)}
-.opt-em .modal-opt-icon{background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.3)}
+.opt-em .modal-opt-icon{background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3)}
 .modal-opt-label{font-size:15px;font-weight:700}
 .modal-opt-val{font-size:12px;color:var(--muted)}
 
@@ -429,26 +433,7 @@ h2.section-title{
   .proof-grid{grid-template-columns:1fr}
   section{padding:60px 18px}
 }
-/* ─── NAVBAR (identic Auto Dealer) ─── */
-#agx-nb{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,18,32,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;padding:0 40px;overflow:visible;font-family:-apple-system,sans-serif}
-#agx-nb .al{display:inline-flex;align-items:center;text-decoration:none;transition:transform .25s ease;margin-left:-15px}
-#agx-nb .al:hover{transform:scale(1.08)}
-#agx-nb .al img{max-height:171px;width:auto;display:block}
-#agx-nb .an{display:flex;gap:36px;align-items:center}
-#agx-nb .an a{text-decoration:none;color:#fff;font-size:18px;font-weight:500;letter-spacing:.3px;transition:color .2s;position:relative;white-space:nowrap}
-#agx-nb .an a::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#4fc3f7;transition:width .25s}
-#agx-nb .an a:hover{color:#4fc3f7}
-#agx-nb .an a:hover::after{width:100%}
-
-.navbar{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,22,40,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.25);overflow:visible;}
-.navbar__logo{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.25s ease;margin-left:-15px;}
-.navbar__logo:hover{transform:scale(1.08);}
-.navbar__logo-img{max-height:171px;width:auto;display:block;}
-.navbar__nav{display:flex;align-items:center;gap:36px;}
-.nav-link{text-decoration:none;color:#ffffff;font-size:22px;font-weight:500;letter-spacing:0.3px;position:relative;padding-bottom:4px;transition:color 0.2s ease;white-space:nowrap;}
-.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background-color:#4fc3f7;transition:width 0.25s ease;}
-.nav-link:hover{color:#4fc3f7;}
-.nav-link:hover::after{width:100%;}
+/* Navbar-ul vine din css/theme.css + js/nav.js (partajat de toate paginile) */
 
 /* ─── AGX PIESE AUTO LOGO ─── */
 .piese-logo-wrap{
@@ -467,19 +452,19 @@ h2.section-title{
   position:relative;
   width:86px;height:86px;
   border-radius:20px;
-  background:linear-gradient(145deg,rgba(220,38,38,0.22) 0%,rgba(150,15,15,0.10) 100%);
-  border:2px solid rgba(220,38,38,0.55);
+  background:linear-gradient(145deg,rgba(56,189,248,0.22) 0%,rgba(150,15,15,0.10) 100%);
+  border:2px solid rgba(56,189,248,0.55);
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 50px rgba(220,38,38,0.4),0 0 100px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.07);
+  box-shadow:0 0 50px rgba(56,189,248,0.4),0 0 100px rgba(56,189,248,0.15),inset 0 1px 0 rgba(255,255,255,0.07);
 }
 .piese-icon-box::before{
   content:'';position:absolute;inset:-1px;border-radius:21px;
-  background:linear-gradient(135deg,rgba(220,38,38,0.6) 0%,transparent 55%);
+  background:linear-gradient(135deg,rgba(56,189,248,0.6) 0%,transparent 55%);
   z-index:-1;
 }
 .piese-logo-name{display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1;}
 .piese-logo-agx{font-size:24px;font-weight:900;color:#ffffff;letter-spacing:-.5px;}
-.piese-logo-sub{font-size:12px;font-weight:800;color:#DC2626;letter-spacing:.5px;text-transform:uppercase;}
+.piese-logo-sub{font-size:12px;font-weight:800;color:#38bdf8;letter-spacing:.5px;text-transform:uppercase;}
 </style>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://agentx.ro/piese-auto" />
@@ -512,10 +497,8 @@ h2.section-title{
 </head>
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar"><a href="/" class="navbar__logo" aria-label="Acasa"><img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" /></a><nav class="navbar__nav"><a href="/#despre-noi" class="nav-link">Despre noi</a><a href="/#servicii" class="nav-link">Servicii</a><a href="/#contact" class="nav-link">Contact</a></nav></header>
-
-
+  <!-- NAVBAR — injectat din scriptul partajat -->
+  <div id="agx-navbar"></div>
 
 <!-- ─── 1. HERO ─── -->
 <section class="hero" style="padding-left:24px;padding-right:24px">
@@ -523,28 +506,28 @@ h2.section-title{
   <!-- AGX PIESE AUTO LOGO — centrat deasupra -->
   <div class="piese-logo-wrap">
     <div class="piese-icon-box">
-      <svg width="56" height="56" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 18px rgba(220,38,38,0.8))">
+      <svg width="56" height="56" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 18px rgba(56,189,248,0.8))">
         <defs>
           <radialGradient id="hubGrad" cx="40%" cy="35%" r="70%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#7f1d1d"/>
+            <stop offset="0%" stop-color="#7dd3fc"/>
+            <stop offset="100%" stop-color="#0c4a6e"/>
           </radialGradient>
         </defs>
         <circle cx="45" cy="45" r="42" fill="#0e0e0e"/>
-        <circle cx="45" cy="45" r="42" stroke="#DC2626" stroke-width="1.5" fill="none" opacity=".5"/>
-        <circle cx="45" cy="45" r="38.5" stroke="#DC2626" stroke-width="1" fill="none" opacity=".2"/>
-        <circle cx="45" cy="45" r="30" fill="rgba(220,38,38,0.07)" stroke="#DC2626" stroke-width="2"/>
-        <g fill="#DC2626">
+        <circle cx="45" cy="45" r="42" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity=".5"/>
+        <circle cx="45" cy="45" r="38.5" stroke="#38bdf8" stroke-width="1" fill="none" opacity=".2"/>
+        <circle cx="45" cy="45" r="30" fill="rgba(56,189,248,0.07)" stroke="#38bdf8" stroke-width="2"/>
+        <g fill="#38bdf8">
           <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(0 45 45)"/>
           <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(72 45 45)"/>
           <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(144 45 45)"/>
           <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(216 45 45)"/>
           <rect x="41.5" y="16" width="7" height="17" rx="3.5" transform="rotate(288 45 45)"/>
         </g>
-        <circle cx="45" cy="45" r="13" fill="#0e0e0e" stroke="#DC2626" stroke-width="1.5"/>
+        <circle cx="45" cy="45" r="13" fill="#0e0e0e" stroke="#38bdf8" stroke-width="1.5"/>
         <circle cx="45" cy="45" r="9" fill="url(#hubGrad)"/>
         <circle cx="45" cy="45" r="5" fill="#0e0e0e"/>
-        <circle cx="45" cy="45" r="2.5" fill="rgba(220,38,38,0.7)"/>
+        <circle cx="45" cy="45" r="2.5" fill="rgba(56,189,248,0.7)"/>
         <ellipse cx="36" cy="27" rx="7" ry="3" fill="rgba(255,255,255,0.06)" transform="rotate(-35 36 27)"/>
       </svg>
     </div>
@@ -792,7 +775,7 @@ h2.section-title{
     <h2 class="section-title">Câți bani pierzi acum?</h2>
     <p class="section-sub" style="margin:0 auto">Calculează impactul real al apelurilor și mesajelor la care nu răspunzi.</p>
     <div class="roi-box">
-      <div class="roi-label">Câte apeluri sau mesaje pierzi zilnic? <span id="roiSliderVal" style="color:var(--red);font-weight:800">20</span></div>
+      <div class="roi-label">Câte apeluri sau mesaje pierzi zilnic? <span id="roiSliderVal" style="color:var(--accent);font-weight:800">20</span></div>
       <input type="range" class="roi-slider" id="roiSlider" min="1" max="100" value="20">
       <div class="roi-slider-vals"><span>1</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
       <div class="roi-output">
@@ -852,7 +835,7 @@ h2.section-title{
     <h3>Hai să vorbim</h3>
     <p>Alege cum vrei să ne contactezi</p>
     <div class="modal-options">
-      <a href="https://wa.me/40750403392" target="_blank" class="modal-option opt-wa">
+      <a href="https://wa.me/40750403392" target="_blank" rel="noopener" class="modal-option opt-wa">
         <div class="modal-opt-icon">💬</div>
         <div>
           <div class="modal-opt-label">WhatsApp</div>
@@ -989,7 +972,7 @@ function calcROI(){
   roiResult.textContent = monthly.toLocaleString('ro-RO') + ' RON';
   // Update slider fill
   const pct = ((calls - 1) / 99) * 100;
-  slider.style.background = `linear-gradient(90deg, var(--red) ${pct}%, #3d1a1a ${pct}%)`;
+  slider.style.background = `linear-gradient(90deg, var(--accent) ${pct}%, #12263a ${pct}%)`;
 }
 slider.addEventListener('input', calcROI);
 calcROI();
@@ -1000,5 +983,6 @@ function closeModal(){ document.getElementById('modalOverlay').classList.remove(
 function handleOverlayClick(e){ if(e.target === document.getElementById('modalOverlay')) closeModal(); }
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 </script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

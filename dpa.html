@@ -2,6 +2,10 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Processing Agreement | AgentX</title>
   <link rel="stylesheet" href="css/style.css" />
@@ -78,14 +82,10 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <a href="/" class="navbar__logo" aria-label="Acasă">
-      <img src="Indicatii/LOGO_FINAL.png" alt="AgentX Logo" class="navbar__logo-img" />
-    </a>
-  </header>
+  <!-- NAVBAR — injectat din scriptul partajat -->
+  <div id="agx-navbar"></div>
 
-  <main>
+<main>
     <div class="legal-page">
 
       <a href="/" class="legal-back">← Înapoi la pagina principală</a>
@@ -206,5 +206,6 @@
     </div>
   </main>
 
+  <script src="js/nav.js"></script>
 </body>
 </html>

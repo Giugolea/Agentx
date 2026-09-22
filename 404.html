@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagină negăsită — 404 | AgentX</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .nf-wrap {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .nf-code {
+      font-size: clamp(6rem, 18vw, 11rem);
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #ffffff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .nf-title {
+      color: #fff;
+      font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .nf-text {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+    .nf-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nf-btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nf-btn--primary {
+      background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+      color: #06121f;
+      box-shadow: 0 8px 24px rgba(56,189,248,0.35);
+    }
+    .nf-btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(56,189,248,0.5);
+    }
+    .nf-btn--ghost {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      background: rgba(255,255,255,0.04);
+    }
+    .nf-btn--ghost:hover {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    .nf-links {
+      margin-top: 48px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+    }
+    .nf-links a {
+      color: #0ea5e9;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .nf-links a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR — injectat din scriptul partajat -->
+  <div id="agx-navbar"></div>
+
+<div class="starfield" id="starfield"></div>
+
+  <main>
+    <div class="nf-wrap">
+      <div class="nf-code">404</div>
+      <h1 class="nf-title">Ups! Pagina asta nu există.</h1>
+      <p class="nf-text">
+        Se pare că link-ul pe care l-ai accesat a fost mutat sau nu a existat niciodată.
+        Nicio grijă — Ariana e tot aici, 24/7. 🤖
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="nf-btn nf-btn--primary">Înapoi la pagina principală</a>
+        <a href="/demo" class="nf-btn nf-btn--ghost">Vezi un demo</a>
+      </div>
+      <div class="nf-links">
+        Pagini populare:
+        <a href="/clinici">Clinici</a>·
+        <a href="/dealer">Dealer Auto</a>·
+        <a href="/piese-auto">Piese Auto</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Starfield — identic cu pagina principala
+    (function() {
+      var sf = document.getElementById('starfield');
+      if (!sf) return;
+      for (var s = 0; s < 120; s++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        var size = Math.random() * 2.2 + 0.5;
+        star.style.cssText = [
+          'width:'  + size + 'px',
+          'height:' + size + 'px',
+          'left:'   + (Math.random() * 100) + '%',
+          'top:'    + (Math.random() * 100) + '%',
+          '--dur:'    + (2 + Math.random() * 4) + 's',
+          '--delay:'  + (-Math.random() * 5)    + 's',
+          '--min-op:' + (0.2 + Math.random() * 0.4)
+        ].join(';');
+        sf.appendChild(star);
+      }
+    })();
+  </script>
+  <script src="/js/nav.js"></script>
+</body>
+</html>

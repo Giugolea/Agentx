@@ -2,10 +2,14 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agent AI Vânzări Auto | Dashboard & Rapoarte — AgentX</title>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +44,7 @@
       letter-spacing: -0.03em;
       margin-bottom: 12px;
     }
-    .page-header h1 span { color: #2ecc8f; }
+    .page-header h1 span { color: #38bdf8; }
     .page-header p {
       font-size: 17px;
       color: #6b8099;
@@ -92,9 +96,9 @@
     .traffic-light {
       width: 12px; height: 12px; border-radius: 50%;
     }
-    .tl-red { background: #ff5f57; }
-    .tl-yellow { background: #febc2e; }
-    .tl-green { background: #28c840; }
+    .tl-red { background: #3f4a5a; }
+    .tl-yellow { background: #4a5666; }
+    .tl-green { background: #556274; }
     .macbook-url {
       position: absolute;
       left: 50%;
@@ -108,7 +112,7 @@
       align-items: center;
       gap: 6px;
     }
-    .macbook-url span.lock { color: #2ecc8f; font-size: 11px; }
+    .macbook-url span.lock { color: #38bdf8; font-size: 11px; }
 
     .macbook-content {
       height: 620px;
@@ -177,7 +181,7 @@
     }
     .logo-dot {
       width: 24px; height: 24px;
-      background: #2ecc8f;
+      background: #38bdf8;
       border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 800; color: #0a0f1a;
@@ -194,7 +198,7 @@
       transition: all 0.15s;
     }
     .sidebar-item:hover { background: #111820; color: #8ab0cc; }
-    .sidebar-item.active { background: #111e2e; color: #fff; border-left: 2px solid #2ecc8f; }
+    .sidebar-item.active { background: #111e2e; color: #fff; border-left: 2px solid #38bdf8; }
     .sidebar-item .icon { font-size: 14px; width: 16px; text-align: center; }
     .sidebar-section {
       font-size: 10px;
@@ -205,7 +209,7 @@
     }
     .sidebar-badge {
       margin-left: auto;
-      background: #2ecc8f;
+      background: #38bdf8;
       color: #0a0f1a;
       font-size: 9px;
       font-weight: 700;
@@ -214,7 +218,7 @@
     }
     .sidebar-badge-red {
       margin-left: auto;
-      background: #e74c3c;
+      background: #22d3ee;
       color: #fff;
       font-size: 9px;
       font-weight: 700;
@@ -249,7 +253,7 @@
       white-space: nowrap;
     }
     .tab-btn:hover { color: #8ab0cc; }
-    .tab-btn.active { color: #2ecc8f; border-bottom-color: #2ecc8f; }
+    .tab-btn.active { color: #38bdf8; border-bottom-color: #38bdf8; }
 
     /* CHAT PAGE */
     .chat-page {
@@ -273,7 +277,7 @@
     }
     .chat-avatar {
       width: 34px; height: 34px;
-      background: linear-gradient(135deg, #2ecc8f, #1a9966);
+      background: linear-gradient(135deg, #38bdf8, #1a9966);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 15px;
@@ -285,7 +289,7 @@
     }
     .chat-header-info p {
       font-size: 11px;
-      color: #2ecc8f;
+      color: #38bdf8;
     }
     .chat-header-right {
       margin-left: auto;
@@ -295,8 +299,8 @@
     }
     .score-badge {
       background: #0d2818;
-      border: 1px solid #2ecc8f;
-      color: #2ecc8f;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
       font-size: 11px;
       font-weight: 600;
       padding: 3px 10px;
@@ -304,8 +308,8 @@
     }
     .intent-badge {
       background: #1a1a0d;
-      border: 1px solid #f0a500;
-      color: #f0a500;
+      border: 1px solid #7dd3fc;
+      color: #7dd3fc;
       font-size: 10px;
       padding: 3px 8px;
       border-radius: 12px;
@@ -340,7 +344,7 @@
       font-size: 12px;
       flex-shrink: 0;
     }
-    .msg-avatar.ai { background: linear-gradient(135deg, #2ecc8f22, #2ecc8f44); border: 1px solid #2ecc8f55; font-size: 14px; }
+    .msg-avatar.ai { background: linear-gradient(135deg, #38bdf822, #38bdf844); border: 1px solid #38bdf855; font-size: 14px; }
     .msg-avatar.client-av { background: #1a2a3e; border: 1px solid #2a3a50; color: #8ab0cc; font-size: 10px; font-weight: 700; }
 
     .msg-bubble {
@@ -357,7 +361,7 @@
       border: 1px solid #1a2a3e;
     }
     .msg-bubble.client {
-      background: #2ecc8f;
+      background: #38bdf8;
       color: #0a1a0f;
       border-radius: 16px 16px 4px 16px;
       font-weight: 500;
@@ -386,7 +390,7 @@
     }
     .typing-dot {
       width: 6px; height: 6px;
-      background: #2ecc8f;
+      background: #38bdf8;
       border-radius: 50%;
       animation: typingBounce 1.2s infinite;
     }
@@ -417,7 +421,7 @@
     }
     .chat-send-btn {
       width: 32px; height: 32px;
-      background: #2ecc8f;
+      background: #38bdf8;
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -457,7 +461,7 @@
     .ai-card-value {
       font-size: 18px;
       font-weight: 700;
-      color: #2ecc8f;
+      color: #38bdf8;
     }
     .ai-card-sub {
       font-size: 10px;
@@ -473,7 +477,7 @@
     }
     .mini-bar-fill {
       height: 100%;
-      background: linear-gradient(to right, #2ecc8f, #1a9966);
+      background: linear-gradient(to right, #38bdf8, #1a9966);
       border-radius: 2px;
       transition: width 1s ease;
     }
@@ -491,9 +495,9 @@
       border: 1px solid #1a2a3e;
       color: #8ab0cc;
     }
-    .tag.hot { background: #1a0d0d; border-color: #e74c3c55; color: #e74c3c; }
-    .tag.warm { background: #1a120d; border-color: #f0a50055; color: #f0a500; }
-    .tag.green { background: #0d1a10; border-color: #2ecc8f55; color: #2ecc8f; }
+    .tag.hot { background: #0b1a20; border-color: #22d3ee55; color: #22d3ee; }
+    .tag.warm { background: #0b1a20; border-color: #7dd3fc55; color: #7dd3fc; }
+    .tag.green { background: #0d1a10; border-color: #38bdf855; color: #38bdf8; }
 
     /* DASHBOARD PAGE */
     .dashboard-page {
@@ -554,9 +558,9 @@
     }
     .metric-card-delta {
       font-size: 10px;
-      color: #2ecc8f;
+      color: #38bdf8;
     }
-    .metric-card-delta.down { color: #e74c3c; }
+    .metric-card-delta.down { color: #22d3ee; }
 
     .charts-row {
       display: grid;
@@ -593,11 +597,11 @@
     }
     .bar-rect {
       width: 100%;
-      background: linear-gradient(to top, #2ecc8f, #2ecc8f99);
+      background: linear-gradient(to top, #38bdf8, #38bdf899);
       border-radius: 3px 3px 0 0;
       transition: height 1s ease;
     }
-    .bar-rect.accent { background: linear-gradient(to top, #3a8ef0, #3a8ef099); }
+    .bar-rect.accent { background: linear-gradient(to top, #0284c7, #0284c799); }
     .bar-label {
       font-size: 8px;
       color: #4a6080;
@@ -655,14 +659,14 @@
       border-radius: 8px;
       font-weight: 600;
     }
-    .status-pill.hot { background: #2a0d0d; color: #e74c3c; }
-    .status-pill.warm { background: #2a1a0d; color: #f0a500; }
-    .status-pill.new { background: #0d2a20; color: #2ecc8f; }
+    .status-pill.hot { background: #2a0d0d; color: #22d3ee; }
+    .status-pill.warm { background: #2a1a0d; color: #7dd3fc; }
+    .status-pill.new { background: #0d2a20; color: #38bdf8; }
     .score-bar-wrap { display: flex; align-items: center; gap: 6px; }
     .score-bar {
       flex: 1; height: 4px; background: #1a2030; border-radius: 2px; overflow: hidden;
     }
-    .score-bar-fill { height: 100%; background: #2ecc8f; border-radius: 2px; }
+    .score-bar-fill { height: 100%; background: #38bdf8; border-radius: 2px; }
 
     /* ARCHITECTURE PAGE */
     .arch-page {
@@ -705,11 +709,11 @@
       font-size: 22px;
       position: relative;
     }
-    .arch-icon-box.blue { background: #0d1a2e; border: 1px solid #3a8ef055; }
-    .arch-icon-box.green { background: #0d2218; border: 1px solid #2ecc8f55; }
-    .arch-icon-box.purple { background: #1a0d2e; border: 1px solid #9b59b655; }
-    .arch-icon-box.orange { background: #2a180d; border: 1px solid #e67e2255; }
-    .arch-icon-box.teal { background: #0d1e22; border: 1px solid #1abc9c55; }
+    .arch-icon-box.blue { background: #0d1a2e; border: 1px solid #0284c755; }
+    .arch-icon-box.green { background: #0d2218; border: 1px solid #38bdf855; }
+    .arch-icon-box.purple { background: #1a0d2e; border: 1px solid #818cf855; }
+    .arch-icon-box.orange { background: #0d1b26; border: 1px solid #2dd4bf55; }
+    .arch-icon-box.teal { background: #0d1e22; border: 1px solid #2dd4bf55; }
     .arch-node-label {
       font-size: 9px;
       color: #4a6080;
@@ -761,7 +765,7 @@
     }
     .arch-feature {
       font-size: 10px;
-      color: #2ecc8f;
+      color: #38bdf8;
       display: flex;
       align-items: center;
       gap: 4px;
@@ -776,20 +780,9 @@
 </head>
 <body>
 
-<header class="navbar">
-  <a href="/" class="navbar__logo" aria-label="Acasă">
-    <img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" />
-  </a>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-  <label for="nav-toggle" class="nav-hamburger" aria-label="Meniu">
-    <span></span><span></span><span></span>
-  </label>
-  <nav class="navbar__nav">
-    <a href="/#despre-noi" class="nav-link">Despre noi</a>
-    <a href="/#servicii" class="nav-link">Servicii</a>
-    <a href="/#contact" class="nav-link">Contact</a>
-  </nav>
-</header>
+
+  <!-- NAVBAR — injectat din scriptul partajat -->
+  <div id="agx-navbar"></div>
 
 <div class="page-header" style="padding-top: 120px;">
   <h1>Agent AI de <span>Vânzări Auto</span> — Lead-uri & Rapoarte</h1>
@@ -944,7 +937,7 @@ function ChatPage() {
 
         <div className="ai-card">
           <div className="ai-card-label">Intenție detectată</div>
-          <div style={{fontSize:'12px',fontWeight:'600',color:'#f0a500'}}>{intent}</div>
+          <div style={{fontSize:'12px',fontWeight:'600',color:'#7dd3fc'}}>{intent}</div>
         </div>
 
         <div className="ai-card">
@@ -966,7 +959,7 @@ function ChatPage() {
 
         <div className="ai-card">
           <div className="ai-card-label">Acțiune sugerată</div>
-          <div style={{fontSize:'11px',color:'#2ecc8f',fontWeight:'500'}}>Programare test drive</div>
+          <div style={{fontSize:'11px',color:'#38bdf8',fontWeight:'500'}}>Programare test drive</div>
           <div className="ai-card-sub">Trimite ofertă PDF</div>
         </div>
 
@@ -1036,10 +1029,10 @@ function DashboardPage() {
           </div>
           <div style={{display:'flex',gap:'12px',marginTop:'8px'}}>
             <div style={{display:'flex',alignItems:'center',gap:'4px',fontSize:'9px',color:'#4a6080'}}>
-              <div style={{width:'8px',height:'8px',background:'#2ecc8f',borderRadius:'2px'}}></div>Conversații
+              <div style={{width:'8px',height:'8px',background:'#38bdf8',borderRadius:'2px'}}></div>Conversații
             </div>
             <div style={{display:'flex',alignItems:'center',gap:'4px',fontSize:'9px',color:'#4a6080'}}>
-              <div style={{width:'8px',height:'8px',background:'#3a8ef0',borderRadius:'2px'}}></div>Test drive
+              <div style={{width:'8px',height:'8px',background:'#0284c7',borderRadius:'2px'}}></div>Test drive
             </div>
           </div>
         </div>
@@ -1049,22 +1042,22 @@ function DashboardPage() {
           <div className="donut-wrap">
             <svg className="donut-svg" viewBox="0 0 80 80" width="80" height="80">
               <circle cx="40" cy="40" r="28" fill="none" stroke="#0d1520" strokeWidth="14"/>
-              <circle cx="40" cy="40" r="28" fill="none" stroke="#2ecc8f" strokeWidth="14"
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#38bdf8" strokeWidth="14"
                 strokeDasharray="52 124" strokeDashoffset="0" transform="rotate(-90 40 40)"/>
-              <circle cx="40" cy="40" r="28" fill="none" stroke="#f0a500" strokeWidth="14"
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#7dd3fc" strokeWidth="14"
                 strokeDasharray="37 139" strokeDashoffset="-52" transform="rotate(-90 40 40)"/>
-              <circle cx="40" cy="40" r="28" fill="none" stroke="#3a8ef0" strokeWidth="14"
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#0284c7" strokeWidth="14"
                 strokeDasharray="25 151" strokeDashoffset="-89" transform="rotate(-90 40 40)"/>
-              <circle cx="40" cy="40" r="28" fill="none" stroke="#e74c3c" strokeWidth="14"
+              <circle cx="40" cy="40" r="28" fill="none" stroke="#22d3ee" strokeWidth="14"
                 strokeDasharray="62 114" strokeDashoffset="-114" transform="rotate(-90 40 40)"/>
               <text x="40" y="44" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="700">247</text>
             </svg>
             <div className="donut-legend">
               {[
-                {color:'#2ecc8f',label:'Cumpărare',pct:'42%'},
-                {color:'#f0a500',label:'Finanțare',pct:'30%'},
-                {color:'#3a8ef0',label:'Test drive',pct:'20%'},
-                {color:'#e74c3c',label:'Altele',pct:'8%'},
+                {color:'#38bdf8',label:'Cumpărare',pct:'42%'},
+                {color:'#7dd3fc',label:'Finanțare',pct:'30%'},
+                {color:'#0284c7',label:'Test drive',pct:'20%'},
+                {color:'#22d3ee',label:'Altele',pct:'8%'},
               ].map((d,i)=>(
                 <div key={i} className="donut-item">
                   <div className="donut-dot" style={{background:d.color}}></div>
@@ -1094,7 +1087,7 @@ function DashboardPage() {
             <span><span className={`status-pill ${r.status}`}>{r.status==='hot'?'🔥 Fierbinte':r.status==='warm'?'♨️ Interesat':'🆕 Nou'}</span></span>
             <span>
               <div className="score-bar-wrap">
-                <div className="score-bar"><div className="score-bar-fill" style={{width:`${r.score}%`,background:r.score>80?'#2ecc8f':r.score>60?'#f0a500':'#3a8ef0'}}></div></div>
+                <div className="score-bar"><div className="score-bar-fill" style={{width:`${r.score}%`,background:r.score>80?'#38bdf8':r.score>60?'#7dd3fc':'#0284c7'}}></div></div>
                 <span style={{fontSize:'10px',color:'#fff',width:'24px',textAlign:'right'}}>{r.score}</span>
               </div>
             </span>
@@ -1149,8 +1142,8 @@ function ArchPage() {
     },
   ];
 
-  const colorMap = {blue:'#0d1a2e',green:'#0d2218',purple:'#1a0d2e',orange:'#2a180d',teal:'#0d1e22'};
-  const borderMap = {blue:'#3a8ef055',green:'#2ecc8f55',purple:'#9b59b655',orange:'#e67e2255',teal:'#1abc9c55'};
+  const colorMap = {blue:'#0d1a2e',green:'#0d2218',purple:'#1a0d2e',orange:'#0d1b26',teal:'#0d1e22'};
+  const borderMap = {blue:'#0284c755',green:'#38bdf855',purple:'#818cf855',orange:'#2dd4bf55',teal:'#2dd4bf55'};
 
   return (
     <div className="arch-page">
@@ -1252,5 +1245,6 @@ function App() {
 const root = ReactDOM.createRoot(document.getElementById('app-root'));
 root.render(<App />);
 </script>
+  <script src="js/nav.js"></script>
 </body>
 </html>

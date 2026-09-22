@@ -2,6 +2,10 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Demo Asistent Virtual AI pentru Afaceri | AgentX</title>
   <link rel="stylesheet" href="css/style.css" />
@@ -371,7 +375,7 @@
       width: 38px;
       height: 38px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #4fc3f7, #5b7cfa);
+      background: linear-gradient(135deg, #38bdf8, #38bdf8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -443,9 +447,9 @@
       margin-top: 1px;
     }
 
-    .ri-step--1 .ri-step-num { background: rgba(79,195,247,0.2); color: #4fc3f7; }
-    .ri-step--2 .ri-step-num { background: rgba(167,139,250,0.2); color: #a78bfa; }
-    .ri-step--3 .ri-step-num { background: rgba(52,211,153,0.2); color: #34d399; }
+    .ri-step--1 .ri-step-num { background: rgba(79,195,247,0.2); color: #38bdf8; }
+    .ri-step--2 .ri-step-num { background: rgba(167,139,250,0.2); color: #7dd3fc; }
+    .ri-step--3 .ri-step-num { background: rgba(52,211,153,0.2); color: #25d366; }
 
     .ri-step-content { flex: 1; }
 
@@ -472,7 +476,7 @@
     .ri-tag {
       background: rgba(52,211,153,0.12);
       border: 1px solid rgba(52,211,153,0.25);
-      color: #34d399;
+      color: #25d366;
       font-size: 13px;
       padding: 4px 10px;
       border-radius: 20px;
@@ -519,7 +523,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #4fc3f7, #5b7cfa);
+      background: linear-gradient(135deg, #38bdf8, #38bdf8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -782,7 +786,7 @@
     }
 
     .cal-header {
-      background: linear-gradient(135deg, #5B7CFA 0%, #4fc3f7 100%);
+      background: linear-gradient(135deg, #38bdf8 0%, #38bdf8 100%);
       padding: 46px 18px 16px;
       display: flex;
       align-items: center;
@@ -837,7 +841,7 @@
       padding: 8px 18px;
       font-size: 12px;
       font-weight: 600;
-      color: #5B7CFA;
+      color: #38bdf8;
       letter-spacing: 0.3px;
       flex-shrink: 0;
     }
@@ -865,10 +869,10 @@
       flex-shrink: 0;
     }
 
-    .cal-card--confirmed  { border-left-color: #34D399; }
-    .cal-card--reminder   { border-left-color: #FBBF24; }
+    .cal-card--confirmed  { border-left-color: #25d366; }
+    .cal-card--reminder   { border-left-color: #38bdf8; }
     .cal-card--reschedule { border-left-color: #60A5FA; }
-    .cal-card--crm        { border-left-color: #A78BFA; }
+    .cal-card--crm        { border-left-color: #7dd3fc; }
 
     .cal-time {
       font-size: 16px;
@@ -904,9 +908,9 @@
     }
 
     .cal-status--confirmed  { background: rgba(52,211,153,0.13);  color: #059669; }
-    .cal-status--reminder   { background: rgba(251,191,36,0.13);   color: #D97706; }
+    .cal-status--reminder   { background: rgba(251,191,36,0.13);   color: #0284C7; }
     .cal-status--reschedule { background: rgba(96,165,250,0.13);   color: #2563EB; }
-    .cal-status--crm        { background: rgba(167,139,250,0.13);  color: #7C3AED; }
+    .cal-status--crm        { background: rgba(167,139,250,0.13);  color: #0284c7; }
 
     /* Auto-fill animation */
     @keyframes cal-card-fill {
@@ -929,7 +933,7 @@
       position: absolute;
       top: -11px;
       right: 12px;
-      background: linear-gradient(135deg, #7C3AED, #5B7CFA);
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
       color: white;
       font-size: 9px;
       font-weight: 700;
@@ -985,7 +989,7 @@
     .cal-doctor-count {
       font-size: 10px;
       font-weight: 600;
-      color: #5B7CFA;
+      color: #38bdf8;
       background: rgba(91,124,250,0.1);
       padding: 2px 8px;
       border-radius: 10px;
@@ -1012,12 +1016,12 @@
       color: #1a3a52;
       line-height: 1.55;
       min-height: 4em;
-      border-right: 2px solid #1dadc0;
+      border-right: 2px solid #38bdf8;
       animation: blink-cursor 0.75s step-end infinite;
     }
 
     @keyframes blink-cursor {
-      0%, 100% { border-right-color: #1dadc0; }
+      0%, 100% { border-right-color: #38bdf8; }
       50%       { border-right-color: transparent; }
     }
 
@@ -1025,7 +1029,7 @@
       display: block;
       width: fit-content;
       margin: 0 auto 30px;
-      background: #1dadc0;
+      background: #38bdf8;
       color: #fff;
       font-size: 13px;
       font-weight: 700;
@@ -1083,24 +1087,11 @@
 </head>
 <body>
 
-  <header class="navbar">
-    <a href="/" class="navbar__logo" aria-label="Acasă">
-      <img src="Indicatii/LOGO_FINAL.png" alt="AGX Logo" class="navbar__logo-img" />
-    </a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-    <label for="nav-toggle" class="nav-hamburger" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
-    <nav class="navbar__nav">
-      <a href="/#despre-noi" class="nav-link">Despre noi</a>
-      <a href="/#servicii" class="nav-link">Servicii</a>
-      <a href="/#contact" class="nav-link">Contact</a>
-    </nav>
-  </header>
 
-  <!-- SPATIU STELE -->
+  <!-- NAVBAR — injectat din scriptul partajat -->
+  <div id="agx-navbar"></div>
+
+<!-- SPATIU STELE -->
   <div class="starfield" id="starfield"></div>
 
   <div style="text-align:center;padding:100px 24px 20px;max-width:700px;margin:0 auto;">
@@ -1303,7 +1294,7 @@
 
                 <!-- DR. CRISTIAN -->
                 <div class="cal-doctor-header">
-                  <div class="cal-doctor-avatar" style="background:#5B7CFA;">DC</div>
+                  <div class="cal-doctor-avatar" style="background:#38bdf8;">DC</div>
                   <div class="cal-doctor-name">Dr. Cristian Ionescu</div>
                   <span class="cal-doctor-count">4 programări</span>
                 </div>
@@ -1347,7 +1338,7 @@
 
                 <!-- DR. ANDREEA -->
                 <div class="cal-doctor-header">
-                  <div class="cal-doctor-avatar" style="background:#EC4899;">AM</div>
+                  <div class="cal-doctor-avatar" style="background:#38BDF8;">AM</div>
                   <div class="cal-doctor-name">Dr. Andreea Munteanu</div>
                   <span class="cal-doctor-count">5 programări</span>
                 </div>
@@ -1600,5 +1591,6 @@
     });
   </script>
 
+  <script src="js/nav.js"></script>
 </body>
 </html>
