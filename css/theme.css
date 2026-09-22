@@ -45,7 +45,7 @@
      paginile isi redefinesc paleta (clinici e pe fundal deschis, de exemplu),
      iar navbar-ul trebuie sa arate identic peste tot. */
   --nav-h: 78px;
-  --nav-bg: rgba(7, 12, 21, 0.85);
+  --nav-bg: rgba(7, 12, 21, 0.95);
   --nav-bg-solid: rgba(7, 12, 21, 0.98);
   --nav-line: rgba(148, 180, 220, 0.13);
   --nav-text: #eef3f9;

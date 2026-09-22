@@ -73,10 +73,14 @@
 
   // Paginile bundle-uite inlocuiesc tot <html> dupa montare, deci pierd
   // <link>-urile din head-ul static. Le punem la loc la fiecare injectare.
+  // Folosim intentionat un fisier IZOLAT (nav-embed.css), nu theme.css:
+  // theme.css defineste variabile generice (--bg, --accent, --text...) care
+  // s-ar ciocni cu paleta proprie a paginii-gazda (ex. clinici.html are
+  // propriul --bg, cu alt sens) si i-ar strica lizibilitatea.
   function ensureStyles() {
     if (!document.head) return;
     var sheets = [
-      { id: 'agx-theme-css', href: (live ? '/' : '') + 'css/theme.css' },
+      { id: 'agx-nav-css', href: (live ? '/' : '') + 'css/nav-embed.css' },
       { id: 'agx-fonts-css', href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap' }
     ];
     for (var i = 0; i < sheets.length; i++) {

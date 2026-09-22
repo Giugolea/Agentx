@@ -1,0 +1,168 @@
+/* ============================================================
+   AGENTX — NAVBAR IZOLAT (pentru injectare dinamica)
+   Folosit de js/nav.js ca sa reinjecteze stilul navbar-ului pe
+   paginile care isi inlocuiesc tot documentul dupa incarcare
+   (clinici.html, dealer.html).
+   Contine STRICT stiluri pentru .nav / .nav__* — zero variabile
+   generice (--bg, --accent, --text etc), ca sa nu intre in
+   conflict cu paleta proprie a paginii-gazda. Pentru asta toate
+   valorile sunt fie hardcodate, fie folosesc tokenuri proprii
+   --nav-*, neatinse de nicio alta pagina.
+   ============================================================ */
+
+:root {
+  --nav-h: 78px;
+  --nav-bg: rgba(7, 12, 21, 0.95);
+  --nav-bg-solid: rgba(7, 12, 21, 0.98);
+  --nav-line: rgba(148, 180, 220, 0.13);
+  --nav-text: #eef3f9;
+  --nav-text-2: #9fb0c3;
+  --nav-accent: #38bdf8;
+  --nav-accent-hover: #7dd3fc;
+  --nav-ink: #070c15;
+  --nav-font: 'Inter', system-ui, sans-serif;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--nav-line);
+}
+
+.nav__inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav__logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav__logo img {
+  height: 112px;
+  width: auto;
+  display: block;
+  margin: 0 0 0 -12px;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.nav__menu { display: contents; }
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: auto;
+}
+
+.nav__link {
+  color: var(--nav-text-2);
+  text-decoration: none;
+  font-family: var(--nav-font);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav__link:hover,
+.nav__link[aria-current='page'] {
+  color: var(--nav-text);
+}
+
+.nav__cta {
+  flex-shrink: 0;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nav-ink);
+  background: var(--nav-accent);
+  font-family: var(--nav-font);
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 12px;
+  white-space: nowrap;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.nav__cta:hover {
+  transform: translateY(-1px);
+  background: var(--nav-accent-hover);
+}
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav__burger span {
+  width: 24px;
+  height: 2px;
+  background: var(--nav-text);
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  .nav__links { gap: 20px; }
+  .nav__link { font-size: 14px; }
+}
+
+@media (max-width: 820px) {
+  .nav__menu { display: none; }
+  .nav__burger { display: flex; }
+
+  .nav--open .nav__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: var(--nav-bg-solid);
+    border-bottom: 1px solid var(--nav-line);
+    padding: 16px 28px 22px;
+  }
+
+  .nav--open .nav__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .nav--open .nav__link {
+    padding: 11px 0;
+    font-size: 16px;
+  }
+
+  .nav--open .nav__cta { margin-left: 0; }
+
+  .nav__logo img { height: 92px; }
+}
